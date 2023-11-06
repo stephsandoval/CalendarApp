@@ -10,23 +10,26 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="920.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="920.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Screens.EventScreen">
    <children>
       <Pane layoutX="14.0" layoutY="14.0" prefHeight="492.0" prefWidth="86.0">
          <children>
-            <Button layoutX="8.0" layoutY="9.0" mnemonicParsing="false" prefWidth="70.0" text="CALENDAR">
+            <Button fx:id="calendarButton" layoutX="8.0" layoutY="9.0" mnemonicParsing="false" onAction="#loadCalendarScreen" prefWidth="70.0" text="CALENDAR">
                <font>
-                  <Font size="11.0" />
-               </font></Button>
-            <Button layoutX="8.0" layoutY="47.0" mnemonicParsing="false" prefWidth="70.0" text="POSTS">
+                  <Font size="10.0" />
+               </font>
+            </Button>
+            <Button fx:id="postsButton" layoutX="8.0" layoutY="47.0" mnemonicParsing="false" onAction="#loadInstaScreen" prefWidth="70.0" text="POSTS">
                <font>
-                  <Font size="11.0" />
-               </font></Button>
-            <Button layoutX="8.0" layoutY="85.0" mnemonicParsing="false" prefWidth="70.0" text="STATS">
+                  <Font size="10.0" />
+               </font>
+            </Button>
+            <Button fx:id="statsButton" layoutX="8.0" layoutY="85.0" mnemonicParsing="false" onAction="#loadStatsScreen" prefWidth="70.0" text="STATS">
                <font>
-                  <Font size="11.0" />
-               </font></Button>
-            <Button layoutX="8.0" layoutY="459.0" mnemonicParsing="false" prefWidth="70.0" text="LOGOUT">
+                  <Font size="10.0" />
+               </font>
+            </Button>
+            <Button layoutX="8.0" layoutY="459.0" mnemonicParsing="false" onAction="#logout" prefWidth="70.0" text="LOGOUT">
                <font>
                   <Font size="11.0" />
                </font></Button>
@@ -38,7 +41,7 @@
             <Font name="Arial Black" size="36.0" />
          </font>
       </Label>
-      <Button layoutX="879.0" layoutY="481.0" mnemonicParsing="false" text="&lt;" />
+      <Button layoutX="879.0" layoutY="481.0" mnemonicParsing="false" onAction="#loadCalendarScreen" text="&lt;" />
       <Slider blockIncrement="1.0" layoutX="144.0" layoutY="116.0" prefHeight="33.0" prefWidth="221.0" showTickLabels="true" />
       <Slider blockIncrement="1.0" layoutX="144.0" layoutY="189.0" prefHeight="33.0" prefWidth="221.0" showTickLabels="true" />
       <Slider blockIncrement="1.0" layoutX="144.0" layoutY="260.0" prefHeight="33.0" prefWidth="221.0" showTickLabels="true" />
