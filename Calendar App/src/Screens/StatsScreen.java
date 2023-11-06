@@ -11,7 +11,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
-public class StatsScreen extends ScreenChanger implements Initializable {
+public class StatsScreen extends GeneralScreen implements Initializable {
     
     @FXML
     private Button loadPage;

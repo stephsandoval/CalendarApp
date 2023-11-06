@@ -13,7 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 
-public class EventScreen extends ScreenChanger implements Initializable{
+public class EventScreen extends GeneralScreen implements Initializable{
     
     @FXML
     private Slider screenTemperature, screenHumidity, screenPrecipitation, screenSunlight, screenWaterAmount, screenWaterpH;

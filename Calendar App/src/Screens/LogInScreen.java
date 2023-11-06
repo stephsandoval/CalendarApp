@@ -1,5 +1,5 @@
 package Screens;
 
-public class LogInScreen extends ScreenChanger {
-    
+public class LogInScreen extends GeneralScreen {
+
 }

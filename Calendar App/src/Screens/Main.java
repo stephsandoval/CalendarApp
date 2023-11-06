@@ -1,5 +1,9 @@
 package Screens;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,7 +16,10 @@ public class Main extends Application {
     @Override
     public void start (Stage stage){
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("LogInScreen.fxml"));
+            File file = new File("src/FXML/LogInScreen.fxml");
+            InputStream stream = new FileInputStream(file);
+            FXMLLoader loader = new FXMLLoader();
+            Parent root = loader.load(stream);
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.setResizable(false);

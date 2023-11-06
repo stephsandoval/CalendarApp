@@ -26,7 +26,7 @@
             <Font size="10.0" />
          </font>
       </Label>
-      <Button fx:id="LogIn" layoutX="217.0" layoutY="251.0" mnemonicParsing="false" onAction="#loadCalendarScreen" text="LOGIN">
+      <Button layoutX="217.0" layoutY="251.0" mnemonicParsing="false" onAction="#loadCalendarScreen" text="LOGIN">
          <font>
             <Font size="11.0" />
          </font></Button>

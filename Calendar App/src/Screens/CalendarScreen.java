@@ -18,10 +18,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class CalendarScreen extends ScreenChanger implements Initializable{
+public class CalendarScreen extends GeneralScreen implements Initializable{
     
     @FXML
-    private Button calendarButton, postsButton, statsButton, logoutButton, addEventButton, goButton;
+    private Button addEventButton, goButton;
     @FXML
     private Label monthLabel;
     @FXML 

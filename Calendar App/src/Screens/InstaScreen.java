@@ -1,5 +1,5 @@
 package Screens;
 
-public class InstaScreen extends ScreenChanger {
+public class InstaScreen extends GeneralScreen {
     
 }
