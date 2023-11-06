@@ -28,7 +28,7 @@
       </Label>
       <Button layoutX="217.0" layoutY="251.0" mnemonicParsing="false" onAction="#loadCalendarScreen" text="LOGIN">
          <font>
-            <Font size="11.0" />
+            <Font size="10.0" />
          </font></Button>
    </children>
 </AnchorPane>
