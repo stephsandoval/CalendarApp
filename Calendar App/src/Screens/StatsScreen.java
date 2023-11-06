@@ -3,6 +3,7 @@ package Screens;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import Controllers.StatsController;
 import Json.JsonParser;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -21,7 +22,9 @@ public class StatsScreen extends GeneralScreen implements Initializable {
     private WebView webView;
 
     private WebEngine engine;
+
     private JsonParser items = JsonParser.getInstance();
+    private StatsController controller = new StatsController();
 
     @Override
     public void initialize (URL location, ResourceBundle resources){
@@ -34,7 +37,7 @@ public class StatsScreen extends GeneralScreen implements Initializable {
         webView.getEngine().loadContent("");
         String aspect = aspectsStats.getValue();
         if (aspect != null && aspect.equals("crop")){
-            String url = this.getClass().getResource("chart.html").toExternalForm();
+            String url = this.getClass().getResource(controller.getURL(aspect)).toExternalForm();
             engine.load(url);
         }
     }
