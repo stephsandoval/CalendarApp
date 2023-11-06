@@ -40,13 +40,13 @@
             <Font name="Arial Black" size="36.0" />
          </font>
       </Label>
-      <ComboBox layoutX="130.0" layoutY="98.0" prefHeight="25.0" prefWidth="221.0" />
-      <Button layoutX="364.0" layoutY="99.0" mnemonicParsing="false" text="LOAD">
+      <ComboBox fx:id="aspectsStats" layoutX="130.0" layoutY="98.0" prefHeight="25.0" prefWidth="221.0" />
+      <Button fx:id="loadPage" layoutX="364.0" layoutY="99.0" mnemonicParsing="false" onAction="#loadPage" text="LOAD">
          <font>
             <Font size="11.0" />
          </font>
       </Button>
-      <WebView layoutX="130.0" layoutY="134.0" prefHeight="371.0" prefWidth="772.0" />
+      <WebView fx:id="webView" layoutX="130.0" layoutY="134.0" prefHeight="371.0" prefWidth="772.0" />
       <Label layoutX="130.0" layoutY="74.0" text="ASPECT">
          <font>
             <Font size="10.0" />

@@ -11,28 +11,27 @@
         var chartDiv = document.getElementById('chart_div');
 
         var data = google.visualization.arrayToDataTable([
-          ['Galaxy', 'Distance', 'Brightness'],
-          ['Canis Major Dwarf', 8000, 23.3],
-          ['Sagittarius Dwarf', 24000, 4.5],
-          ['Ursa Major II Dwarf', 30000, 14.3],
-          ['Lg. Magellanic Cloud', 50000, 0.9],
-          ['Bootes I', 60000, 13.1]
+          ['Crop', 'March', 'September'],
+          ['Potato', 30, 25],
+          ['Carrot', 24, 16],
+          ['Onion', 14, 28],
+          ['Strawberry', 27, 9],
+          ['Tomato', 26, 8]
         ]);
 
         var materialOptions = {
           width: 900,
           chart: {
-            title: 'Nearby galaxies',
-            subtitle: 'distance on the left, brightness on the right'
+            title: 'Crops'
           },
           series: {
-            0: { axis: 'distance' }, // Bind series 0 to an axis named 'distance'.
-            1: { axis: 'brightness' } // Bind series 1 to an axis named 'brightness'.
+            0: { axis: 'March' }, // Bind series 0 to an axis named 'March'.
+            1: { axis: 'September' } // Bind series 1 to an axis named 'September'.
           },
           axes: {
             y: {
-              distance: {label: 'parsecs'}, // Left y-axis.
-              brightness: {side: 'right', label: 'apparent magnitude'} // Right y-axis.
+              distance: {label: 'march production'}, // Left y-axis.
+              brightness: {side: 'right', label: 'september production'} // Right y-axis.
             }
           }
         };
@@ -43,11 +42,11 @@
             0: {targetAxisIndex: 0},
             1: {targetAxisIndex: 1}
           },
-          title: 'Nearby galaxies - distance on the left, brightness on the right',
+          title: 'Crop stats',
           vAxes: {
             // Adds titles to each axis.
-            0: {title: 'parsecs'},
-            1: {title: 'apparent magnitude'}
+            0: {title: 'march production'},
+            1: {title: 'september production'}
           }
         };
 
