@@ -9,11 +9,6 @@
 import com.contentful.java.cda.CDAClient;
 import com.contentful.java.cda.CDAEntry;
 
-import com.contentful.java.cma.CMAClient;
-import com.contentful.java.cma.model.CMAEntry;
-import com.contentful.java.cma.model.CMAResource;
-import com.contentful.java.cma.model.CMASpace;
-
 public class ContentfulConnector {
     private final CDAClient cdaClient;
 
