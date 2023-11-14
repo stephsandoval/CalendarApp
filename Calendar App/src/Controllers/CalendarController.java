@@ -3,8 +3,8 @@ package Controllers;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import Calendar.DayPrev;
-import Calendar.WeekPrev;
+import CalendarPrev.DayPrev;
+import CalendarPrev.WeekPrev;
 import javafx.scene.control.ListView;
 
 public class CalendarController {

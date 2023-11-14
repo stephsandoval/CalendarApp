@@ -5,8 +5,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import Calendar.DayPrev;
-import Calendar.WeekPrev;
+import CalendarPrev.DayPrev;
+import CalendarPrev.WeekPrev;
 import Controllers.CalendarController;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

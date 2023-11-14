@@ -3,9 +3,11 @@ package Records;
 public class CropRecord {
  
     private String crop, cropStatus, pests, cropNote;
+    private int amount;
 
-    public CropRecord (String crop, String cropStatus, String pests, String cropNote){
+    public CropRecord (String crop, int amount, String cropStatus, String pests, String cropNote){
         this.crop = crop;
+        this.amount = amount;
         this.cropStatus = cropStatus;
         this.pests = pests;
         this.cropNote = cropNote;
@@ -13,6 +15,10 @@ public class CropRecord {
 
     public String getCrop (){
         return this.crop;
+    }
+
+    public int getAmount (){
+        return this.amount;
     }
 
     public String getCropStatus (){
@@ -31,6 +37,10 @@ public class CropRecord {
         this.crop = crop;
     }
 
+    public void setAmount (int amount){
+        this.amount = amount;
+    }
+
     public void setCropStatus (String cropStatus){
         this.cropStatus = cropStatus;
     }
@@ -44,6 +54,6 @@ public class CropRecord {
     }
 
     public String toString (){
-        return "crop record >> crop > " + crop + " | status > " + cropStatus + " | pests > " + pests + " | note > " + cropNote;
+        return "crop record >> crop > " + crop + " | amount > " + amount + " | status > " + cropStatus + " | pests > " + pests + " | note > " + cropNote;
     }
 }

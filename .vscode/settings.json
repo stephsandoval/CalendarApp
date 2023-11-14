@@ -1,0 +1,11 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "Calendar App/src/Jars/java-sdk-10.5.16.jar",
+        "Calendar App/src/Jars/java-sdk-10.5.16-jar-with-dependencies.jar",
+        "Calendar App/src/Jars/java-sdk-10.5.16-sources.jar",
+        "Calendar App/src/Jars/javax.json-1.1.4.jar",
+        "Calendar App/src/Jars/javax.json-1.1.jar",
+        "Calendar App/src/Jars/javax.json-api-1.1.4.jar"
+    ]
+}

@@ -14,7 +14,7 @@ import javafx.scene.Node;
 
 public class GeneralScreen {
 
-    private final String calendarPath = "src/FXML/CalendarScreen.fxml";
+    private final String calendarPath = "src/FXML/NewCalendarScreen.fxml";
     private final String eventsPath = "src/FXML/EventScreen.fxml";
     private final String postsPath = "src/FXML/InstaScreen.fxml";
     private final String statsPath = "src/FXML/StatsScreen.fxml";
