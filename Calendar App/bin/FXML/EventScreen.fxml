@@ -47,7 +47,6 @@
       <Slider fx:id="screenPrecipitation" blockIncrement="1.0" layoutX="673.0" layoutY="189.0" onDragDetected="#updatePrecipitation" prefHeight="33.0" prefWidth="221.0" showTickLabels="true" />
       <Slider fx:id="screenHumidity" blockIncrement="1.0" layoutX="673.0" layoutY="260.0" onDragDetected="#updateHumidity" prefHeight="33.0" prefWidth="221.0" showTickLabels="true" />
       <TextField fx:id="screenWeatherNotes" layoutX="673.0" layoutY="329.0" prefHeight="25.0" prefWidth="221.0" />
-      <TextField fx:id="screenCrop" layoutX="139.0" layoutY="120.0" prefHeight="25.0" prefWidth="221.0" />
       <TextField fx:id="screenCropNotes" layoutX="140.0" layoutY="397.0" prefHeight="25.0" prefWidth="221.0" />
       <TextField fx:id="screenWaterNotes" layoutX="407.0" layoutY="330.0" prefHeight="25.0" prefWidth="221.0" />
       <ComboBox fx:id="screenPests" layoutX="140.0" layoutY="331.0" prefHeight="25.0" prefWidth="221.0" />
@@ -157,5 +156,6 @@
          </font>
       </Label>
       <DatePicker fx:id="screenDate" layoutX="673.0" layoutY="29.0" prefHeight="25.0" prefWidth="221.0" />
+      <ComboBox fx:id="screenCrop" layoutX="140.0" layoutY="121.0" prefHeight="25.0" prefWidth="221.0" />
    </children>
 </AnchorPane>

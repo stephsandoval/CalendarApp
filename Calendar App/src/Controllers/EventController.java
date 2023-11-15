@@ -1,8 +1,10 @@
 package Controllers;
 
 import java.time.LocalDate;
+import java.time.Month;
 
 import Calendar.Calendar;
+import Calendar.Day;
 import Records.CropRecord;
 import Records.WaterRecord;
 import Records.WeatherRecord;
@@ -15,12 +17,12 @@ public class EventController {
         calendar = Calendar.getInstance();
     }
 
-    public void createEvents (double temperature, double humidity, double precipitation, double sunlight, String weatherNotes, String waterSource, double waterAmount, double waterpH, String waterNotes, String crop, int cropAmount, String cropStatus, String pests, String cropNotes){
-        WaterRecord waterRecord;
-        WeatherRecord weatherRecord;
-        CropRecord cropRecord;
-        if (temperature != 0 || humidity != 0 || precipitation != 0 || sunlight != 0 || !(weatherNotes.equals(""))){
-            weatherRecord = createWeatherRecord (temperature, humidity, precipitation, sunlight, weatherNotes);
+    public void createEvents (LocalDate date, double temperature, double humidity, double precipitation, String weatherNotes, String waterSource, double waterAmount, double waterpH, String waterNotes, String crop, int cropAmount, String cropStatus, String pests, String cropNotes){
+        WaterRecord waterRecord = null;
+        WeatherRecord weatherRecord = null;
+        CropRecord cropRecord = null;
+        if (temperature != 0 || humidity != 0 || precipitation != 0 || !(weatherNotes.equals(""))){
+            weatherRecord = createWeatherRecord (temperature, humidity, precipitation, weatherNotes);
         }
         if (!(waterSource.equals("")) || !(waterNotes.equals(""))){
             waterRecord = createWaterRecord(waterSource, waterAmount, waterpH, waterNotes);
@@ -28,10 +30,11 @@ public class EventController {
         if (!(crop.equals("")) || !(pests.equals("")) || !(cropNotes.equals(""))){
             cropRecord = createCropRecord(crop, cropAmount, cropStatus, pests, cropNotes);
         }
+        addDayToCalendar(date, waterRecord, weatherRecord, cropRecord);
     }
 
-    private WeatherRecord createWeatherRecord (double temperature, double humidity, double precipitation, double sunlight, String notes){
-        WeatherRecord record = new WeatherRecord(temperature, humidity, precipitation, sunlight, notes);
+    private WeatherRecord createWeatherRecord (double temperature, double humidity, double precipitation, String notes){
+        WeatherRecord record = new WeatherRecord(temperature, humidity, precipitation, notes);
         return record;
     }
 
@@ -43,5 +46,16 @@ public class EventController {
     private CropRecord createCropRecord (String crop, int amount, String cropStatus, String pests, String notes){
         CropRecord record = new CropRecord(crop, amount, cropStatus, pests, notes);
         return record;
+    }
+
+    private void addDayToCalendar (LocalDate date, WaterRecord waterRecord, WeatherRecord weatherRecord, CropRecord cropRecord){
+        int year = date.getYear();
+        Month month = date.getMonth();
+        Day day = new Day (date, weatherRecord, waterRecord, cropRecord);
+        calendar.getYear(year).addDayToMonth(month, day);
+        System.out.println("the day was created");
+        System.out.println(weatherRecord);
+        System.out.println(waterRecord);
+        System.out.println(cropRecord);
     }
 }

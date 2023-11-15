@@ -2,14 +2,13 @@ package Records;
 
 public class WeatherRecord {
  
-    private double temperature, humidity, precipitation, sunlight;
+    private double temperature, humidity, precipitation;
     private String weatherNote;
 
-    public WeatherRecord (double temperature, double humidity, double precipitation, double sunlight, String weatherNote){
+    public WeatherRecord (double temperature, double humidity, double precipitation, String weatherNote){
         this.temperature = temperature;
         this.humidity = humidity;
         this.precipitation = precipitation;
-        this.sunlight = sunlight;
         this.weatherNote = weatherNote;
     }
 
@@ -37,14 +36,6 @@ public class WeatherRecord {
         this.precipitation = precipitation;
     }
 
-    public double getSunlight (){
-        return sunlight;
-    }
-
-    public void setSunlight (double sunlight){
-        this.sunlight = sunlight;
-    }
-
     public String getWeatherNote (){
         return weatherNote;
     }
@@ -54,6 +45,6 @@ public class WeatherRecord {
     }
 
     public String toString (){
-        return "weather record >> temperature > " + temperature + " | humidity > " + humidity + " | precipitation > " + precipitation + " | sunlight > " + sunlight + " | note > " + weatherNote;
+        return "weather record >> temperature > " + temperature + " | humidity > " + humidity + " | precipitation > " + precipitation + " | note > " + weatherNote;
     }
 }

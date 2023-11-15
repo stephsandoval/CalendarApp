@@ -23,6 +23,10 @@ public class Calendar {
     }
 
     public Year getYear (int yearNumber){
+        if (this.calendar.containsKey(yearNumber) == false){
+            Year year = new Year(yearNumber);
+            this.calendar.put(yearNumber, year);
+        }
         return this.calendar.get(yearNumber);
     }
 

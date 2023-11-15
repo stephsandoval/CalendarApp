@@ -12,15 +12,16 @@ import javax.json.JsonValue;
 public class JsonParser {
     
     private static JsonParser instance;
-    private JsonArray jsonWaterSource, jsonCropStatus, jsonPests, jsonAspects;
-    private ArrayList <String> waterSource, cropStatus, pests, aspects;
+    private JsonArray jsonWaterSource, jsonCrops, jsonCropStatus, jsonPests, jsonAspects;
+    private ArrayList <String> waterSource, crops, cropStatus, pests, aspects;
 
     private JsonParser (){
         loadJson ();
-        waterSource = toArray (jsonWaterSource);
-        cropStatus = toArray (jsonCropStatus);
-        pests = toArray (jsonPests);
-        aspects = toArray (jsonAspects);
+        waterSource = toArray(jsonWaterSource);
+        crops = toArray(jsonCrops);
+        cropStatus = toArray(jsonCropStatus);
+        pests = toArray(jsonPests);
+        aspects = toArray(jsonAspects);
     }
 
     public static synchronized JsonParser getInstance (){
@@ -36,6 +37,7 @@ public class JsonParser {
             JsonObject jsonParser = reader.readObject();
 
             jsonWaterSource = jsonParser.getJsonArray("water source");
+            jsonCrops = jsonParser.getJsonArray("crops");
             jsonCropStatus = jsonParser.getJsonArray("crop status");
             jsonPests = jsonParser.getJsonArray("pests");
             jsonAspects = jsonParser.getJsonArray("aspects");
@@ -57,6 +59,10 @@ public class JsonParser {
 
     public ArrayList<String> getWaterSource (){
         return this.waterSource;
+    }
+
+    public ArrayList<String> getCrops (){
+        return this.crops;
     }
 
     public ArrayList<String> getCropStatus (){

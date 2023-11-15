@@ -6,11 +6,11 @@ import java.util.ResourceBundle;
 
 import Controllers.EventController;
 import Json.JsonParser;
-import android.widget.DatePicker;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
@@ -18,19 +18,19 @@ import javafx.scene.control.TextField;
 public class EventScreen extends GeneralScreen implements Initializable{
     
     @FXML
-    private Slider screenTemperature, screenHumidity, screenPrecipitation, screenSunlight, screenWaterAmount, screenWaterpH, screenCropAmount;
+    private Slider screenTemperature, screenHumidity, screenPrecipitation, screenWaterAmount, screenWaterpH, screenCropAmount;
     @FXML
-    private TextField screenWeatherNotes, screenWaterNotes, screenCrop, screenCropNotes;
+    private TextField screenWeatherNotes, screenWaterNotes, screenCropNotes;
     @FXML
-    private ComboBox<String> screenWaterSource, screenCropStatus, screenPests;
+    private ComboBox<String> screenWaterSource, screenCrop, screenCropStatus, screenPests;
     @FXML
     private Button addEventButton;
     @FXML
-    private Label temperatureLabel, humidityLabel, precipitationLabel, sunlightLabel, waterAmountLabel, waterpHLabel, cropAmountLabel;
+    private Label temperatureLabel, humidityLabel, precipitationLabel, waterAmountLabel, waterpHLabel, cropAmountLabel;
     @FXML
     private DatePicker screenDate;
 
-    private double temperature, humidity, precipitation, sunlight, waterAmount, waterpH;
+    private double temperature, humidity, precipitation, waterAmount, waterpH;
     private int cropAmount;
     private String weatherNotes, waterNotes, crop, cropNotes, waterSource, cropStatus, pests;
     private LocalDate date;
@@ -42,74 +42,81 @@ public class EventScreen extends GeneralScreen implements Initializable{
     public void initialize (URL location, ResourceBundle resources) {
         clearFields();
         screenWaterSource.getItems().setAll(items.getWaterSource());
+        screenCrop.getItems().setAll(items.getCrops());
         screenCropStatus.getItems().setAll(items.getCropStatus());
         screenPests.getItems().setAll(items.getPests());
     }
 
     public void updateTemperature (){
-        temperatureLabel.setText(Double.toString(Math.floor(screenTemperature.getValue())));
+        temperatureLabel.setText(Double.toString(roundDouble(screenTemperature.getValue(), "3")));
     }
 
     public void updateHumidity (){
-        humidityLabel.setText(Double.toString(Math.floor(screenHumidity.getValue())));
+        humidityLabel.setText(Double.toString(roundDouble(screenHumidity.getValue(), "3")));
     }
 
     public void updatePrecipitation (){
-        precipitationLabel.setText(Double.toString((Math.floor(screenPrecipitation.getValue()))));
-    }
-
-    public void updateSunlight (){
-        sunlightLabel.setText(Double.toString(Math.floor(screenSunlight.getValue())));
+        precipitationLabel.setText(Double.toString(roundDouble(screenPrecipitation.getValue(), "3")));
     }
 
     public void updateWaterAmount (){
-        waterAmountLabel.setText(Double.toString(Math.floor(screenWaterAmount.getValue())));
+        waterAmountLabel.setText(Double.toString(roundDouble(screenWaterAmount.getValue(), "3")));
     }
 
     public void updateWaterpH (){
-        waterpHLabel.setText(Double.toString(Math.floor(screenWaterpH.getValue())));
+        waterpHLabel.setText(Double.toString(roundDouble(screenWaterpH.getValue(), "2")));
     }
 
     public void updateCropAmount (){
-        cropAmountLabel.setText(Double.toString(Math.floor(screenCropAmount.getValue())));
+        cropAmountLabel.setText(Integer.toString((int) Math.floor(screenCropAmount.getValue())));
     }
 
     public void getValues (){
-        temperature = screenTemperature.getValue();
-        humidity = screenHumidity.getValue();
-        precipitation = screenPrecipitation.getValue();
-        sunlight = screenSunlight.getValue();
+        temperature = roundDouble(screenTemperature.getValue(), "3");
+        humidity = roundDouble(screenHumidity.getValue(), "3");
+        precipitation = roundDouble(screenPrecipitation.getValue(), "3");
         weatherNotes = screenWeatherNotes.getText();
 
         waterSource = screenWaterSource.getValue();
-        waterAmount = screenWaterAmount.getValue();
-        waterpH = screenWaterpH.getValue();
+        waterAmount = roundDouble(screenWaterAmount.getValue(), "3");
+        waterpH = roundDouble(screenWaterpH.getValue(), "2");
         waterNotes = screenWaterNotes.getText();
 
-        crop = screenCrop.getText().toLowerCase();
+        crop = screenCrop.getValue();
         cropAmount = (int) screenCropAmount.getValue();
         cropStatus = screenCropStatus.getValue();
         pests = screenPests.getValue();
         cropNotes = screenCropNotes.getText();
+
+        date = screenDate.getValue();
+        if (date == null){
+            date = LocalDate.now();
+        }
     }
 
-    public void createEvent (){
+    private double roundDouble (double number, String decimals){
+        String formattedValue = String.format("%." + decimals + "f", number);
+        double roundedValue = Double.parseDouble(formattedValue);
+        return roundedValue;
+    }
+
+    public void createEvent () throws Exception{
         getValues();
-        controller.createEvents(temperature, humidity, precipitation, sunlight, weatherNotes, waterSource, waterAmount, waterpH, waterNotes, crop, cropAmount, cropStatus, pests, cropNotes);
-        clearFields();
+        if (checkDate()){
+            controller.createEvents(date, temperature, humidity, precipitation, weatherNotes, waterSource, waterAmount, waterpH, waterNotes, crop, cropAmount, cropStatus, pests, cropNotes);
+            clearFields();
+        }
     }
 
     private void clearFields (){
         screenTemperature.setValue(screenTemperature.getMin());
         screenHumidity.setValue(screenHumidity.getMin());
         screenPrecipitation.setValue(screenTemperature.getMin());
-        screenSunlight.setValue(screenSunlight.getMin());
         screenWeatherNotes.clear();
 
         updateTemperature();
         updateHumidity();
         updatePrecipitation();
-        updateSunlight();
 
         screenWaterSource.setValue("");
         screenWaterAmount.setValue(screenWaterAmount.getMin());
@@ -119,10 +126,17 @@ public class EventScreen extends GeneralScreen implements Initializable{
         updateWaterAmount();
         updateWaterpH();
 
-        screenCrop.clear();
+        screenCrop.setValue("");
         screenCropAmount.setValue(screenCropAmount.getMin());
         screenCropStatus.setValue("");
         screenPests.setValue("");
         screenCropNotes.clear();
+    }
+
+    private boolean checkDate () throws Exception{
+        if (date.isAfter(LocalDate.now())){
+            return false;
+        }
+        return true;
     }
 }
