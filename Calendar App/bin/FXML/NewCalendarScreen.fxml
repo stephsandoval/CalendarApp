@@ -65,8 +65,8 @@
             <Font name="Arial Black" size="36.0" />
          </font>
       </Label>
-      <Button fx:id="nextButton" layoutX="576.0" layoutY="33.0" mnemonicParsing="false" onAction="#loadEventsScreen" text="&gt;" />
-      <Button fx:id="previousButton" layoutX="145.0" layoutY="33.0" mnemonicParsing="false" onAction="#loadEventsScreen" text="&lt;" />
+      <Button fx:id="nextButton" layoutX="576.0" layoutY="33.0" mnemonicParsing="false" onAction="#loadNextMonth" text="&gt;" />
+      <Button fx:id="previousButton" layoutX="145.0" layoutY="33.0" mnemonicParsing="false" onAction="#loadPreviousMonth" text="&lt;" />
       <GridPane fx:id="calendarGrid" alignment="CENTER" hgap="5.0" layoutX="144.0" layoutY="132.0" prefHeight="299.0" prefWidth="458.0" vgap="5.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

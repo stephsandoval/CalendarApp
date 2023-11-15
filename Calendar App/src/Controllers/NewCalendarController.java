@@ -1,26 +1,40 @@
 package Controllers;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.Month;
+import java.time.YearMonth;
 import java.util.ArrayList;
 
 import Calendar.Calendar;
+import Calendar.Year;
 import CalendarPrev.DayPrev;
 
 public class NewCalendarController {
  
-    private int offset, maxDays;
+    private int yearNumber;
+    private Month month;
     private Calendar calendar;
 
     public NewCalendarController (){
         calendar = Calendar.getInstance();
     }
 
+    public void setMonthandYear (Month month, int yearNumber){
+        this.month = month;
+        this.yearNumber = yearNumber;
+    }
+
     public int getOffset (){
-        return this.offset;
+        YearMonth yearMonth = YearMonth.of(yearNumber, month);
+        LocalDate date = yearMonth.atDay(1);
+        return date.getDayOfWeek().getValue() % 7;
     }
 
     public int getMaxDays (){
-        return this.maxDays;
+        YearMonth yearMonth = YearMonth.of(yearNumber, month);
+        int monthLength = yearMonth.lengthOfMonth();
+        return monthLength;
     }
 
     public ArrayList <DayPrev> getDayPreview (LocalDate day){
