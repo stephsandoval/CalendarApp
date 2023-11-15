@@ -1,23 +1,25 @@
 package Controllers;
 
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.YearMonth;
 import java.util.ArrayList;
 
 import Calendar.Calendar;
-import Calendar.Year;
-import CalendarPrev.DayPrev;
+import Calendar.Day;
+import CalendarPrev.DayPreview;
+import CalendarPrev.DayPreviewCreator;
 
 public class NewCalendarController {
  
     private int yearNumber;
     private Month month;
     private Calendar calendar;
+    private DayPreviewCreator previewCreator;
 
     public NewCalendarController (){
         calendar = Calendar.getInstance();
+        previewCreator = DayPreviewCreator.getInstance();
     }
 
     public void setMonthandYear (Month month, int yearNumber){
@@ -37,12 +39,16 @@ public class NewCalendarController {
         return monthLength;
     }
 
-    public ArrayList <DayPrev> getDayPreview (LocalDate day){
-        // verify the day exists, if it does, return array with events
-        ArrayList <DayPrev> preview = new ArrayList<>();
-        preview.add(new DayPrev("temperature", "25°C"));
-        preview.add(new DayPrev("notes", "sunny weather"));
-        preview.add(new DayPrev("water source", "groundwater"));
+    public ArrayList <DayPreview> getDayPreview (LocalDate date){
+        ArrayList <DayPreview> preview = new ArrayList<>();
+        Day day = calendar.getDay(date);
+        if (day.getWaterRecord() != null || day.getWeatherRecord() != null || day.getCropRecord() != null){
+            preview = previewCreator.getDayPreview(day);
+        }
         return preview;
+    }
+
+    public boolean containsInfo (LocalDate date){
+        return calendar.containsInfo(date);
     }
 }

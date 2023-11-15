@@ -131,6 +131,8 @@ public class EventScreen extends GeneralScreen implements Initializable{
         screenCropStatus.setValue("");
         screenPests.setValue("");
         screenCropNotes.clear();
+
+        screenDate.setValue(null);
     }
 
     private boolean checkDate () throws Exception{

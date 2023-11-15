@@ -3,7 +3,7 @@ package Controllers;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import CalendarPrev.DayPrev;
+import CalendarPrev.DayPreview;
 import CalendarPrev.WeekPrev;
 import javafx.scene.control.ListView;
 
@@ -33,12 +33,12 @@ public class CalendarController {
         return weeksList;
     }
 
-    public ArrayList <DayPrev> getDayPreview (LocalDate day){
+    public ArrayList <DayPreview> getDayPreview (LocalDate day){
         // verify the day exists, if it does, return array with events
-        ArrayList <DayPrev> preview = new ArrayList<>();
-        preview.add(new DayPrev("temperature", "25°C"));
-        preview.add(new DayPrev("notes", "sunny weather"));
-        preview.add(new DayPrev("water source", "groundwater"));
+        ArrayList <DayPreview> preview = new ArrayList<>();
+        preview.add(new DayPreview("temperature", "25°C"));
+        preview.add(new DayPreview("notes", "sunny weather"));
+        preview.add(new DayPreview("water source", "groundwater"));
         return preview;
     }
 }

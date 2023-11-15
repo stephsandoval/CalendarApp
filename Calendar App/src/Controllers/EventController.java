@@ -53,9 +53,5 @@ public class EventController {
         Month month = date.getMonth();
         Day day = new Day (date, weatherRecord, waterRecord, cropRecord);
         calendar.getYear(year).addDayToMonth(month, day);
-        System.out.println("the day was created");
-        System.out.println(weatherRecord);
-        System.out.println(waterRecord);
-        System.out.println(cropRecord);
     }
 }

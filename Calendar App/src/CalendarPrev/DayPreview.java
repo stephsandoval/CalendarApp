@@ -1,10 +1,10 @@
 package CalendarPrev;
 
-public class DayPrev {
+public class DayPreview {
 
     private String aspect, info;
 
-    public DayPrev (String aspect, String info){
+    public DayPreview (String aspect, String info){
         this.aspect = aspect;
         this.info = info;
     }

@@ -47,7 +47,7 @@ public class Year {
         // if the day has info, it is replaced for the new information
         int dayNumber = day.getDate().getDayOfMonth();
         ArrayList<Day> monthDays = year.get(month);
-        monthDays.set(dayNumber, day);
+        monthDays.set(dayNumber - 1, day);
     }
 
     public HashMap <Month, ArrayList<Day>> getYear (){

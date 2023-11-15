@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import CalendarPrev.DayPrev;
+import CalendarPrev.DayPreview;
 import CalendarPrev.WeekPrev;
 import Controllers.CalendarController;
 import javafx.collections.ObservableList;
@@ -29,11 +29,11 @@ public class CalendarScreen extends GeneralScreen implements Initializable{
     @FXML
     private DatePicker datePicker;
     @FXML 
-    private TableView<DayPrev> dayView; // change object when the calendar is defined
+    private TableView<DayPreview> dayView; // change object when the calendar is defined
     @FXML
     private TableColumn<WeekPrev, String> mondayColumn, tuesdayColumn, wednesdayColumn, thursdayColumn, fridayColumn, saturdayColumn, sundayColumn;
     @FXML
-    private TableColumn<DayPrev, String> aspectColumn, infoColumn;
+    private TableColumn<DayPreview, String> aspectColumn, infoColumn;
 
     private CalendarController controller = new CalendarController();
 
@@ -67,8 +67,8 @@ public class CalendarScreen extends GeneralScreen implements Initializable{
     }
 
     private void populatePreview (LocalDate day){
-        ArrayList <DayPrev> dayPreview = controller.getDayPreview(day);
-        ObservableList <DayPrev> tablePreview = dayView.getItems();
+        ArrayList <DayPreview> dayPreview = controller.getDayPreview(day);
+        ObservableList <DayPreview> tablePreview = dayView.getItems();
         tablePreview.clear();
         tablePreview.addAll(dayPreview);
         dayView.setItems(tablePreview);

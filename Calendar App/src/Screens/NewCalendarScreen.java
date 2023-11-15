@@ -7,8 +7,7 @@ import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import Calendar.Year;
-import CalendarPrev.DayPrev;
+import CalendarPrev.DayPreview;
 import Controllers.NewCalendarController;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -31,13 +30,13 @@ public class NewCalendarScreen extends GeneralScreen implements Initializable{
     @FXML
     private Label monthLabel, yearLabel;
     @FXML 
-    private TableView<DayPrev> dayView; // change object when the calendar is defined
+    private TableView<DayPreview> dayView; // change object when the calendar is defined
     @FXML
-    private TableColumn<DayPrev, String> aspectColumn, infoColumn;
+    private TableColumn<DayPreview, String> aspectColumn, infoColumn;
 
     private ArrayList<Button> calendarDays;
     private Month month;
-    private int year, day;
+    private int year;
     private NewCalendarController controller = new NewCalendarController();
 
     @Override
@@ -71,7 +70,9 @@ public class NewCalendarScreen extends GeneralScreen implements Initializable{
     private void clearButtons (){
         for (Button button : calendarDays){
             button.setText("");
-            button.setOnAction(e -> {});
+            button.setOnAction(e -> {
+                dayView.getItems().clear();
+            });
         }
     }
 
@@ -83,10 +84,14 @@ public class NewCalendarScreen extends GeneralScreen implements Initializable{
         for (int i = start; i < stop + start; i++) {
             calendarDays.get(i).setText(Integer.toString(currentDay));
             int dayOfMonth = currentDay;
+            YearMonth yearMonth = YearMonth.of(year, month);
+            LocalDate date = yearMonth.atDay(dayOfMonth);
             calendarDays.get(i).setOnAction(e -> {
-                YearMonth yearMonth = YearMonth.of(year, month);
-                populatePreview(yearMonth.atDay(dayOfMonth));
+                populatePreview(date);
             });
+            if (controller.containsInfo(date)){
+                calendarDays.get(i).setStyle("-fx-base: #00ccaa;");
+            }
             calendarDays.get(i).setAlignment(Pos.CENTER);
             currentDay++;
         }
@@ -94,9 +99,12 @@ public class NewCalendarScreen extends GeneralScreen implements Initializable{
     
 
     private void populatePreview (LocalDate day){
-        System.out.println("should print day of " + day.toString());
-        ArrayList <DayPrev> dayPreview = controller.getDayPreview(day);
-        ObservableList <DayPrev> tablePreview = dayView.getItems();
+        ArrayList <DayPreview> dayPreview = controller.getDayPreview(day);
+        if (dayPreview.size() == 0){
+            dayView.getItems().clear();
+            return;
+        }
+        ObservableList <DayPreview> tablePreview = dayView.getItems();
         tablePreview.clear();
         tablePreview.addAll(dayPreview);
         dayView.setItems(tablePreview);

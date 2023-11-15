@@ -1,5 +1,7 @@
 package Calendar;
 
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.HashMap;
 
 public class Calendar {
@@ -18,6 +20,21 @@ public class Calendar {
         return instance;
     }
 
+    public Day getDay (LocalDate date){
+        int year = date.getYear();
+        Month month = date.getMonth();
+        int day = date.getDayOfMonth();
+        return getYear(year).getMonth(month).get(day-1);
+    }
+
+    public boolean containsInfo (LocalDate date){
+        Day day = getDay(date);
+        if (day.getCropRecord() != null || day.getWaterRecord() != null || day.getWeatherRecord() != null){
+            return true;
+        }
+        return false;
+    }
+
     public void addYear (int yearNumber, Year year){
         this.calendar.put(yearNumber, year);
     }
@@ -30,7 +47,7 @@ public class Calendar {
         return this.calendar.get(yearNumber);
     }
 
-    public void setYer (int yearNumber, Year year){
+    public void setYear (int yearNumber, Year year){
         this.calendar.replace(yearNumber, year);
     }
 
