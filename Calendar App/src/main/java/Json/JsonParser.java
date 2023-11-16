@@ -14,6 +14,7 @@ public class JsonParser {
     private static JsonParser instance;
     private JsonArray jsonWaterSource, jsonCrops, jsonCropStatus, jsonPests, jsonAspects;
     private ArrayList <String> waterSource, crops, cropStatus, pests, aspects;
+    private ArrayList <String> basic;
 
     private JsonParser (){
         loadJson ();
@@ -22,6 +23,8 @@ public class JsonParser {
         cropStatus = toArray(jsonCropStatus);
         pests = toArray(jsonPests);
         aspects = toArray(jsonAspects);
+        // empty array to send in case of an error
+        basic = new ArrayList<>();
     }
 
     public static synchronized JsonParser getInstance (){
@@ -32,7 +35,7 @@ public class JsonParser {
     }
 
     private void loadJson (){
-        String filePath = "C:\\Users\\Stephanie\\OneDrive - Estudiantes ITCR\\Semestre II\\Programación Orientada a Objetos\\Caso 03\\Calendar App\\src\\Json\\config.json";
+        String filePath = "src/main/java/Json/config.json";
         try (JsonReader reader = Json.createReader(new FileReader(filePath))){
             JsonObject jsonParser = reader.readObject();
 
@@ -58,22 +61,37 @@ public class JsonParser {
     }
 
     public ArrayList<String> getWaterSource (){
+        if (this.waterSource == null){
+            return basic;
+        }
         return this.waterSource;
     }
 
     public ArrayList<String> getCrops (){
+        if (this.crops == null){
+            return basic;
+        }
         return this.crops;
     }
 
     public ArrayList<String> getCropStatus (){
+        if (this.cropStatus == null){
+            return basic;
+        }
         return this.cropStatus;
     }
 
     public ArrayList<String> getPests (){
+        if (this.pests == null){
+            return basic;
+        }
         return this.pests;
     }
 
     public ArrayList<String> getAspects (){
+        if (this.aspects == null){
+            return basic;
+        }
         return this.aspects;
     }
 }

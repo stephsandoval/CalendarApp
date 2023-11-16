@@ -12,7 +12,7 @@ public class StatsController {
     }
 
     private void loadMap (){
-        urlMap.put("crop", "chart.html");
+        urlMap.put("crop", "src/main/java/Screens/chart.html");
     }
 
     public String getURL (String aspect) {
