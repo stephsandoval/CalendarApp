@@ -1,5 +1,7 @@
 package Screens;
 
+import java.io.File;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -33,13 +35,15 @@ public class StatsScreen extends GeneralScreen implements Initializable {
         webView.setZoom(0.8);
     }
 
-    public void loadPage (){
+    public void loadPage () throws MalformedURLException{
         webView.getEngine().loadContent("");
         String aspect = aspectsStats.getValue();
-        if (aspect != null && aspect.equals("crop")){
-            String url = this.getClass().getResource(controller.getURL(aspect)).toExternalForm();
+
+        if (aspect != null && aspect.equals("crop")) {
+            String fileName = controller.getURL("crop");
+            File file = new File(fileName);
+            String url = file.toURI().toURL().toExternalForm();
             engine.load(url);
         }
     }
-
 }

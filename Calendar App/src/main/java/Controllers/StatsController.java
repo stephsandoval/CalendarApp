@@ -12,11 +12,10 @@ public class StatsController {
     }
 
     private void loadMap (){
-        urlMap.put("crop", "src/main/java/Screens/chart.html");
+        urlMap.put("crop", "src/main/java/HMTL/chart.html");
     }
 
     public String getURL (String aspect) {
-        System.out.println(urlMap.get(aspect));
         return urlMap.get(aspect);
     }
 }
