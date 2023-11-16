@@ -12,12 +12,7 @@ public class Year {
     private int yearNumber;
 
     public Year (int yearNumber){
-        if (yearNumber <= LocalDate.now().getYear()){
-            this.yearNumber = yearNumber;
-        } else {
-            this.yearNumber = LocalDate.now().getYear();
-        }
-
+        this.yearNumber = yearNumber;
         year = new HashMap<>();
         populateYear();
     }

@@ -89,9 +89,7 @@ public class NewCalendarScreen extends GeneralScreen implements Initializable{
             calendarDays.get(i).setOnAction(e -> {
                 populatePreview(date);
             });
-            if (controller.containsInfo(date)){
-                calendarDays.get(i).setStyle("-fx-base: #00ccaa;");
-            }
+            // change style based on button's condition
             calendarDays.get(i).setAlignment(Pos.CENTER);
             currentDay++;
         }
