@@ -5,6 +5,7 @@ import java.time.Month;
 import java.time.YearMonth;
 import java.util.ArrayList;
 
+import ApiClient.CalendarApiClient;
 import Calendar.Calendar;
 import Calendar.Day;
 import CalendarPrev.DayPreview;
@@ -16,10 +17,21 @@ public class NewCalendarController {
     private Month month;
     private Calendar calendar;
     private DayPreviewCreator previewCreator;
+    private CalendarApiClient reader;
 
     public NewCalendarController (){
         calendar = Calendar.getInstance();
         previewCreator = DayPreviewCreator.getInstance();
+        reader = CalendarApiClient.getInstance();
+        addDays();
+    }
+
+    private void addDays (){
+        ArrayList<Day> days = reader.readData();
+        System.out.println(days.size());
+        for (Day day : days){
+            calendar.getYear(day.getDate().getYear()).addDayToMonth(day.getDate().getMonth(), day);
+        }
     }
 
     public void setMonthandYear (Month month, int yearNumber){
@@ -42,7 +54,7 @@ public class NewCalendarController {
     public ArrayList <DayPreview> getDayPreview (LocalDate date){
         ArrayList <DayPreview> preview = new ArrayList<>();
         Day day = calendar.getDay(date);
-        if (day.getWaterRecord() != null || day.getWeatherRecord() != null || day.getCropRecord() != null){
+        if (day.getWaterRecord().hasInformation() || day.getWeatherRecord().hasInformation() || day.getCropRecord().hasInformation()){
             preview = previewCreator.getDayPreview(day);
         }
         return preview;

@@ -29,7 +29,7 @@ public class Calendar {
 
     public boolean containsInfo (LocalDate date){
         Day day = getDay(date);
-        if (day.getCropRecord() != null || day.getWaterRecord() != null || day.getWeatherRecord() != null){
+        if (day.getCropRecord().hasInformation() || day.getWaterRecord().hasInformation() || day.getWeatherRecord().hasInformation()){
             return true;
         }
         return false;

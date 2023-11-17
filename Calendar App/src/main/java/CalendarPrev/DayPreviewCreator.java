@@ -11,7 +11,6 @@ public class DayPreviewCreator {
 
     private DayPreviewCreator (){
         dayPreview = new ArrayList<>();
-        dayPreview.add(new DayPreview("--", "no information to show"));
     }
 
     public static synchronized DayPreviewCreator getInstance (){

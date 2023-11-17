@@ -4,51 +4,78 @@ public class WeatherRecord {
  
     private double temperature, humidity, precipitation;
     private String weatherNote;
+    private boolean hasInformation;
 
     public WeatherRecord (){
         this.temperature = 0.0;
         this.humidity = 0.0;
         this.precipitation = 0.0;
         this.weatherNote = "-";
+        this.hasInformation = false;
     }
 
     public WeatherRecord (double temperature, double humidity, double precipitation, String weatherNote){
-        this.temperature = temperature;
-        this.humidity = humidity;
-        this.precipitation = precipitation;
-        this.weatherNote = weatherNote;
+        this.hasInformation = false;
+        setTemperature(temperature);
+        setHumidity(humidity);
+        setPrecipitation(precipitation);
+        setWeatherNote(weatherNote);
     }
 
     public double getTemperature (){
         return temperature;
     }
 
-    public void setTemperature (double temperature){
-        this.temperature = temperature;
-    }
-
     public double getHumidity (){
         return humidity;
-    }
-
-    public void setHumidity (double humidity){
-        this.humidity = humidity;
     }
 
     public double getPrecipitation (){
         return precipitation;
     }
 
-    public void setPrecipitation (double precipitation){
-        this.precipitation = precipitation;
-    }
-
     public String getWeatherNote (){
         return weatherNote;
     }
 
+    public void setTemperature (double temperature){
+        if (temperature > 0){
+            this.hasInformation = true;
+            this.temperature = temperature;
+        } else {
+            this.temperature = 0;
+        }
+    }
+
+    public void setHumidity (double humidity){
+        if (humidity > 0){
+            this.hasInformation = true;
+            this.humidity = humidity;
+        } else {
+            this.humidity = 0;
+        }
+    }
+
+    public void setPrecipitation (double precipitation){
+        if (precipitation > 0){
+            this.hasInformation = true;
+            this.precipitation = precipitation;
+        } else {
+            this.precipitation = 0;
+        }
+    }
+
     public void setWeatherNote (String weatherNote){
-        this.weatherNote = weatherNote;
+        if (weatherNote != null){
+            this.hasInformation = true;
+            this.weatherNote = weatherNote;
+        } else {
+            this.weatherNote = "-";
+        }
+    }
+
+    public boolean hasInformation (){
+        return this.hasInformation;
     }
 
     public String toString (){
