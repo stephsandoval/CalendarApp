@@ -24,7 +24,7 @@ public class VideoElement implements VisualElement{
         Media media = new Media(file.toURI().toString());
         mediaPlayer = new MediaPlayer(media);
         MediaView mediaView = new MediaView(mediaPlayer);
-        mediaView.setPreserveRatio(true);
+        mediaView.setPreserveRatio(false);
         mediaView.setFitWidth(325);
         mediaView.setFitHeight(189);
         mediaView.setLayoutX(14);

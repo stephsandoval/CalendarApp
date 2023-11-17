@@ -16,11 +16,13 @@ public class ImageElement implements VisualElement{
     public Node createVisual () {
         Image image = new Image(mediaPath);
         ImageView imageView = new ImageView(image);
-        imageView.setPreserveRatio(true);
+        imageView.setPreserveRatio(false);
         imageView.setFitWidth(325);
         imageView.setFitHeight(189);
         imageView.setLayoutX(14);
         imageView.setLayoutY(35);
+        System.out.println(image.getHeight());
+        System.out.println(image.getWidth());
         return (Node)imageView;
     }
 }

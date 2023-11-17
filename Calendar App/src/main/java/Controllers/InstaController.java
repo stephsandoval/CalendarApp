@@ -18,7 +18,7 @@ public class InstaController {
 
     public ArrayList<Pane> getPosts (){
         String videoPath = "src/main/java/Videos/seedlings.mp4";
-        String potatoPath = "file:src/main/java/tempImage.jpg";
+        String potatoPath = "file:src/main/java/Images/potato.jpg";
         VideoElement video = new VideoElement(videoPath);
         ImageElement image = new ImageElement(potatoPath);
         String username = "stephsandoval";
