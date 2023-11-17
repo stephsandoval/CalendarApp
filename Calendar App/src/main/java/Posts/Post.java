@@ -6,18 +6,37 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.Pane;
 
-public class Post {
+public class Post extends Pane{
  
     private Label username, date;
     private Node media;
     private TextArea description;
 
+    private static double height = 332;
+    private static double width = 355;
+
     public Post (LocalDate date, String username, String description, VisualElement element){
+        this.username = new Label();
+        this.date = new Label();
+        this.description = new TextArea();
+
         setUsernameLabel(username);
         setDateLabel(date);
         setDescriptionArea(description);
+
         this.media = element.createVisual();
+        setPane();
+    }
+
+    private void setPane (){
+        this.setPrefWidth(355);
+        this.setPrefWidth(332);
+        this.getChildren().add(username);
+        this.getChildren().add(date);
+        this.getChildren().add(description);
+        this.getChildren().add(media);
     }
 
     private void setUsernameLabel (String username){
@@ -30,7 +49,7 @@ public class Post {
     private void setDateLabel (LocalDate date){
         setDate(date);
         this.date.setAlignment(Pos.CENTER_RIGHT);
-        this.date.setLayoutX(314);
+        this.date.setLayoutX(275);
         this.date.setLayoutY(14);
     }
 
@@ -78,6 +97,10 @@ public class Post {
         } else {
             this.description.setText(" ");
         }
+    }
+
+    public static double getPostHeight (){
+        return height;
     }
 
     public String toString (){
