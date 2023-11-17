@@ -5,12 +5,20 @@ public class CropRecord {
     private String crop, cropStatus, pests, cropNote;
     private int amount;
 
+    public CropRecord (){
+        this.crop = "-";
+        this.amount = 0;
+        this.cropStatus = "-";
+        this.pests = "-";
+        this.cropNote = "-";
+    }
+
     public CropRecord (String crop, int amount, String cropStatus, String pests, String cropNote){
-        this.crop = crop;
-        this.amount = amount;
-        this.cropStatus = cropStatus;
-        this.pests = pests;
-        this.cropNote = cropNote;
+        setCrop(crop);
+        setAmount(amount);
+        setCropStatus(cropStatus);
+        setPests(pests);
+        setCropNote(cropNote);
     }
 
     public String getCrop (){
@@ -34,23 +42,43 @@ public class CropRecord {
     }
     
     public void setCrop (String crop){
-        this.crop = crop;
+        if (crop != null){
+            this.crop = crop;
+        } else {
+            this.crop = "-";
+        }
     }
 
     public void setAmount (int amount){
-        this.amount = amount;
+        if (amount >= 0){
+            this.amount = amount;
+        } else {
+            this.amount = 0;
+        }
     }
 
     public void setCropStatus (String cropStatus){
-        this.cropStatus = cropStatus;
+        if (cropStatus != null){
+            this.cropStatus = cropStatus;
+        } else {
+            this.cropStatus = "-";
+        }
     }
 
     public void setPests (String pests){
-        this.pests = pests;
+        if (pests != null){
+            this.pests = pests;
+        } else {
+            this.pests = "-";
+        }
     }
 
     public void setCropNote (String cropNote){
-        this.cropNote = cropNote;
+        if (cropNote != null){
+            this.cropNote = cropNote;
+        } else {
+            this.cropNote = "-";
+        }
     }
 
     public String toString (){

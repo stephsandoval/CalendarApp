@@ -5,6 +5,13 @@ public class WaterRecord {
     private double waterAmount, waterpH;
     private String waterSource, waterNote;
 
+    public WaterRecord (){
+        this.waterSource = "-";
+        this.waterAmount = 0.0;
+        this.waterpH = 1.0;
+        this.waterNote = "-";
+    }
+
     public WaterRecord (String waterSource, double waterAmount, double waterpH, String waterNote){
         this.waterSource = waterSource;
         this.waterAmount = waterAmount;

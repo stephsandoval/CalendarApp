@@ -5,6 +5,13 @@ public class WeatherRecord {
     private double temperature, humidity, precipitation;
     private String weatherNote;
 
+    public WeatherRecord (){
+        this.temperature = 0.0;
+        this.humidity = 0.0;
+        this.precipitation = 0.0;
+        this.weatherNote = "-";
+    }
+
     public WeatherRecord (double temperature, double humidity, double precipitation, String weatherNote){
         this.temperature = temperature;
         this.humidity = humidity;

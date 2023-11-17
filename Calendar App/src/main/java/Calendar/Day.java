@@ -13,11 +13,18 @@ public class Day {
     private WaterRecord waterRecord;
     private CropRecord cropRecord;
 
+    public Day (){
+        this.date = null;
+        this.waterRecord = new WaterRecord();
+        this.weatherRecord = new WeatherRecord();
+        this.cropRecord = new CropRecord();
+    }
+
     public Day (LocalDate date){
         this.date = date;
-        this.waterRecord = null;
-        this.weatherRecord = null;
-        this.cropRecord = null;
+        this.waterRecord = new WaterRecord();
+        this.weatherRecord = new WeatherRecord();
+        this.cropRecord = new CropRecord();
     }
 
     public Day (LocalDate date, WeatherRecord weatherRecord, WaterRecord waterRecord, CropRecord cropRecord){
@@ -57,5 +64,9 @@ public class Day {
 
     public void setCropRecord (CropRecord cropRecord){
         this.cropRecord = cropRecord;
+    }
+
+    public String toString (){
+        return "day >> " + date.toString() + " | " + weatherRecord + " | " + waterRecord + " | " + cropRecord + " ";
     }
 }
