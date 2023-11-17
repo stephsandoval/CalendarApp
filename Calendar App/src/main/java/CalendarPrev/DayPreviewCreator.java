@@ -22,26 +22,79 @@ public class DayPreviewCreator {
 
     public ArrayList<DayPreview> getDayPreview (Day day){
         dayPreview.clear();
-        if (day.getWeatherRecord() != null){
-            dayPreview.add(new DayPreview("temperature", Double.toString(day.getWeatherRecord().getTemperature())));
-            String humidity = Double.toString(day.getWeatherRecord().getHumidity());
-            dayPreview.add(new DayPreview("humidity", humidity != "0.0" ? humidity : "--" ));
-            dayPreview.add(new DayPreview("precipitation", Double.toString(day.getWeatherRecord().getPrecipitation())));
-            dayPreview.add(new DayPreview("weather note", day.getWeatherRecord().getWeatherNote()));
+        if (day.getWeatherRecord().hasInformation()){
+            writeWeatherPreview(day);
         }
-        if (day.getWaterRecord() != null){
-            dayPreview.add(new DayPreview("water source", day.getWaterRecord().getWaterSource()));
-            dayPreview.add(new DayPreview("water amount", Double.toString(day.getWaterRecord().getWaterAmount())));
-            dayPreview.add(new DayPreview("water pH", Double.toString(day.getWaterRecord().getWaterpH())));
-            dayPreview.add(new DayPreview("water note", day.getWaterRecord().getWaterNote()));
+        if (day.getWaterRecord().hasInformation()){
+            writeWaterPreview(day);
         }
-        if (day.getCropRecord() != null){
-            dayPreview.add(new DayPreview("crop type", day.getCropRecord().getCrop()));
-            dayPreview.add(new DayPreview("crop amount", Integer.toString(day.getCropRecord().getAmount())));
-            dayPreview.add(new DayPreview("crop status", day.getCropRecord().getCropStatus()));
-            dayPreview.add(new DayPreview("pests", day.getCropRecord().getPests()));
-            dayPreview.add(new DayPreview("crop note", day.getCropRecord().getCropNote()));
+        if (day.getCropRecord().hasInformation()){
+            writeCropPreview(day);
         }
         return dayPreview;
+    }
+
+    private void writeWeatherPreview (Day day){
+        String temperature = Double.toString(day.getWeatherRecord().getTemperature());
+        String humidity = Double.toString(day.getWeatherRecord().getHumidity());
+        String precipitation = Double.toString(day.getWeatherRecord().getPrecipitation());
+        String note = day.getWeatherRecord().getWeatherNote();
+
+        if (!temperature.equals("0.0")){
+            dayPreview.add(new DayPreview("temperature", temperature));
+        }
+        if (!humidity.equals("0.0")){
+            dayPreview.add(new DayPreview("humidity", humidity));
+        }
+        if (!precipitation.equals("0.0")){
+            dayPreview.add(new DayPreview("precipitation", precipitation));
+        }
+        if (!note.equals("-")){
+            dayPreview.add(new DayPreview("weather note", note));
+        }
+    }
+
+    private void writeWaterPreview (Day day){
+        String source = day.getWaterRecord().getWaterSource();
+        String amount = Double.toString(day.getWaterRecord().getWaterAmount());
+        String pH = Double.toString(day.getWaterRecord().getWaterpH());
+        String note = day.getWaterRecord().getWaterNote();
+
+        if (!source.equals("-")){
+            dayPreview.add(new DayPreview("water source", source));
+        }
+        if (!amount.equals("0.0")){
+            dayPreview.add(new DayPreview("water amount", amount));
+        }
+        if (!pH.equals("1.0")){
+            dayPreview.add(new DayPreview("precipitation", pH));
+        }
+        if (!note.equals("-")){
+            dayPreview.add(new DayPreview("water note", note));
+        }
+    }
+
+    private void writeCropPreview (Day day){
+        String type = day.getCropRecord().getCrop();
+        String amount = Integer.toString(day.getCropRecord().getAmount());
+        String status = day.getCropRecord().getCropStatus();
+        String pests = day.getCropRecord().getPests();
+        String note = day.getCropRecord().getCropNote();
+
+        if (!type.equals("-")){
+            dayPreview.add(new DayPreview("crop type", type));
+        }
+        if (!amount.equals("0")){
+            dayPreview.add(new DayPreview("crop amount", amount));
+        }
+        if (!status.equals("-")){
+            dayPreview.add(new DayPreview("crop status", status));
+        }
+        if (!pests.equals("-")){
+            dayPreview.add(new DayPreview("pests", pests));
+        }
+        if (!note.equals("-")){
+            dayPreview.add(new DayPreview("crop note", note));
+        }
     }
 }

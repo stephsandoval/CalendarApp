@@ -4,7 +4,6 @@ public class CropRecord {
  
     private String crop, cropStatus, pests, cropNote;
     private int amount;
-    private boolean hasInformation;
 
     public CropRecord (){
         this.crop = "-";
@@ -12,11 +11,9 @@ public class CropRecord {
         this.cropStatus = "-";
         this.pests = "-";
         this.cropNote = "-";
-        this.hasInformation = false;
     }
 
     public CropRecord (String crop, int amount, String cropStatus, String pests, String cropNote){
-        this.hasInformation = false;
         setCrop(crop);
         setAmount(amount);
         setCropStatus(cropStatus);
@@ -47,7 +44,6 @@ public class CropRecord {
     public void setCrop (String crop){
         if (crop != null){
             this.crop = crop;
-            this.hasInformation = true;
         } else {
             this.crop = "-";
         }
@@ -56,7 +52,6 @@ public class CropRecord {
     public void setAmount (int amount){
         if (amount >= 0){
             this.amount = amount;
-            this.hasInformation = true;
         } else {
             this.amount = 0;
         }
@@ -65,7 +60,6 @@ public class CropRecord {
     public void setCropStatus (String cropStatus){
         if (cropStatus != null){
             this.cropStatus = cropStatus;
-            this.hasInformation = true;
         } else {
             this.cropStatus = "-";
         }
@@ -74,7 +68,6 @@ public class CropRecord {
     public void setPests (String pests){
         if (pests != null){
             this.pests = pests;
-            this.hasInformation = true;
         } else {
             this.pests = "-";
         }
@@ -83,14 +76,13 @@ public class CropRecord {
     public void setCropNote (String cropNote){
         if (cropNote != null){
             this.cropNote = cropNote;
-            this.hasInformation = true;
         } else {
             this.cropNote = "-";
         }
     }
 
     public boolean hasInformation (){
-        return this.hasInformation;
+        return (!crop.equals("-") || amount != 0 || !cropStatus.equals("-") || !pests.equals("-") || !cropNote.equals("-"));
     }
 
     public String toString (){

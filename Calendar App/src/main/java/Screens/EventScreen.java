@@ -75,18 +75,18 @@ public class EventScreen extends GeneralScreen implements Initializable{
         temperature = roundDouble(screenTemperature.getValue(), "3");
         humidity = roundDouble(screenHumidity.getValue(), "3");
         precipitation = roundDouble(screenPrecipitation.getValue(), "3");
-        weatherNotes = screenWeatherNotes.getText();
+        weatherNotes = screenWeatherNotes.getText().equals("") ? "-" : screenWeatherNotes.getText();
 
-        waterSource = screenWaterSource.getValue();
+        waterSource = screenWaterSource.getValue().equals("") ? "-" : screenWaterSource.getValue();
         waterAmount = roundDouble(screenWaterAmount.getValue(), "3");
         waterpH = roundDouble(screenWaterpH.getValue(), "2");
-        waterNotes = screenWaterNotes.getText();
+        waterNotes = screenWaterNotes.getText().equals("") ? "-" : screenWaterNotes.getText();
 
-        crop = screenCrop.getValue();
+        crop = screenCrop.getValue().equals("") ? "-" : screenCrop.getValue();
         cropAmount = (int) screenCropAmount.getValue();
-        cropStatus = screenCropStatus.getValue();
-        pests = screenPests.getValue();
-        cropNotes = screenCropNotes.getText();
+        cropStatus = screenCropStatus.getValue().equals("") ? "-" : screenCropStatus.getValue();
+        pests = screenPests.getValue().equals("") ? "-" : screenPests.getValue();
+        cropNotes = screenCropNotes.getText().equals("") ? "-" : screenCropNotes.getText();
 
         date = screenDate.getValue();
         if (date == null){

@@ -4,18 +4,15 @@ public class WeatherRecord {
  
     private double temperature, humidity, precipitation;
     private String weatherNote;
-    private boolean hasInformation;
 
     public WeatherRecord (){
         this.temperature = 0.0;
         this.humidity = 0.0;
         this.precipitation = 0.0;
         this.weatherNote = "-";
-        this.hasInformation = false;
     }
 
     public WeatherRecord (double temperature, double humidity, double precipitation, String weatherNote){
-        this.hasInformation = false;
         setTemperature(temperature);
         setHumidity(humidity);
         setPrecipitation(precipitation);
@@ -40,7 +37,6 @@ public class WeatherRecord {
 
     public void setTemperature (double temperature){
         if (temperature > 0){
-            this.hasInformation = true;
             this.temperature = temperature;
         } else {
             this.temperature = 0;
@@ -49,7 +45,6 @@ public class WeatherRecord {
 
     public void setHumidity (double humidity){
         if (humidity > 0){
-            this.hasInformation = true;
             this.humidity = humidity;
         } else {
             this.humidity = 0;
@@ -58,7 +53,6 @@ public class WeatherRecord {
 
     public void setPrecipitation (double precipitation){
         if (precipitation > 0){
-            this.hasInformation = true;
             this.precipitation = precipitation;
         } else {
             this.precipitation = 0;
@@ -67,7 +61,6 @@ public class WeatherRecord {
 
     public void setWeatherNote (String weatherNote){
         if (weatherNote != null){
-            this.hasInformation = true;
             this.weatherNote = weatherNote;
         } else {
             this.weatherNote = "-";
@@ -75,7 +68,7 @@ public class WeatherRecord {
     }
 
     public boolean hasInformation (){
-        return this.hasInformation;
+        return (temperature > 0 || humidity > 0 || precipitation > 0 || !weatherNote.equals("-"));
     }
 
     public String toString (){
