@@ -25,6 +25,7 @@ public class Main extends Application {
             stage.setResizable(false);
             stage.setTitle("Calendar App");
             stage.getIcons().add(new Image("plantLogo.png"));
+            stage.setOnCloseRequest(event -> {System.exit(0);});
             stage.show();
         } catch (Exception e){}
     }
