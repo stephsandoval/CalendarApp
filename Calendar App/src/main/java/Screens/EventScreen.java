@@ -102,10 +102,8 @@ public class EventScreen extends GeneralScreen implements Initializable{
 
     public void createEvent () throws Exception{
         getValues();
-        if (checkDate()){
-            controller.createEvents(date, temperature, humidity, precipitation, weatherNotes, waterSource, waterAmount, waterpH, waterNotes, crop, cropAmount, cropStatus, pests, cropNotes);
-            clearFields();
-        }
+        controller.createEvents(date, temperature, humidity, precipitation, weatherNotes, waterSource, waterAmount, waterpH, waterNotes, crop, cropAmount, cropStatus, pests, cropNotes);
+        clearFields();
     }
 
     private void clearFields (){
@@ -133,12 +131,5 @@ public class EventScreen extends GeneralScreen implements Initializable{
         screenCropNotes.clear();
 
         screenDate.setValue(null);
-    }
-
-    private boolean checkDate () throws Exception{
-        if (date.isAfter(LocalDate.now())){
-            return false;
-        }
-        return true;
     }
 }

@@ -57,14 +57,11 @@ public class CalendarApiClient {
         return days;
     }
 
-    public void writeData (ArrayList<Day> days){
+    public void writeData (Day day){
         CMAClient client = new CMAClient.Builder().setAccessToken(writeToken).setSpaceId(spaceId).setEnvironmentId(environmentId).build();
-        for (Day day : days){
-            CMAEntry entry = createEntry(day);
-            CMAEntry result = client.entries().create(contentType, entry);
-            client.entries().publish(result);
-        }
-
+        CMAEntry entry = createEntry(day);
+        CMAEntry result = client.entries().create(contentType, entry);
+        client.entries().publish(result);
     }
 
     private void performReadAction(String key, Object value, Object object) {
