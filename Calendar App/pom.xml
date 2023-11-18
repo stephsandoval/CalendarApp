@@ -51,6 +51,20 @@
             <version>4.5.13</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.dropbox.core</groupId>
+            <artifactId>dropbox-core-sdk</artifactId>
+            <version>5.4.6</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.contentful.java</groupId>
+            <artifactId>cma-sdk</artifactId>
+            <version>3.4.8</version>
+        </dependency>
+
+
+
     </dependencies>
 
     <properties>
