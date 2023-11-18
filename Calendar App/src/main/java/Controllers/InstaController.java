@@ -10,18 +10,28 @@ import javafx.scene.layout.Pane;
 public class InstaController {
 
     private ArrayList<Pane> posts;
+    private PostApiClient client;
  
     public InstaController (){
+        client = PostApiClient.getInstance();
         posts = new ArrayList<>();
     }
 
     public ArrayList<Pane> getPosts (){
-        PostApiClient reader = PostApiClient.getInstance();
-        ArrayList<Post> postsRead = reader.readData();
+        ArrayList<Post> postsRead = client.readData();
         for (Post post : postsRead){
             posts.add(post);
         }
         return posts;
+    }
+
+    public void publishPost (String mediaPath, String description){
+        Post post = new Post();
+        post.setUsername("devilPotato");
+        post.setDate(LocalDate.now());
+        post.setDescription(description);
+        post.setVisualElement(mediaPath);
+        client.writeData(post);
     }
 
     public double getPostOffset (){

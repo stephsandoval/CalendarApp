@@ -1,7 +1,5 @@
 package Posts;
 
-import java.io.File;
-
 import javafx.scene.Node;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -32,11 +30,6 @@ public class VideoElement implements VisualElement{
             setVideoActions();
         });
         return (Node) mediaView;
-    }
-
-    @Override
-    public String getMediaPath (){
-        return this.mediaPath;
     }
 
     private void setVideoActions (){

@@ -17,6 +17,7 @@ public class Post extends Pane{
     private Node media;
     private TextArea description;
 
+    private String mediaPath;
     private static double height = 332;
 
     public Post (){
@@ -28,13 +29,14 @@ public class Post extends Pane{
         setDescriptionArea("");
     }
 
-    public Post (LocalDate date, String username, String description, VisualElement element){
+    public Post (LocalDate date, String username, String description, String mediaPath){
         this();
         setUsernameLabel(username);
         setDateLabel(date);
         setDescriptionArea(description);
-        this.media = element.createVisual();
+        setVisualElement(mediaPath);
         setPane();
+        this.mediaPath = mediaPath;
     }
 
     private void setPane (){
@@ -107,10 +109,11 @@ public class Post extends Pane{
     }
 
     public String getVisualPath (){
-        return this.visualElement.getMediaPath();
+        return this.mediaPath;
     }
 
     public void setVisualElement (String mediaPath){
+        this.mediaPath = mediaPath;
         Tika tika = new Tika();
         String type = tika.detect(mediaPath).split("/")[0];
         if (type.equals("video")){
@@ -124,9 +127,5 @@ public class Post extends Pane{
 
     public static double getPostHeight (){
         return height;
-    }
-
-    public String toString (){
-        return "post >> date > " + date + " | username > " + username + " | visual of type " + media.getClass() + " | description > " + description;
     }
 }

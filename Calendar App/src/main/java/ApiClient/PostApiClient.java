@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URI;
+import java.net.URL;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -16,7 +17,6 @@ import javax.json.JsonReader;
 import java.io.StringReader;
 
 import java.time.LocalDate;
-import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -28,7 +28,10 @@ import com.contentful.java.cda.CDAClient;
 import com.contentful.java.cda.CDAEntry;
 import com.contentful.java.cda.CDAResource;
 import com.contentful.java.cma.CMAClient;
+import com.contentful.java.cma.model.CMAAsset;
 import com.contentful.java.cma.model.CMAEntry;
+import com.contentful.java.cma.model.CMAField;
+import com.contentful.java.cma.model.CMAType;
 import com.google.gson.internal.LinkedTreeMap;
 
 import Posts.Post;
@@ -72,6 +75,35 @@ public class PostApiClient {
             posts.add(createPost(entry));
         }
         return posts; 
+    }
+
+    public void writeData (Post post){
+        CMAClient client = new CMAClient.Builder().setAccessToken(writeToken).setSpaceId(spaceId).setEnvironmentId(environmentId).build();
+        CMAEntry entry = createEntry(post);
+        CMAEntry result = client.entries().create(contentType, entry);
+        client.entries().publish(result);
+    }
+
+    private void performWriteAction (String key, Object value, Object object){
+        Action action = writeActionMap.get(value.getClass());
+        if (action != null){
+            action.performAction(key, value, object);
+        }
+    }
+
+    private CMAEntry createEntry (Post post){
+        int index = 0;
+        CMAEntry entry = new CMAEntry();
+        entry.setField("postTitle", "en-US", post.getDate().toString() + "-" + post.getUsername());
+        performWriteAction(entryFields.get(index++), post.getUsername(), entry);
+        performWriteAction(entryFields.get(index++), post.getDate(), entry);
+        performWriteAction(entryFields.get(index++), post.getDescription(), entry);
+        performWriteAction(entryFields.get(index), post.getVisualPath(), entry);
+        return entry;
+    }
+
+    private void writeImage (String key, Object value, Object object){
+        // something
     }
 
     private void performReadAction(String key, Object value, Object object) {
@@ -157,12 +189,12 @@ public class PostApiClient {
         readActionMap.put(entryFields.get(index++), (key, value, object) -> ((Post) object).setUsername((String) value));
         readActionMap.put(entryFields.get(index++), (key, value, object) -> ((Post) object).setDate(LocalDate.parse(value.toString())));
         readActionMap.put(entryFields.get(index++), (key, value, object) -> ((Post) object).setDescription((String) value));
-        readActionMap.put(entryFields.get(index++), (key, value, object) -> getJsonURL(key, value, object));
+        readActionMap.put(entryFields.get(index), (key, value, object) -> getJsonURL(key, value, object));
     }
 
     private void populateWriteActionMap (){
         writeActionMap.put(LocalDate.class, (key, value, object) -> ((CMAEntry) object).setField(key, "en-US", ((LocalDate) value).toString()));
-        writeActionMap.put(LocalDate.class, (key, value, object) -> ((CMAEntry) object).setField(key, "en-US", (String) value));
+        writeActionMap.put(String.class, (key, value, object) -> ((CMAEntry) object).setField(key, "en-US", (String) value));
     }
 
     private void populateFields (){

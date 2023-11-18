@@ -1,55 +1,51 @@
+import com.contentful.java.cma.*;
+import com.contentful.java.cma.model.CMAAsset;
+import com.contentful.java.cma.model.CMAAssetFile;
 
-/*import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
+public class ContentfulConnector {
 
-public class ContentfulImageFetcher {
+    public static void main(String[] args) {
+        // Create the Contentful client.
+        final CMAClient client =
+        new CMAClient
+            .Builder()
+            .setAccessToken("CFPAT-PD1g-fAbvgONwsLi0_CdbJilnPRFE4QyEJ_PuduEdQ4")
+            .setSpaceId("7u4zyhwnzl64")
+            .setEnvironmentId("master")
+            .build();
 
-    public static void main(String[] args) throws Exception {
-        String spaceId = "your_space_id";
-        String entryId = "your_entry_id";
-        String assetId = "your_asset_id";
-        String accessToken = "your_access_token";
+        // Create an arbitrary new asset with some custom values.
+        final CMAAsset asset = new CMAAsset();
+        asset.getFields().setTitle("en-US","apple2");
 
-        // Construct entry URL
-        String entryUrl = "https://cdn.contentful.com/spaces/" + spaceId + "/entries/" + entryId + "?access_token=" + accessToken;
+        CMAAssetFile file = new CMAAssetFile();
+        file.setFileName("apple.jpg");  // Replace with the actual filename.
+        file.setContentType("image/jpg");  // Replace with the actual content type.
+        file.setUploadUrl("https://i.pinimg.com/564x/2b/11/66/2b1166e601906c5ecdca2fcb7774169f.jpg");
 
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest entryRequest = HttpRequest.newBuilder()
-                .uri(URI.create(entryUrl))
-                .build();
+        asset.getFields().setFile("en-US", file);
 
-        HttpResponse<String> entryResponse = client.send(entryRequest, HttpResponse.BodyHandlers.ofString());
+        // Create it on Contentful.
+        CMAAsset result = client.assets().create(asset);
 
-        // Parse entry response and extract image information
-        String imageUrl = parseImageUrlFromEntryResponse(entryResponse.body());
+        client.assets().process(result, "en-US");
 
-        // Construct asset URL
-        String assetUrl = "https://cdn.contentful.com/spaces/" + spaceId + "/assets/" + assetId + "?access_token=" + accessToken;
+        // Assuming you have the ID of the draft asset
+        String draftAssetId = result.getId();
+        System.out.println(result.getId());
 
-        HttpRequest assetRequest = HttpRequest.newBuilder()
-                .uri(URI.create(assetUrl))
-                .build();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {}
+        
+        // Get the draft asset
+        CMAAsset draftAsset = client.assets().fetchOne(draftAssetId);
 
-        HttpResponse<String> assetResponse = client.send(assetRequest, HttpResponse.BodyHandlers.ofString());
+        // Publish the draft asset
+        CMAAsset p = client.assets().publish(draftAsset);
 
-        // Parse asset response to get the actual image URL or other information
-        String actualImageUrl = parseImageUrlFromAssetResponse(assetResponse.body());
+        System.out.println("Published Asset ID: " + p.getId());
 
-        // Now you can use actualImageUrl to display or download the image
-        System.out.println("Actual Image URL: " + actualImageUrl);
+        System.exit(0);
     }
-
-    private static String parseImageUrlFromEntryResponse(String entryResponse) {
-        // Implement parsing logic based on your JSON structure
-        // Extract the information needed to construct the asset URL
-        return "extracted_image_url";
-    }
-
-    private static String parseImageUrlFromAssetResponse(String assetResponse) {
-        // Implement parsing logic based on your JSON structure
-        // Extract the actual image URL or other information
-        return "actual_image_url";
-    }
-}*/
+}

@@ -23,9 +23,4 @@ public class ImageElement implements VisualElement{
         imageView.setLayoutY(35);
         return (Node)imageView;
     }
-
-    @Override
-    public String getMediaPath (){
-        return this.mediaPath;
-    }
 }

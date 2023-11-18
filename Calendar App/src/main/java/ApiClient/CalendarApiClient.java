@@ -121,7 +121,7 @@ public class CalendarApiClient {
         performWriteAction(entryFields.get(index++), day.getCropRecord().getAmount(), entry);
         performWriteAction(entryFields.get(index++), day.getCropRecord().getCropStatus(), entry);
         performWriteAction(entryFields.get(index++), day.getCropRecord().getPests(), entry);
-        performWriteAction(entryFields.get(index++), day.getCropRecord().getCropNote(), entry);
+        performWriteAction(entryFields.get(index), day.getCropRecord().getCropNote(), entry);
         return entry;
     }
 
@@ -140,7 +140,7 @@ public class CalendarApiClient {
         readActionMap.put(entryFields.get(index++), (key, value, object) -> ((Day) object).getCropRecord().setAmount(((Double) value).intValue()));
         readActionMap.put(entryFields.get(index++), (key, value, object) -> ((Day) object).getCropRecord().setCropStatus((String) value));
         readActionMap.put(entryFields.get(index++), (key, value, object) -> ((Day) object).getCropRecord().setPests((String) value));
-        readActionMap.put(entryFields.get(index++), (key, value, object) -> ((Day) object).getCropRecord().setCropNote((String) value));
+        readActionMap.put(entryFields.get(index), (key, value, object) -> ((Day) object).getCropRecord().setCropNote((String) value));
     }
 
     private void populateWriteActionMap (){

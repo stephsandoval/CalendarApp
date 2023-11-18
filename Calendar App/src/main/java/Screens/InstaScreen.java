@@ -1,7 +1,6 @@
 package Screens;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.URL;
@@ -33,8 +32,6 @@ public class InstaScreen extends GeneralScreen implements Initializable{
     @FXML
     private ScrollPane scrollPane;
 
-    private InputStream stream;
-
     private FileChooser fileChooser = new FileChooser();
     private InstaController controller = new InstaController();
     private double yCoordinate = 0;
@@ -50,8 +47,7 @@ public class InstaScreen extends GeneralScreen implements Initializable{
     public void openFileExplorer () throws FileNotFoundException {
         screenImagePath.clear();
         File file = fileChooser.showOpenDialog(new Stage());
-        screenImagePath.setText(file.getName());
-        //stream = new FileInputStream(file);
+        screenImagePath.setText(file.toURI().toString());
     }
 
     private void setInitialPosts (){
@@ -71,6 +67,11 @@ public class InstaScreen extends GeneralScreen implements Initializable{
     }
 
     public void addPost (){
-        
+        String description = screenDescription.getText();
+        if (description == null){
+            description = " ";
+        }
+        String mediaPath = screenImagePath.getText();
+        controller.publishPost(mediaPath, description);
     }
 }
