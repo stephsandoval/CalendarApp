@@ -21,7 +21,7 @@ public class CalendarApiClient {
     private HashMap<String, Action> readActionMap;
     private HashMap<Class<?>, Action> writeActionMap;
     private ArrayList<String> entryFields;
-
+    private ArrayList<Day> days;
     private String writeToken, readToken, spaceId, environmentId, contentType;
     private static CalendarApiClient instance;
 
@@ -39,6 +39,7 @@ public class CalendarApiClient {
         populateFields();
         populateReadActionMap();
         populateWriteActionMap();
+        readData();
     }
 
     public static synchronized CalendarApiClient getInstance (){
@@ -48,13 +49,19 @@ public class CalendarApiClient {
         return instance;
     }
 
-    public ArrayList<Day> readData (){
-        ArrayList<Day> days = new ArrayList<>();
+    public ArrayList<Day> getDays (){
+        return this.days;
+    }
+
+    private void readData (){
+        days = new ArrayList<>();
+        int index = 0;
         ArrayList<CDAEntry> entries = fetchEntries();
         for (CDAEntry entry : entries){
             days.add(createDay(entry));
+            System.out.println(days.get(index++).getDate().toString());
+
         }
-        return days;
     }
 
     public void writeData (Day day){

@@ -27,7 +27,7 @@ public class NewCalendarController {
     }
 
     private void addDays (){
-        ArrayList<Day> days = reader.readData();
+        ArrayList<Day> days = reader.getDays();
         for (Day day : days){
             calendar.getYear(day.getDate().getYear()).addDayToMonth(day.getDate().getMonth(), day);
         }
