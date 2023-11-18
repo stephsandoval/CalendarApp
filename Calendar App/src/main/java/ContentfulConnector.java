@@ -1,11 +1,13 @@
 import com.contentful.java.cma.*;
 import com.contentful.java.cma.model.CMAAsset;
 import com.contentful.java.cma.model.CMAAssetFile;
+import com.contentful.java.cma.model.CMAEntry;
 import com.contentful.java.cma.model.CMALink;
 import com.contentful.java.cma.model.CMASystem;
 import com.contentful.java.cma.model.CMAType;
 import com.contentful.java.cma.model.CMAUpload;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
@@ -22,7 +24,9 @@ public class ContentfulConnector {
 
         try {
             // Upload the file
-            CMAUpload upload = client.uploads().create("7u4zyhwnzl64", new FileInputStream("src/main/java/Images/apple.jpg"));
+            File f = new File("C:\\Users\\Stephanie\\OneDrive - Estudiantes ITCR\\Semestre II\\Programación Orientada a Objetos\\Caso 03\\Calendar App\\src\\main\\java\\Images\\apple.jpg");
+            String path = f.getPath();
+            CMAUpload upload = client.uploads().create("7u4zyhwnzl64", new FileInputStream(path));
 
             CMASystem sys = new CMASystem();
             sys.setLinkType(CMAType.Upload);
@@ -62,6 +66,29 @@ public class ContentfulConnector {
             CMAAsset p = client.assets().publish(draftAsset);
 
             System.out.println("Published Asset ID: " + p.getId());
+            System.exit(0);
+
+            // Assuming you have the ID of the published asset
+            String assetId = p.getId();
+
+            // Fetch the published asset
+            CMAAsset a = client.assets().fetchOne(assetId);
+
+            // Assuming you have the ID of the entry
+            String entryId = "2TSP2dhHQVkR2WhFaSPyPk";
+
+            // Fetch the entry
+            CMAEntry entry = client.entries().fetchOne(entryId);
+
+            // Update the entry's field with the asset
+            entry.setField("visualMedia", "en-US", a);
+
+            // Update the entry on Contentful
+            CMAEntry updatedEntry = client.entries().update(entry);
+            client.entries().publish(updatedEntry);
+
+            System.out.println("Asset added to entry. Updated Entry ID: " + updatedEntry.getId());
+
         } catch (IOException e) {}
         System.exit(0);
     }

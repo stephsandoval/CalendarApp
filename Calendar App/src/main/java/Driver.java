@@ -1,10 +1,6 @@
-import java.time.LocalDate;
+import java.io.File;
 
 import org.apache.tika.Tika;
-
-import Posts.ImageElement;
-import Posts.Post;
-import Posts.VideoElement;
 
 public class Driver {
     public static void main (String [] args){
@@ -20,5 +16,9 @@ public class Driver {
         System.out.println(mimeType);
         mimeType = tika.detect(tempPath);
         System.out.println(mimeType.split("/")[0]);
+
+        File file = new File(potatoPath);
+        String fileName = file.getName();
+        System.out.println(fileName.split(".")[0]);
     }
 }

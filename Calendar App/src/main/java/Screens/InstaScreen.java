@@ -2,7 +2,6 @@ package Screens;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -47,7 +46,8 @@ public class InstaScreen extends GeneralScreen implements Initializable{
     public void openFileExplorer () throws FileNotFoundException {
         screenImagePath.clear();
         File file = fileChooser.showOpenDialog(new Stage());
-        screenImagePath.setText(file.toURI().toString());
+        screenImagePath.setText(file.getPath());
+        System.out.println(file.getPath());
     }
 
     private void setInitialPosts (){
@@ -72,6 +72,7 @@ public class InstaScreen extends GeneralScreen implements Initializable{
             description = " ";
         }
         String mediaPath = screenImagePath.getText();
+        System.out.println(mediaPath);
         controller.publishPost(mediaPath, description);
     }
 }

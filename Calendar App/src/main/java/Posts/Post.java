@@ -13,7 +13,6 @@ import javafx.scene.layout.Pane;
 public class Post extends Pane{
  
     private Label username, date;
-    private VisualElement visualElement;
     private Node media;
     private TextArea description;
 

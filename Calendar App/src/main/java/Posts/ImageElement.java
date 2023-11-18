@@ -1,5 +1,9 @@
 package Posts;
 
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -14,7 +18,15 @@ public class ImageElement implements VisualElement{
 
     @Override
     public Node createVisual () {
-        Image image = new Image(mediaPath);
+        Image image = null;
+        if (isURL(mediaPath)){
+            image = new Image(mediaPath);
+        } else {
+            try {
+                File file = new File(mediaPath);
+                image = new Image(file.toURI().toURL().toString());
+            } catch (Exception e){}
+        }
         ImageView imageView = new ImageView(image);
         imageView.setPreserveRatio(false);
         imageView.setFitWidth(325);
@@ -22,5 +34,14 @@ public class ImageElement implements VisualElement{
         imageView.setLayoutX(14);
         imageView.setLayoutY(35);
         return (Node)imageView;
+    }
+
+    private boolean isURL(String input) {
+        try {
+            new URL(input);
+            return true; // If no exception is thrown, it's a valid URL.
+        } catch (MalformedURLException e) {
+            return false; // MalformedURLException indicates that it's not a valid URL.
+        }
     }
 }

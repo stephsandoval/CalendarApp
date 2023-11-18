@@ -1,15 +1,15 @@
 package ApiClient;
 
 import java.io.BufferedReader;
-import java.io.IOException;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import java.net.URI;
-import java.net.URL;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.tika.Tika;
 
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -29,9 +29,12 @@ import com.contentful.java.cda.CDAEntry;
 import com.contentful.java.cda.CDAResource;
 import com.contentful.java.cma.CMAClient;
 import com.contentful.java.cma.model.CMAAsset;
+import com.contentful.java.cma.model.CMAAssetFile;
 import com.contentful.java.cma.model.CMAEntry;
-import com.contentful.java.cma.model.CMAField;
+import com.contentful.java.cma.model.CMALink;
+import com.contentful.java.cma.model.CMASystem;
 import com.contentful.java.cma.model.CMAType;
+import com.contentful.java.cma.model.CMAUpload;
 import com.google.gson.internal.LinkedTreeMap;
 
 import Posts.Post;
@@ -79,9 +82,11 @@ public class PostApiClient {
 
     public void writeData (Post post){
         CMAClient client = new CMAClient.Builder().setAccessToken(writeToken).setSpaceId(spaceId).setEnvironmentId(environmentId).build();
-        CMAEntry entry = createEntry(post);
-        CMAEntry result = client.entries().create(contentType, entry);
-        client.entries().publish(result);
+        String imageId = publishAsset(client, post.getVisualPath());
+        CMAAsset image = client.assets().fetchOne(imageId);
+        CMAEntry entry = createEntry(post, image);
+        CMAEntry publishEntry = client.entries().create(contentType, entry);
+        client.entries().publish(publishEntry);
     }
 
     private void performWriteAction (String key, Object value, Object object){
@@ -91,19 +96,49 @@ public class PostApiClient {
         }
     }
 
-    private CMAEntry createEntry (Post post){
+    private CMAEntry createEntry (Post post, CMAAsset image){
         int index = 0;
         CMAEntry entry = new CMAEntry();
         entry.setField("postTitle", "en-US", post.getDate().toString() + "-" + post.getUsername());
         performWriteAction(entryFields.get(index++), post.getUsername(), entry);
         performWriteAction(entryFields.get(index++), post.getDate(), entry);
         performWriteAction(entryFields.get(index++), post.getDescription(), entry);
-        performWriteAction(entryFields.get(index), post.getVisualPath(), entry);
+        entry.setField(entryFields.get(index), "en-US", image);
         return entry;
     }
 
-    private void writeImage (String key, Object value, Object object){
-        // something
+    private String publishAsset (CMAClient client, String mediaPath){
+        String publishId = " ";
+        try {
+            CMAUpload upload = client.uploads().create(spaceId, new FileInputStream(mediaPath));
+
+            CMASystem sys = new CMASystem();
+            sys.setLinkType(CMAType.Upload);
+            sys.setType(CMAType.Link);
+            sys.setId(upload.getSystem().getId());
+            CMALink link = new CMALink();
+            link.setSystem(sys);
+
+            CMAAsset asset = new CMAAsset();
+            asset.getFields().setTitle("en-US", getFileName(mediaPath));
+            
+            CMAAssetFile file = new CMAAssetFile();
+            file.setFileName(mediaPath);
+            file.setContentType(getMimeType(mediaPath));
+            file.setUploadFrom(link);
+
+            asset.getFields().setFile("en-US", file);
+
+            CMAAsset result = client.assets().create(asset);
+            client.assets().process(result, "en-US");
+
+            String draftAssetId = result.getId();
+            Thread.sleep(1000);
+            CMAAsset draftAsset = client.assets().fetchOne(draftAssetId);
+            CMAAsset publishAsset = client.assets().publish(draftAsset);
+            publishId = publishAsset.getId();
+        } catch (Exception e) {}
+        return publishId;
     }
 
     private void performReadAction(String key, Object value, Object object) {
@@ -202,5 +237,16 @@ public class PostApiClient {
         for (String field : fields){
             entryFields.add(field);
         }
+    }
+
+    private String getMimeType (String mediaPath){
+        Tika tika = new Tika();
+        return tika.detect(mediaPath);
+    }
+
+    private String getFileName (String mediaPath){
+        File file = new File(mediaPath);
+        String fileName = file.getName();
+        return fileName.substring(0, fileName.length() - 4);
     }
 }
