@@ -48,7 +48,7 @@
       </Button>
       <ScrollPane fx:id="scrollPane" layoutX="174.0" layoutY="102.0" prefHeight="418.0" prefWidth="368.0">
         <content>
-          <AnchorPane fx:id="postPane" minHeight="0.0" minWidth="0.0" prefHeight="418.0" prefWidth="368.0" />
+          <AnchorPane fx:id="postPane" minHeight="0.0" minWidth="0.0" prefHeight="418.0" prefWidth="367.0" />
         </content>
       </ScrollPane>
       <Separator layoutX="598.0" orientation="VERTICAL" prefHeight="520.0" prefWidth="6.0" />

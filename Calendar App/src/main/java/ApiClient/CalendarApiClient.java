@@ -18,8 +18,8 @@ import Calendar.Day;
 
 public class CalendarApiClient {
     
-    private Map<String, Action> readActionMap;
-    private Map<Class<?>, Action> writeActionMap;
+    private HashMap<String, Action> readActionMap;
+    private HashMap<Class<?>, Action> writeActionMap;
     private ArrayList<String> entryFields;
 
     private String writeToken, readToken, spaceId, environmentId, contentType;

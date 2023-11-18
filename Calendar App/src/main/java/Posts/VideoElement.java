@@ -20,8 +20,7 @@ public class VideoElement implements VisualElement{
 
     @Override
     public Node createVisual () {
-        File file = new File(mediaPath);
-        Media media = new Media(file.toURI().toString());
+        Media media = new Media(mediaPath);
         mediaPlayer = new MediaPlayer(media);
         MediaView mediaView = new MediaView(mediaPlayer);
         mediaView.setPreserveRatio(false);
@@ -33,6 +32,11 @@ public class VideoElement implements VisualElement{
             setVideoActions();
         });
         return (Node) mediaView;
+    }
+
+    @Override
+    public String getMediaPath (){
+        return this.mediaPath;
     }
 
     private void setVideoActions (){

@@ -1,35 +1,55 @@
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
 
-import com.contentful.java.cda.CDAArray;
-import com.contentful.java.cda.CDAClient;
-import com.contentful.java.cda.CDAEntry;
-import com.contentful.java.cda.CDAResource;
+/*import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 
-import ApiClient.CalendarApiClient;
-import Calendar.Day;
-import Records.CropRecord;
-import Records.WaterRecord;
-import Records.WeatherRecord;
+public class ContentfulImageFetcher {
 
-public class ContentfulConnector {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
+        String spaceId = "your_space_id";
+        String entryId = "your_entry_id";
+        String assetId = "your_asset_id";
+        String accessToken = "your_access_token";
 
-        CalendarApiClient api = CalendarApiClient.getInstance();
-        /*CropRecord crop = new CropRecord("potato", 85, "germination", null, "going well");
-        Day day = new Day(LocalDate.now(), new WeatherRecord(), new WaterRecord(), crop);
-        ArrayList<Day> days = new ArrayList<>();
-        days.add(day);
-        api.writeData(days);*/
+        // Construct entry URL
+        String entryUrl = "https://cdn.contentful.com/spaces/" + spaceId + "/entries/" + entryId + "?access_token=" + accessToken;
 
-        ArrayList<Day> days = api.readData();
-        for (Day day : days){
-            System.out.println(day + "\n\n");
-        }
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest entryRequest = HttpRequest.newBuilder()
+                .uri(URI.create(entryUrl))
+                .build();
 
-        System.exit(0);
+        HttpResponse<String> entryResponse = client.send(entryRequest, HttpResponse.BodyHandlers.ofString());
+
+        // Parse entry response and extract image information
+        String imageUrl = parseImageUrlFromEntryResponse(entryResponse.body());
+
+        // Construct asset URL
+        String assetUrl = "https://cdn.contentful.com/spaces/" + spaceId + "/assets/" + assetId + "?access_token=" + accessToken;
+
+        HttpRequest assetRequest = HttpRequest.newBuilder()
+                .uri(URI.create(assetUrl))
+                .build();
+
+        HttpResponse<String> assetResponse = client.send(assetRequest, HttpResponse.BodyHandlers.ofString());
+
+        // Parse asset response to get the actual image URL or other information
+        String actualImageUrl = parseImageUrlFromAssetResponse(assetResponse.body());
+
+        // Now you can use actualImageUrl to display or download the image
+        System.out.println("Actual Image URL: " + actualImageUrl);
     }
-}
+
+    private static String parseImageUrlFromEntryResponse(String entryResponse) {
+        // Implement parsing logic based on your JSON structure
+        // Extract the information needed to construct the asset URL
+        return "extracted_image_url";
+    }
+
+    private static String parseImageUrlFromAssetResponse(String assetResponse) {
+        // Implement parsing logic based on your JSON structure
+        // Extract the actual image URL or other information
+        return "actual_image_url";
+    }
+}*/

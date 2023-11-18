@@ -21,8 +21,11 @@ public class ImageElement implements VisualElement{
         imageView.setFitHeight(189);
         imageView.setLayoutX(14);
         imageView.setLayoutY(35);
-        System.out.println(image.getHeight());
-        System.out.println(image.getWidth());
         return (Node)imageView;
+    }
+
+    @Override
+    public String getMediaPath (){
+        return this.mediaPath;
     }
 }

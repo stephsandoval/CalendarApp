@@ -2,6 +2,8 @@ package Posts;
 
 import java.time.LocalDate;
 
+import org.apache.tika.Tika;
+
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -11,21 +13,26 @@ import javafx.scene.layout.Pane;
 public class Post extends Pane{
  
     private Label username, date;
+    private VisualElement visualElement;
     private Node media;
     private TextArea description;
 
     private static double height = 332;
-    private static double width = 355;
 
-    public Post (LocalDate date, String username, String description, VisualElement element){
+    public Post (){
         this.username = new Label();
         this.date = new Label();
         this.description = new TextArea();
+        setUsernameLabel("");
+        setDateLabel(null);
+        setDescriptionArea("");
+    }
 
+    public Post (LocalDate date, String username, String description, VisualElement element){
+        this();
         setUsernameLabel(username);
         setDateLabel(date);
         setDescriptionArea(description);
-
         this.media = element.createVisual();
         setPane();
     }
@@ -97,6 +104,22 @@ public class Post extends Pane{
         } else {
             this.description.setText(" ");
         }
+    }
+
+    public String getVisualPath (){
+        return this.visualElement.getMediaPath();
+    }
+
+    public void setVisualElement (String mediaPath){
+        Tika tika = new Tika();
+        String type = tika.detect(mediaPath).split("/")[0];
+        if (type.equals("video")){
+            this.media = new VideoElement(mediaPath).createVisual();
+        }
+        if (type.equals("image")){
+            this.media = new ImageElement(mediaPath).createVisual();
+        }
+        setPane();
     }
 
     public static double getPostHeight (){
