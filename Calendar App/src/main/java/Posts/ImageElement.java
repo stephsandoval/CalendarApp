@@ -1,7 +1,6 @@
 package Posts;
 
 import java.io.File;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import javafx.scene.Node;
