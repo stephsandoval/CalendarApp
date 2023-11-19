@@ -30,7 +30,7 @@ public class NewCalendarScreen extends GeneralScreen implements Initializable{
     @FXML
     private Label monthLabel, yearLabel;
     @FXML 
-    private TableView<DayPreview> dayView; // change object when the calendar is defined
+    private TableView<DayPreview> dayView;
     @FXML
     private TableColumn<DayPreview, String> aspectColumn, infoColumn;
 

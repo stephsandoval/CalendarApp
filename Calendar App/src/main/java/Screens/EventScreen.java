@@ -2,10 +2,12 @@ package Screens;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import Controllers.EventController;
 import Json.JsonParser;
+import Notifications.Status;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -34,6 +36,7 @@ public class EventScreen extends GeneralScreen implements Initializable{
     private int cropAmount;
     private String weatherNotes, waterNotes, crop, cropNotes, waterSource, cropStatus, pests;
     private LocalDate date;
+    private HashMap<Status, String> messageMap;
 
     private EventController controller = new EventController ();
     private JsonParser items = JsonParser.getInstance();
@@ -41,6 +44,7 @@ public class EventScreen extends GeneralScreen implements Initializable{
     @Override
     public void initialize (URL location, ResourceBundle resources) {
         clearFields();
+        populateMap();
         screenWaterSource.getItems().setAll(items.getWaterSource());
         screenCrop.getItems().setAll(items.getCrops());
         screenCropStatus.getItems().setAll(items.getCropStatus());
@@ -75,18 +79,18 @@ public class EventScreen extends GeneralScreen implements Initializable{
         temperature = roundDouble(screenTemperature.getValue(), "3");
         humidity = roundDouble(screenHumidity.getValue(), "3");
         precipitation = roundDouble(screenPrecipitation.getValue(), "3");
-        weatherNotes = screenWeatherNotes.getText().equals("") ? "-" : screenWeatherNotes.getText();
+        weatherNotes = screenWeatherNotes.getText();
 
-        waterSource = screenWaterSource.getValue().equals("") ? "-" : screenWaterSource.getValue();
+        waterSource = screenWaterSource.getValue();
         waterAmount = roundDouble(screenWaterAmount.getValue(), "3");
         waterpH = roundDouble(screenWaterpH.getValue(), "2");
-        waterNotes = screenWaterNotes.getText().equals("") ? "-" : screenWaterNotes.getText();
+        waterNotes = screenWaterNotes.getText();
 
-        crop = screenCrop.getValue().equals("") ? "-" : screenCrop.getValue();
+        crop = screenCrop.getValue();
         cropAmount = (int) screenCropAmount.getValue();
-        cropStatus = screenCropStatus.getValue().equals("") ? "-" : screenCropStatus.getValue();
-        pests = screenPests.getValue().equals("") ? "-" : screenPests.getValue();
-        cropNotes = screenCropNotes.getText().equals("") ? "-" : screenCropNotes.getText();
+        cropStatus = screenCropStatus.getValue();
+        pests = screenPests.getValue();
+        cropNotes = screenCropNotes.getText();
 
         date = screenDate.getValue();
         if (date == null){
@@ -102,7 +106,8 @@ public class EventScreen extends GeneralScreen implements Initializable{
 
     public void createEvent () throws Exception{
         getValues();
-        controller.createEvents(date, temperature, humidity, precipitation, weatherNotes, waterSource, waterAmount, waterpH, waterNotes, crop, cropAmount, cropStatus, pests, cropNotes);
+        Status status = controller.createEvents(date, temperature, humidity, precipitation, weatherNotes, waterSource, waterAmount, waterpH, waterNotes, crop, cropAmount, cropStatus, pests, cropNotes);
+        showNotification(status, messageMap.get(status));
         clearFields();
     }
 
@@ -131,5 +136,11 @@ public class EventScreen extends GeneralScreen implements Initializable{
         screenCropNotes.clear();
 
         screenDate.setValue(null);
+    }
+
+    private void populateMap (){
+        messageMap = new HashMap<>();
+        messageMap.put(Status.WARNING, "No information given for the event");
+        messageMap.put(Status.SUCCESS, "The event was created and uploaded successfully");
     }
 }
