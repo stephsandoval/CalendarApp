@@ -44,6 +44,7 @@ public class PostApiClient {
     private HashMap<String, Action> readActionMap;
     private HashMap<Class<?>, Action> writeActionMap;
     private ArrayList<String> entryFields;
+    private ArrayList<Post> posts;
 
     private String writeToken, readToken, spaceId, environmentId, contentType;
     private static PostApiClient instance;
@@ -62,6 +63,7 @@ public class PostApiClient {
         populateFields();
         populateReadActionMap();
         populateWriteActionMap();
+        readData();
     }
 
     public static synchronized PostApiClient getInstance (){
@@ -71,13 +73,16 @@ public class PostApiClient {
         return instance;
     }
 
-    public ArrayList<Post> readData (){
-        ArrayList<Post> posts = new ArrayList<>();
+    public ArrayList<Post> getPosts (){
+        return this.posts;
+    }
+
+    private void readData (){
+        posts = new ArrayList<>();
         ArrayList<CDAEntry> entries = fetchEntries();
         for (CDAEntry entry : entries){
             posts.add(createPost(entry));
-        }
-        return posts; 
+        } 
     }
 
     public void writeData (Post post){
@@ -184,7 +189,6 @@ public class PostApiClient {
             }
         }
         String imageURL = "https:" + getImageURL(assetURL);
-        System.out.println(imageURL);
         ((Post) object).setVisualElement(imageURL);
     }
 

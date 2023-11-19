@@ -1,5 +1,10 @@
 package Posts;
 
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URL;
+
 import javafx.scene.Node;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -18,7 +23,13 @@ public class VideoElement implements VisualElement{
 
     @Override
     public Node createVisual () {
-        Media media = new Media(mediaPath);
+        Media media;
+        if (isURI(mediaPath)){
+            media = new Media(mediaPath);
+        } else {
+            File file = new File(mediaPath);
+            media = new Media(file.toURI().toString());
+        }
         mediaPlayer = new MediaPlayer(media);
         MediaView mediaView = new MediaView(mediaPlayer);
         mediaView.setPreserveRatio(false);
@@ -45,6 +56,15 @@ public class VideoElement implements VisualElement{
         if (mediaPlayer.getCurrentTime().equals(mediaPlayer.getTotalDuration())){
             mediaPlayer.seek(Duration.seconds(0.0));
             mediaPlayer.play();
+        }
+    }
+
+    private boolean isURI (String input){
+        try {
+            new URI(input);
+            return true;
+        } catch (Exception e) {
+            return false;
         }
     }
 }

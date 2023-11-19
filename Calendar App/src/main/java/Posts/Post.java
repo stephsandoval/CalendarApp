@@ -88,7 +88,7 @@ public class Post extends Pane{
     }
     
     public void setUsername (String username){
-        if (username != null){
+        if (username != null && !username.equals("")){
             this.username.setText(username);
         } else {
             this.username.setText("anonymous");

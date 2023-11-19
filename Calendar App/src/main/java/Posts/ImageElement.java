@@ -36,12 +36,12 @@ public class ImageElement implements VisualElement{
         return (Node)imageView;
     }
 
-    private boolean isURL(String input) {
+    private boolean isURL (String input){
         try {
             new URL(input);
-            return true; // If no exception is thrown, it's a valid URL.
-        } catch (MalformedURLException e) {
-            return false; // MalformedURLException indicates that it's not a valid URL.
+            return true;
+        } catch (Exception e) {
+            return false;
         }
     }
 }

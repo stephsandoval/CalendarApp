@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import Controllers.InstaController;
+import Observer.Observer;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -18,10 +19,12 @@ import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class InstaScreen extends GeneralScreen implements Initializable{
+public class InstaScreen extends GeneralScreen implements Initializable, Observer{
     
     @FXML
-    private TextField screenImagePath;
+    private AnchorPane rootPane;
+    @FXML
+    private TextField screenImagePath, screenUsername;
     @FXML
     private TextArea screenDescription;
     @FXML
@@ -35,10 +38,12 @@ public class InstaScreen extends GeneralScreen implements Initializable{
     private InstaController controller = new InstaController();
     private double yCoordinate = 0;
     private double postOffset = controller.getPostOffset();
+    private ArrayList<Pane> posts = new ArrayList<>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        setInitialPosts();
+        controller.registerMe(this);
+        setPosts();
         screenDescription.setWrapText(true);
         fileChooser.setInitialDirectory(new File("src"));
     }
@@ -47,12 +52,11 @@ public class InstaScreen extends GeneralScreen implements Initializable{
         screenImagePath.clear();
         File file = fileChooser.showOpenDialog(new Stage());
         screenImagePath.setText(file.getPath());
-        System.out.println(file.getPath());
     }
 
-    private void setInitialPosts (){
-        ArrayList<Pane> posts = controller.getPosts();
-        fixlPaneSizes(posts.size());
+    private void setPosts (){
+        posts = controller.getPosts();
+        fixPaneSizes(posts.size());
         for (Pane post : posts){
             post.setLayoutY(yCoordinate);
             postPane.getChildren().add(post);
@@ -60,7 +64,7 @@ public class InstaScreen extends GeneralScreen implements Initializable{
         }
     }
 
-    private void fixlPaneSizes (int amountPost){
+    private void fixPaneSizes (int amountPost){
         double height = amountPost * postOffset;
         postPane.setPrefHeight(height);
         scrollPane.setPrefViewportHeight(height);
@@ -72,7 +76,33 @@ public class InstaScreen extends GeneralScreen implements Initializable{
             description = " ";
         }
         String mediaPath = screenImagePath.getText();
-        System.out.println(mediaPath);
-        controller.publishPost(mediaPath, description);
+        String username = screenUsername.getText();
+        controller.publishPost(mediaPath, description, username);
+        cleanFields();
+    }
+
+    @Override
+    public void update() {
+        cleanFields();
+        fixPaneSizes(posts.size() + 1);
+    
+        for (Pane post : posts) {
+            double previousCoordinate = post.getLayoutY();
+            double newCoordinate = previousCoordinate + postOffset;
+            post.setLayoutY(newCoordinate);
+        }
+    
+        posts.add(controller.updatePosts().get(0));
+        Pane post = posts.get(0);
+        post.setLayoutY(0);
+        postPane.getChildren().add(post);
+        postPane.layout();
+        yCoordinate += postOffset;
+    }
+
+    private void cleanFields (){
+        screenImagePath.clear();
+        screenUsername.clear();
+        screenDescription.clear();
     }
 }

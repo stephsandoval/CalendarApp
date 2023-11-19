@@ -24,7 +24,7 @@ public class ContentfulConnector {
 
         try {
             // Upload the file
-            File f = new File("C:\\Users\\Stephanie\\OneDrive - Estudiantes ITCR\\Semestre II\\Programación Orientada a Objetos\\Caso 03\\Calendar App\\src\\main\\java\\Images\\apple.jpg");
+            File f = new File("C:\\Users\\Stephanie\\OneDrive - Estudiantes ITCR\\Semestre II\\Programación Orientada a Objetos\\Caso 03\\Calendar App\\src\\main\\java\\Videos\\fields.mp4");
             String path = f.getPath();
             CMAUpload upload = client.uploads().create("7u4zyhwnzl64", new FileInputStream(path));
 
@@ -38,10 +38,10 @@ public class ContentfulConnector {
 
             // Create an arbitrary new asset with some custom values.
             final CMAAsset asset = new CMAAsset();
-            asset.getFields().setTitle("en-US","apple");
+            asset.getFields().setTitle("en-US","peach3");
 
             CMAAssetFile file = new CMAAssetFile();
-            file.setFileName("apple.jpg");  // Replace with the actual filename.
+            file.setFileName("peach.jpg");  // Replace with the actual filename.
             file.setContentType("image/jpg");  // Replace with the actual content type.
             file.setUploadFrom(link);
 
@@ -89,7 +89,9 @@ public class ContentfulConnector {
 
             System.out.println("Asset added to entry. Updated Entry ID: " + updatedEntry.getId());
 
-        } catch (IOException e) {}
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         System.exit(0);
     }
 }

@@ -3,35 +3,53 @@ package Controllers;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import ApiClient.PostApiClient;
 import Posts.Post;
+import Screens.InstaScreen;
 import javafx.scene.layout.Pane;
 
 public class InstaController {
 
     private ArrayList<Pane> posts;
-    private PostApiClient client;
+    private PostUpdater postUpdater;
  
     public InstaController (){
-        client = PostApiClient.getInstance();
+        postUpdater = new PostUpdater();
         posts = new ArrayList<>();
+        posts = loadPosts();
     }
 
-    public ArrayList<Pane> getPosts (){
-        ArrayList<Post> postsRead = client.readData();
+    private ArrayList<Pane> loadPosts (){
+        ArrayList<Post> postsRead = postUpdater.getPosts();
         for (Post post : postsRead){
             posts.add(post);
         }
         return posts;
     }
 
-    public void publishPost (String mediaPath, String description){
+    public void registerMe (InstaScreen screen){
+        postUpdater.registerObserver(screen);
+    }
+
+    public ArrayList<Pane> getPosts (){
+        return this.posts;
+    }
+
+    public ArrayList<Pane> updatePosts (){
+        ArrayList<Post> postsRead = postUpdater.getPosts();
+        posts.clear();
+        for (Post post : postsRead){
+            posts.add(post);
+        }
+        return posts;
+    }
+
+    public void publishPost (String mediaPath, String description, String username){
         Post post = new Post();
-        post.setUsername("devilPotato");
+        post.setUsername(username);
         post.setDate(LocalDate.now());
         post.setDescription(description);
         post.setVisualElement(mediaPath);
-        client.writeData(post);
+        postUpdater.addPost(post);
     }
 
     public double getPostOffset (){

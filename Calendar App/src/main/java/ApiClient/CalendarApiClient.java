@@ -55,11 +55,9 @@ public class CalendarApiClient {
 
     private void readData (){
         days = new ArrayList<>();
-        int index = 0;
         ArrayList<CDAEntry> entries = fetchEntries();
         for (CDAEntry entry : entries){
             days.add(createDay(entry));
-            System.out.println(days.get(index++).getDate().toString());
 
         }
     }
