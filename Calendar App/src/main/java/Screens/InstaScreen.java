@@ -113,7 +113,7 @@ public class InstaScreen extends GeneralScreen implements Initializable, Observe
 
     private void populateMap (){
         messageMap = new HashMap<>();
-        messageMap.put(Status.ERROR, "Please provide a valid path for the media");
+        messageMap.put(Status.ERROR, "Please provide a valid path");
         messageMap.put(Status.WARNING, "No information given for the post");
         messageMap.put(Status.SUCCESS, "The post was created and uploaded successfully");
     }

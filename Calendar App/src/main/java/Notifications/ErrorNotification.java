@@ -25,7 +25,7 @@ public class ErrorNotification implements Notification{
         Image image = new Image(imagePath);
         Notifications notification = Notifications.create();
         notification.graphic(new ImageView(image));
-        notification.text(message);
+        notification.text("    " + message);
         notification.title("ERROR");
         notification.hideAfter(Duration.seconds(4));
         notification.hideCloseButton();

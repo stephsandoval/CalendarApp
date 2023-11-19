@@ -25,8 +25,8 @@ public class WarningNotification implements Notification{
         Image image = new Image(imagePath);
         Notifications notification = Notifications.create();
         notification.graphic(new ImageView(image));
-        notification.text(message);
-        notification.title("WARNING");
+        notification.text("    " + message);
+        notification.title("WARNING\n");
         notification.hideAfter(Duration.seconds(4));
         notification.hideCloseButton();
         notification.show();

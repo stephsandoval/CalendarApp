@@ -51,8 +51,8 @@ public class InstaController {
     }
 
     public Status publishPost (String mediaPath, String description, String username){
-        boolean emptyPath = mediaPath.equals(" ");
-        if (emptyPath && description.equals(" ") && username.equals(" ")){
+        boolean emptyPath = mediaPath.equals("");
+        if (emptyPath && description.equals("") && username.equals("")){
             return Status.WARNING;
         }
         if (emptyPath || !isPath(mediaPath)){
