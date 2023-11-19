@@ -45,13 +45,15 @@ public class InstaScreen extends GeneralScreen implements Initializable, Observe
         controller.registerMe(this);
         setPosts();
         screenDescription.setWrapText(true);
-        fileChooser.setInitialDirectory(new File("src"));
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
     }
 
     public void openFileExplorer () throws FileNotFoundException {
         screenImagePath.clear();
         File file = fileChooser.showOpenDialog(new Stage());
-        screenImagePath.setText(file.getPath());
+        if (file != null){
+            screenImagePath.setText(file.getPath());
+        }
     }
 
     private void setPosts (){
