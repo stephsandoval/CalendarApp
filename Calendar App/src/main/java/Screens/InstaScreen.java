@@ -4,9 +4,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import Controllers.InstaController;
+import Notifications.Status;
 import Observer.Observer;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -40,10 +42,13 @@ public class InstaScreen extends GeneralScreen implements Initializable, Observe
     private double postOffset = controller.getPostOffset();
     private ArrayList<Pane> posts = new ArrayList<>();
 
+    private HashMap<Status, String> messageMap;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         controller.registerMe(this);
         setPosts();
+        populateMap();
         screenDescription.setWrapText(true);
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
     }
@@ -74,12 +79,10 @@ public class InstaScreen extends GeneralScreen implements Initializable, Observe
 
     public void addPost (){
         String description = screenDescription.getText();
-        if (description == null){
-            description = " ";
-        }
         String mediaPath = screenImagePath.getText();
         String username = screenUsername.getText();
-        controller.publishPost(mediaPath, description, username);
+        Status status = controller.publishPost(mediaPath, description, username);
+        showNotification(status, messageMap.get(status));
         cleanFields();
     }
 
@@ -106,5 +109,12 @@ public class InstaScreen extends GeneralScreen implements Initializable, Observe
         screenImagePath.clear();
         screenUsername.clear();
         screenDescription.clear();
+    }
+
+    private void populateMap (){
+        messageMap = new HashMap<>();
+        messageMap.put(Status.ERROR, "Please provide a valid path for the media");
+        messageMap.put(Status.WARNING, "No information given for the post");
+        messageMap.put(Status.SUCCESS, "The post was created and uploaded successfully");
     }
 }

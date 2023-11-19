@@ -5,6 +5,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import Notifications.Notification;
+import Notifications.NotificationFactory;
+import Notifications.Status;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,6 +22,7 @@ public class GeneralScreen {
     private final String postsPath = "src/main/java/FXML/InstaScreen.fxml";
     private final String statsPath = "src/main/java/FXML/StatsScreen.fxml";
     private final String loginPath = "src/main/java/FXML/LogInScreen.fxml";
+    private NotificationFactory factory = NotificationFactory.getInstance();
 
     private String path;
 
@@ -57,5 +61,10 @@ public class GeneralScreen {
     public void loadLoginScreen (ActionEvent event) throws IOException{
         path = loginPath;
         loadScreen(event);
+    }
+
+    public void showNotification (Status status, String message){
+        Notification notification = factory.createNotification(status);
+        notification.notifyUser(message);
     }
 }
