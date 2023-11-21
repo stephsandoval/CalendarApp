@@ -13,22 +13,17 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 
 public class EventScreen extends GeneralScreen implements Initializable{
     
     @FXML
-    private Slider screenTemperature, screenHumidity, screenPrecipitation, screenWaterAmount, screenWaterpH, screenCropAmount;
-    @FXML
-    private TextField screenWeatherNotes, screenWaterNotes, screenCropNotes;
+    private TextField screenWeatherNotes, screenWaterNotes, screenCropNotes, screenCropAmount, screenTemperature, screenHumidity, screenPrecipitation, screenWaterAmount, screenWaterpH;
     @FXML
     private ComboBox<String> screenWaterSource, screenCrop, screenCropStatus, screenPests;
     @FXML
     private Button addEventButton;
-    @FXML
-    private Label temperatureLabel, humidityLabel, precipitationLabel, waterAmountLabel, waterpHLabel, cropAmountLabel;
     @FXML
     private DatePicker screenDate;
 
@@ -49,45 +44,22 @@ public class EventScreen extends GeneralScreen implements Initializable{
         screenCrop.getItems().setAll(items.getCrops());
         screenCropStatus.getItems().setAll(items.getCropStatus());
         screenPests.getItems().setAll(items.getPests());
-    }
-
-    public void updateTemperature (){
-        temperatureLabel.setText(Double.toString(roundDouble(screenTemperature.getValue(), "3")));
-    }
-
-    public void updateHumidity (){
-        humidityLabel.setText(Double.toString(roundDouble(screenHumidity.getValue(), "3")));
-    }
-
-    public void updatePrecipitation (){
-        precipitationLabel.setText(Double.toString(roundDouble(screenPrecipitation.getValue(), "3")));
-    }
-
-    public void updateWaterAmount (){
-        waterAmountLabel.setText(Double.toString(roundDouble(screenWaterAmount.getValue(), "3")));
-    }
-
-    public void updateWaterpH (){
-        waterpHLabel.setText(Double.toString(roundDouble(screenWaterpH.getValue(), "2")));
-    }
-
-    public void updateCropAmount (){
-        cropAmountLabel.setText(Integer.toString((int) Math.floor(screenCropAmount.getValue())));
+        setKeyboardActions();
     }
 
     public void getValues (){
-        temperature = roundDouble(screenTemperature.getValue(), "3");
-        humidity = roundDouble(screenHumidity.getValue(), "3");
-        precipitation = roundDouble(screenPrecipitation.getValue(), "3");
+        temperature = Double.parseDouble(screenTemperature.getText());
+        humidity = Double.parseDouble(screenHumidity.getText());
+        precipitation = Double.parseDouble(screenPrecipitation.getText());;
         weatherNotes = screenWeatherNotes.getText();
 
         waterSource = screenWaterSource.getValue();
-        waterAmount = roundDouble(screenWaterAmount.getValue(), "3");
-        waterpH = roundDouble(screenWaterpH.getValue(), "2");
+        waterAmount = Double.parseDouble(screenWaterAmount.getText());
+        waterpH = Double.parseDouble(screenWaterpH.getText());
         waterNotes = screenWaterNotes.getText();
 
         crop = screenCrop.getValue();
-        cropAmount = (int) screenCropAmount.getValue();
+        cropAmount = Integer.parseInt(screenCropAmount.getText());
         cropStatus = screenCropStatus.getValue();
         pests = screenPests.getValue();
         cropNotes = screenCropNotes.getText();
@@ -98,12 +70,6 @@ public class EventScreen extends GeneralScreen implements Initializable{
         }
     }
 
-    private double roundDouble (double number, String decimals){
-        String formattedValue = String.format("%." + decimals + "f", number);
-        double roundedValue = Double.parseDouble(formattedValue);
-        return roundedValue;
-    }
-
     public void createEvent () throws Exception{
         getValues();
         Status status = controller.createEvents(date, temperature, humidity, precipitation, weatherNotes, waterSource, waterAmount, waterpH, waterNotes, crop, cropAmount, cropStatus, pests, cropNotes);
@@ -112,25 +78,18 @@ public class EventScreen extends GeneralScreen implements Initializable{
     }
 
     private void clearFields (){
-        screenTemperature.setValue(screenTemperature.getMin());
-        screenHumidity.setValue(screenHumidity.getMin());
-        screenPrecipitation.setValue(screenTemperature.getMin());
+        screenTemperature.clear();
+        screenHumidity.clear();
+        screenPrecipitation.clear();
         screenWeatherNotes.clear();
 
-        updateTemperature();
-        updateHumidity();
-        updatePrecipitation();
-
         screenWaterSource.setValue("");
-        screenWaterAmount.setValue(screenWaterAmount.getMin());
-        screenWaterpH.setValue(screenWaterpH.getMin());
+        screenWaterAmount.clear();
+        screenWaterpH.clear();
         screenWaterNotes.clear();
 
-        updateWaterAmount();
-        updateWaterpH();
-
         screenCrop.setValue("");
-        screenCropAmount.setValue(screenCropAmount.getMin());
+        screenCropAmount.clear();
         screenCropStatus.setValue("");
         screenPests.setValue("");
         screenCropNotes.clear();
@@ -142,5 +101,31 @@ public class EventScreen extends GeneralScreen implements Initializable{
         messageMap = new HashMap<>();
         messageMap.put(Status.WARNING, "No information given for the event");
         messageMap.put(Status.SUCCESS, "The event was created and uploaded successfully");
+    }
+    
+    public void checkKey (KeyEvent event){
+        char key = event.getCharacter().charAt(0);
+        if (!Character.isDigit(key)) {
+            event.consume();
+        }
+    }
+
+    private void checkLength (TextField field, KeyEvent event){
+        int length = field.getText().length();
+        if (length == 255){
+            event.consume();
+        }
+    }
+
+    private void setKeyboardActions (){
+        screenCropNotes.setOnKeyTyped(event -> {
+            checkLength(screenCropNotes, event);
+        });
+        screenWaterNotes.setOnKeyTyped(event -> {
+            checkLength(screenWaterNotes, event);
+        });
+        screenWeatherNotes.setOnKeyTyped(event -> {
+            checkLength(screenWeatherNotes, event);
+        });
     }
 }
