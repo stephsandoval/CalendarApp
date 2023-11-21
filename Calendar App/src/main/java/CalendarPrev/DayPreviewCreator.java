@@ -49,7 +49,7 @@ public class DayPreviewCreator {
         if (!precipitation.equals("0.0")){
             dayPreview.add(new DayPreview("precipitation", precipitation));
         }
-        if (!note.equals("-")){
+        if (!note.equals("")){
             dayPreview.add(new DayPreview("weather note", note));
         }
     }
@@ -60,16 +60,16 @@ public class DayPreviewCreator {
         String pH = Double.toString(day.getWaterRecord().getWaterpH());
         String note = day.getWaterRecord().getWaterNote();
 
-        if (!source.equals("-")){
+        if (!source.equals("")){
             dayPreview.add(new DayPreview("water source", source));
         }
         if (!amount.equals("0.0")){
             dayPreview.add(new DayPreview("water amount", amount));
         }
-        if (!pH.equals("1.0")){
+        if (!pH.equals("0.0")){
             dayPreview.add(new DayPreview("precipitation", pH));
         }
-        if (!note.equals("-")){
+        if (!note.equals("")){
             dayPreview.add(new DayPreview("water note", note));
         }
     }
@@ -81,19 +81,19 @@ public class DayPreviewCreator {
         String pests = day.getCropRecord().getPests();
         String note = day.getCropRecord().getCropNote();
 
-        if (!type.equals("-")){
+        if (!type.equals("")){
             dayPreview.add(new DayPreview("crop type", type));
         }
         if (!amount.equals("0")){
             dayPreview.add(new DayPreview("crop amount", amount));
         }
-        if (!status.equals("-")){
+        if (!status.equals("")){
             dayPreview.add(new DayPreview("crop status", status));
         }
-        if (!pests.equals("-")){
+        if (!pests.equals("")){
             dayPreview.add(new DayPreview("pests", pests));
         }
-        if (!note.equals("-")){
+        if (!note.equals("")){
             dayPreview.add(new DayPreview("crop note", note));
         }
     }

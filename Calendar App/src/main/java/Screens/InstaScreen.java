@@ -9,7 +9,7 @@ import java.util.ResourceBundle;
 
 import Controllers.InstaController;
 import Notifications.Status;
-import Observer.Observer;
+import Observers.Observer;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -21,7 +21,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class InstaScreen extends GeneralScreen implements Initializable, Observer{
+public class InstaScreen extends GeneralScreen implements Initializable, Observer {
     
     @FXML
     private AnchorPane rootPane;

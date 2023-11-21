@@ -1,4 +1,4 @@
-package Observer;
+package Observers;
 
 public interface Subject {
     

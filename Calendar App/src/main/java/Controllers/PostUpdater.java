@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import ApiClient.PostApiClient;
-import Observer.Observer;
-import Observer.Subject;
+import Observers.Observer;
+import Observers.Subject;
 import Posts.Post;
 
-public class PostUpdater implements Subject{
+public class PostUpdater implements Subject {
 
     private ArrayList<Observer> observers;
     private ArrayList<Post> posts;
