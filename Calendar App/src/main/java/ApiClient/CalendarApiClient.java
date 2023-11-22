@@ -79,9 +79,6 @@ public class CalendarApiClient {
 
     public void writeData (){
         updateData();
-        try {
-            Thread.sleep(1000);
-        } catch (Exception e){}
         for (Day day : newDays){
             CMAClient client = new CMAClient.Builder().setAccessToken(writeToken).setSpaceId(spaceId).setEnvironmentId(environmentId).build();
             CMAEntry entry = createEntry(day);
@@ -93,7 +90,7 @@ public class CalendarApiClient {
     private void updateData (){
         for (Day day : updateDays){
             CMAClient client = new CMAClient.Builder().setAccessToken(writeToken).setSpaceId(spaceId).setEnvironmentId(environmentId).build();
-            CMAEntry oldEntry = client.entries().fetchOne("2023-05-05-calendar");
+            CMAEntry oldEntry = client.entries().fetchOne(day.getDate().toString() + "-calendar");
             client.entries().unPublish(oldEntry);
             client.entries().delete(oldEntry);
             newDays.add(day);

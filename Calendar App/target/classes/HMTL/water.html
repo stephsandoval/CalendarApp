@@ -10,7 +10,13 @@
         var chartDiv = document.getElementById('chart_div');
         var data = google.visualization.arrayToDataTable([
           ['Day', 'Amount', 'pH'],
+          ['SUNDAY', 0, 0],
+          ['MONDAY', 0, 0],
+          ['TUESDAY', 0, 0],
+          ['WEDNESDAY', 15.0, 7.0],
+          ['THURSDAY', 0, 0],
           ['FRIDAY', 30.0, 7.0],
+          ['SATURDAY', 0, 0],
         ]);
 
         var materialOptions = {
@@ -21,8 +27,11 @@
           series: {
             0: { axis: 'Amount' },
             1: { axis: 'pH' },
-          }
-        };function drawMaterialChart() {
+          },
+          colors: ['#1b9e77', '#d95f02']
+        };
+        
+function drawMaterialChart() {
           var materialChart = new google.charts.Bar(chartDiv);
           materialChart.draw(data, google.charts.Bar.convertOptions(materialOptions));
         }

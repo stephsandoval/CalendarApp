@@ -91,8 +91,10 @@ public class StatsCreator {
                 "            0: { axis: 'Temperature' },\r\n" + //
                 "            1: { axis: 'Precipitation' },\r\n" + //
                 "            2: { axis: 'Humidity'}\r\n" + //
-                "          }\r\n" + //
-                "        };";
+                "          },\r\n" + //
+                "          colors: ['#1b9e77', '#d95f02', '#7570b3']\r\n" + //
+                "        };\r\n" + //
+                "        \r\n";
         return content;
     }
 
@@ -104,6 +106,8 @@ public class StatsCreator {
                 WaterRecord waterRecord = calendar.getDay(weekDay).getWaterRecord();
                 if (waterRecord.hasInformation()){
                     content += "          ['" + weekDay.getDayOfWeek().toString() + "', " + waterRecord.getWaterAmount() + ", " + waterRecord.getWaterpH() + "],\r\n";
+                } else {
+                    content += "          ['" + weekDay.getDayOfWeek().toString() + "', " + 0 + ", " + 0 + "],\r\n";
                 }
             }
         }
@@ -117,8 +121,10 @@ public class StatsCreator {
                 "          series: {\r\n" + //
                 "            0: { axis: 'Amount' },\r\n" + //
                 "            1: { axis: 'pH' },\r\n" + //
-                "          }\r\n" + //
-                "        };";
+                "          },\r\n" + //
+                "          colors: ['#1b9e77', '#d95f02']\r\n" + //
+                "        };\r\n" + //
+                "        \r\n";
         return content;
     }
 }

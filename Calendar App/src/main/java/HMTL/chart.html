@@ -1,45 +1,45 @@
 <html>
-  <head>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<head>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart', 'bar']});
-      google.charts.setOnLoadCallback(drawStuff);
+      google.charts.load('current', {'packages':['line']});
+      google.charts.setOnLoadCallback(drawChart);
 
-      function drawStuff() {
+    function drawChart() {
 
-        var chartDiv = document.getElementById('chart_div');
-        var data = google.visualization.arrayToDataTable([
-          ['Day', 'Temperature', 'Precipitation', 'Humidity'],
-          ['SUNDAY', 20.0, 93.0, 91.0],
-          ['MONDAY', 20.0, 97.0, 91.0],
-          ['TUESDAY', 22.0, 67.0, 89.0],
-          ['WEDNESDAY', 23.0, 63.0, 90.0],
-          ['THURSDAY', 22.0, 87.0, 89.0],
-          ['FRIDAY', 23.0, 43.0, 89.0],
-          ['SATURDAY', 23.0, 87.0, 89.0],
-        ]);
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Day');
+      data.addColumn('number', 'Potato');
+      data.addColumn('number', 'Strawberry');
 
-        var materialOptions = {
-          width: 930,
-          chart: {
-            title: 'Weather Statistics'
-          },
-          series: {
-            0: { axis: 'Temperature' },
-            1: { axis: 'Precipitation' },
-            2: { axis: 'Humidity'}
-          }
-        };function drawMaterialChart() {
-          var materialChart = new google.charts.Bar(chartDiv);
-          materialChart.draw(data, google.charts.Bar.convertOptions(materialOptions));
-        }
+      data.addRows([
+        ['APRIL 7', 400, 0],
+        ['APRIL 21', 400, 0],
+        ['MAY 5',  400, 0],
+        ['MAY 15',  370, 0],
+        ['JUNE 1',  370, 300],
+        ['JUNE 15',  370, 300],
+        ['JUNE 30',  370, 300],
+        ['JULY 16', 370, 290],
+        ['JULY 30', 360, 290]
+      ]);
 
-        drawMaterialChart();
-    };
-    </script>
-  </head>
-  <body>
-    <br><br>
-    <div id="chart_div" style="width: 772px; height: 383px;"></div>
-  </body>
+      var options = {
+        chart: {
+          title: 'Box Office Earnings in First Two Weeks of Opening'
+        },
+        width: 900,
+        height: 500
+      };
+
+      var chart = new google.charts.Line(document.getElementById('line_top_x'));
+
+      chart.draw(data, google.charts.Line.convertOptions(options));
+    }
+  </script>
+</head>
+<body>
+  <div id="line_top_x"></div>
+</body>
 </html>
+

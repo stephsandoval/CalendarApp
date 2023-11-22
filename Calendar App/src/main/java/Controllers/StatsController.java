@@ -20,6 +20,7 @@ public class StatsController {
     private void loadMap (){
         urlMap.put("water", "src/main/java/HMTL/water.html");
         urlMap.put("weather", "src/main/java/HMTL/weather.html");
+        //urlMap.put("crop", "src/main/java/HMTL/chart.html");
     }
 
     public String getURL (String aspect) {
