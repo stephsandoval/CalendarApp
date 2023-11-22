@@ -3,6 +3,9 @@ package Screens;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
@@ -16,6 +19,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
@@ -26,7 +30,7 @@ public class InstaScreen extends GeneralScreen implements Initializable, Observe
     @FXML
     private AnchorPane rootPane;
     @FXML
-    private TextField screenImagePath, screenUsername;
+    private TextField screenMediaPath, screenUsername;
     @FXML
     private TextArea screenDescription;
     @FXML
@@ -42,22 +46,22 @@ public class InstaScreen extends GeneralScreen implements Initializable, Observe
     private double postOffset = controller.getPostOffset();
     private ArrayList<Pane> posts = new ArrayList<>();
 
-    private HashMap<Status, String> messageMap;
+    private String description, username, mediaPath;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         controller.registerMe(this);
         setPosts();
-        populateMap();
         screenDescription.setWrapText(true);
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        setKeyboardActions();
     }
 
     public void openFileExplorer () throws FileNotFoundException {
-        screenImagePath.clear();
+        screenMediaPath.clear();
         File file = fileChooser.showOpenDialog(new Stage());
         if (file != null){
-            screenImagePath.setText(file.getPath());
+            screenMediaPath.setText(file.getPath());
         }
     }
 
@@ -78,17 +82,17 @@ public class InstaScreen extends GeneralScreen implements Initializable, Observe
     }
 
     public void addPost (){
-        String description = screenDescription.getText();
-        String mediaPath = screenImagePath.getText();
-        String username = screenUsername.getText();
-        Status status = controller.publishPost(mediaPath, description, username);
-        showNotification(status, messageMap.get(status));
-        cleanFields();
+        getValues();
+        if (validFields() && validDescriptionLength() && validPath(mediaPath)){
+            controller.publishPost(mediaPath, description, username);
+            showNotification(Status.SUCCESS, "The post was succesfully created");
+            clearFields();
+        }
     }
 
     @Override
     public void update() {
-        cleanFields();
+        clearFields();
         fixPaneSizes(posts.size() + 1);
     
         for (Pane post : posts) {
@@ -105,16 +109,55 @@ public class InstaScreen extends GeneralScreen implements Initializable, Observe
         yCoordinate += postOffset;
     }
 
-    private void cleanFields (){
-        screenImagePath.clear();
+    private void getValues (){
+        description = screenDescription.getText();
+        username = screenUsername.getText();
+        mediaPath = screenMediaPath.getText();
+    }
+
+    private void clearFields (){
+        screenMediaPath.clear();
         screenUsername.clear();
         screenDescription.clear();
     }
 
-    private void populateMap (){
-        messageMap = new HashMap<>();
-        messageMap.put(Status.ERROR, "Please provide a valid path");
-        messageMap.put(Status.WARNING, "No information given for the post");
-        messageMap.put(Status.SUCCESS, "The post was created and uploaded successfully");
+    private void checkLength (TextField field, KeyEvent event){
+        int length = field.getText().length();
+        if (length == 255){
+            event.consume();
+        }
+    }
+
+    private void setKeyboardActions (){
+        screenUsername.setOnKeyTyped(event -> {
+            checkLength(screenUsername, event);
+        });
+    }
+
+    private boolean validDescriptionLength (){
+        if (description.length() == 2000){
+            showNotification(Status.WARNING, "The description cannot exceed the 2000 characters");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean validPath (String mediaPath){
+        try {
+            Path path = Paths.get(mediaPath);
+            if (path.isAbsolute() && path.normalize().equals(path)){
+                return true;
+            }
+        } catch (Exception e){}
+        showNotification(Status.WARNING, "Invalid path. Please provide a valid path for the visual media");
+        return false;
+    }
+
+    private boolean validFields (){
+        if (description.equals("") && username.equals("") && mediaPath.equals("")){
+            showNotification(Status.ERROR, "No information given to create the post!");
+            return false;
+        }
+        return true;
     }
 }

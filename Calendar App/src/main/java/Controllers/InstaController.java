@@ -1,7 +1,5 @@
 package Controllers;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -51,27 +49,15 @@ public class InstaController {
     }
 
     public Status publishPost (String mediaPath, String description, String username){
-        boolean emptyPath = mediaPath.equals("");
-        if (emptyPath && description.equals("") && username.equals("")){
-            return Status.WARNING;
-        }
-        if (emptyPath || !isPath(mediaPath)){
-            return Status.ERROR;
-        }
         Post post = new Post();
+        if (username == ""){
+            username = "anonymous";
+        }
         post.setUsername(username);
         post.setDate(LocalDate.now());
         post.setDescription(description);
         post.setVisualElement(mediaPath);
         //postUpdater.addPost(post);
         return Status.SUCCESS;
-    }
-
-    private boolean isPath (String mediaPath){
-        try {
-            Path path = Paths.get(mediaPath);
-            return path.isAbsolute() && path.normalize().equals(path);
-        } catch (Exception e){}
-        return false;
     }
 }
