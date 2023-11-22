@@ -11,15 +11,18 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
 public class StatsScreen extends GeneralScreen implements Initializable {
     
     @FXML
-    private Button loadPage;
+    private Button loadPageButton;
     @FXML
-    private ComboBox <String> aspectsStats;
+    private ComboBox <String> screenAspectsStats;
+    @FXML
+    private DatePicker screenDate;
     @FXML
     private WebView webView;
 
@@ -30,14 +33,14 @@ public class StatsScreen extends GeneralScreen implements Initializable {
 
     @Override
     public void initialize (URL location, ResourceBundle resources){
-        aspectsStats.getItems().setAll(items.getAspects());
+        screenAspectsStats.getItems().setAll(items.getAspects());
         engine = webView.getEngine();
         webView.setZoom(0.8);
     }
 
     public void loadPage () throws MalformedURLException{
         webView.getEngine().loadContent("");
-        String aspect = aspectsStats.getValue();
+        String aspect = screenAspectsStats.getValue();
 
         if (aspect != null && aspect.equals("crop")) {
             String fileName = controller.getURL("crop");

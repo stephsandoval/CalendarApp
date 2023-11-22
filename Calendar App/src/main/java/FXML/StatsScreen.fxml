@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -40,17 +41,18 @@
             <Font name="Arial Black" size="36.0" />
          </font>
       </Label>
-      <ComboBox fx:id="aspectsStats" layoutX="130.0" layoutY="98.0" prefHeight="25.0" prefWidth="221.0" />
-      <Button fx:id="loadPage" layoutX="364.0" layoutY="99.0" mnemonicParsing="false" onAction="#loadPage" text="LOAD">
+      <ComboBox fx:id="screenAspectsStats" layoutX="130.0" layoutY="86.0" prefHeight="25.0" prefWidth="221.0" />
+      <Button fx:id="loadPageButton" layoutX="364.0" layoutY="87.0" mnemonicParsing="false" onAction="#loadPage" text="LOAD">
          <font>
             <Font size="11.0" />
          </font>
       </Button>
-      <WebView fx:id="webView" layoutX="130.0" layoutY="134.0" prefHeight="371.0" prefWidth="772.0" />
-      <Label layoutX="130.0" layoutY="74.0" text="ASPECT">
+      <WebView fx:id="webView" layoutX="130.0" layoutY="122.0" prefHeight="383.0" prefWidth="772.0" />
+      <Label layoutX="130.0" layoutY="68.0" text="ASPECT">
          <font>
             <Font size="10.0" />
          </font>
       </Label>
+      <DatePicker fx:id="screenDate" layoutX="681.0" layoutY="86.0" prefHeight="25.0" prefWidth="221.0" />
    </children>
 </AnchorPane>

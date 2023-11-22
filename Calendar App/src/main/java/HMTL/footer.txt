@@ -1,0 +1,14 @@
+function drawMaterialChart() {
+          var materialChart = new google.charts.Bar(chartDiv);
+          materialChart.draw(data, google.charts.Bar.convertOptions(materialOptions));
+        }
+
+        drawMaterialChart();
+    };
+    </script>
+  </head>
+  <body>
+    <br><br>
+    <div id="chart_div" style="width: 772px; height: 383px;"></div>
+  </body>
+</html>
