@@ -22,6 +22,7 @@ public class CalendarApiClient {
     private HashMap<Class<?>, Action> writeActionMap;
     private ArrayList<String> entryFields;
     private ArrayList<Day> days;
+    private ArrayList<Day> newDays;
     private String writeToken, readToken, spaceId, environmentId, contentType;
     private static CalendarApiClient instance;
 
@@ -35,6 +36,7 @@ public class CalendarApiClient {
         this.readActionMap = new HashMap<>();
         this.writeActionMap = new HashMap<>();
         this.entryFields = new ArrayList<>();
+        this.newDays = new ArrayList<>();
 
         populateFields();
         populateReadActionMap();
@@ -62,11 +64,17 @@ public class CalendarApiClient {
         }
     }
 
-    public void writeData (Day day){
-        CMAClient client = new CMAClient.Builder().setAccessToken(writeToken).setSpaceId(spaceId).setEnvironmentId(environmentId).build();
-        CMAEntry entry = createEntry(day);
-        CMAEntry result = client.entries().create(contentType, entry);
-        client.entries().publish(result);
+    public void addDay (Day day){
+        this.newDays.add(day);
+    }
+
+    public void writeData (){
+        for (Day day : newDays){
+            CMAClient client = new CMAClient.Builder().setAccessToken(writeToken).setSpaceId(spaceId).setEnvironmentId(environmentId).build();
+            CMAEntry entry = createEntry(day);
+            CMAEntry result = client.entries().create(contentType, entry);
+            client.entries().publish(result);
+        }
     }
 
     private void performReadAction(String key, Object value, Object object) {

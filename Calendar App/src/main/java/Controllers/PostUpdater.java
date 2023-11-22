@@ -38,7 +38,7 @@ public class PostUpdater implements Subject {
     }
 
     public void addPost (Post post){
-        client.writeData(post);
+        client.addPost(post);
         this.posts.add(0, post);
         notifyObservers();
     }

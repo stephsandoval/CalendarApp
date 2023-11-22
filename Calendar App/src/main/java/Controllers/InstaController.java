@@ -57,7 +57,7 @@ public class InstaController {
         post.setDate(LocalDate.now());
         post.setDescription(description);
         post.setVisualElement(mediaPath);
-        //postUpdater.addPost(post);
+        postUpdater.addPost(post);
         return Status.SUCCESS;
     }
 }

@@ -21,7 +21,6 @@ public class EventController {
     }
 
     public void createEvents (LocalDate date, double temperature, double humidity, double precipitation, String weatherNotes, String waterSource, double waterAmount, double waterpH, String waterNotes, String crop, int cropAmount, String cropStatus, String pests, String cropNotes){
-        System.out.println(precipitation);
         WeatherRecord weatherRecord = new WeatherRecord(temperature, humidity, precipitation, weatherNotes);
         WaterRecord waterRecord = new WaterRecord(waterSource, waterAmount, waterpH, waterNotes);
         CropRecord cropRecord = new CropRecord(crop, cropAmount, cropStatus, pests, cropNotes);
@@ -34,6 +33,6 @@ public class EventController {
         Month month = date.getMonth();
         Day day = new Day (date, weatherRecord, waterRecord, cropRecord);
         calendar.getYear(year).addDayToMonth(month, day);
-        //writer.writeData(day);
+        writer.addDay(day);
     }
 }

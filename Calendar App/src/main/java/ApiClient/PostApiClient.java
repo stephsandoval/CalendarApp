@@ -45,6 +45,7 @@ public class PostApiClient {
     private HashMap<Class<?>, Action> writeActionMap;
     private ArrayList<String> entryFields;
     private ArrayList<Post> posts;
+    private ArrayList<Post> newPosts;
 
     private String writeToken, readToken, spaceId, environmentId, contentType;
     private static PostApiClient instance;
@@ -59,6 +60,7 @@ public class PostApiClient {
         this.readActionMap = new HashMap<>();
         this.writeActionMap = new HashMap<>();
         this.entryFields = new ArrayList<>();
+        this.newPosts = new ArrayList<>();
 
         populateFields();
         populateReadActionMap();
@@ -85,13 +87,19 @@ public class PostApiClient {
         } 
     }
 
-    public void writeData (Post post){
-        CMAClient client = new CMAClient.Builder().setAccessToken(writeToken).setSpaceId(spaceId).setEnvironmentId(environmentId).build();
-        String imageId = publishAsset(client, post.getVisualPath());
-        CMAAsset image = client.assets().fetchOne(imageId);
-        CMAEntry entry = createEntry(post, image);
-        CMAEntry publishEntry = client.entries().create(contentType, entry);
-        client.entries().publish(publishEntry);
+    public void addPost (Post post){
+        this.newPosts.add(post);
+    }
+
+    public void writeData (){
+        for (Post post : newPosts){
+            CMAClient client = new CMAClient.Builder().setAccessToken(writeToken).setSpaceId(spaceId).setEnvironmentId(environmentId).build();
+            String imageId = publishAsset(client, post.getVisualPath());
+            CMAAsset image = client.assets().fetchOne(imageId);
+            CMAEntry entry = createEntry(post, image);
+            CMAEntry publishEntry = client.entries().create(contentType, entry);
+            client.entries().publish(publishEntry);
+        }
     }
 
     private void performWriteAction (String key, Object value, Object object){
