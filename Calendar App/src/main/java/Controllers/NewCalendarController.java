@@ -28,7 +28,6 @@ public class NewCalendarController {
 
     private void addDays (){
         ArrayList<Day> days = reader.getDays();
-        System.out.println("read " + days.size());
         for (Day day : days){
             calendar.getYear(day.getDate().getYear()).addDayToMonth(day.getDate().getMonth(), day);
         }
