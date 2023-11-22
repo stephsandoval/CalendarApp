@@ -24,12 +24,12 @@ public class Calendar {
         int year = date.getYear();
         Month month = date.getMonth();
         int day = date.getDayOfMonth();
-        return getYear(year).getMonth(month).get(day-1);
+        return getYear(year).getMonth(month).get(day);
     }
 
     public boolean containsInfo (LocalDate date){
         Day day = getDay(date);
-        if (day.getCropRecord().hasInformation() || day.getWaterRecord().hasInformation() || day.getWeatherRecord().hasInformation()){
+        if (day != null && (day.getCropRecord().hasInformation() || day.getWaterRecord().hasInformation() || day.getWeatherRecord().hasInformation())){
             return true;
         }
         return false;

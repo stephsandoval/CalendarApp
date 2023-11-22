@@ -120,6 +120,7 @@ public class CalendarApiClient {
         int index = 0;
         CMAEntry entry = new CMAEntry();
         String date = day.getDate().toString();
+        entry.setId(date + "-calendar");
         entry.setField("entryTitle", "en-US", date + "-calendar");
         performWriteAction(entryFields.get(index++), day.getDate().toString(), entry);
         performWriteAction(entryFields.get(index++), day.getWeatherRecord().getTemperature(), entry);

@@ -63,8 +63,32 @@ public class WeatherRecord {
         this.weatherNote = weatherNote;
     }
 
+    public void updateTemperature (double temperature){
+        if (this.temperature == 0){
+            this.temperature = temperature;
+        }
+    }
+
+    public void updateHumidity (double humidity){
+        if (this.humidity == 0){
+            this.humidity = humidity;
+        }
+    }
+
+    public void updatePrecipitation (double precipitation){
+        if (this.precipitation == 0){
+            this.precipitation = precipitation;
+        }
+    }
+
+    public void updateNotes (String notes){
+        if (this.weatherNote.isEmpty() || this.weatherNote == null){
+            this.weatherNote = notes;
+        }
+    } 
+
     public boolean hasInformation (){
-        return (temperature > 0 || humidity > 0 || precipitation > 0 || !weatherNote.equals("-"));
+        return (temperature > 0 || humidity > 0 || precipitation > 0 || !weatherNote.isEmpty());
     }
 
     public String toString (){

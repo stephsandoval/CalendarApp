@@ -28,6 +28,7 @@ public class NewCalendarController {
 
     private void addDays (){
         ArrayList<Day> days = reader.getDays();
+        System.out.println("read " + days.size());
         for (Day day : days){
             calendar.getYear(day.getDate().getYear()).addDayToMonth(day.getDate().getMonth(), day);
         }
@@ -53,7 +54,7 @@ public class NewCalendarController {
     public ArrayList <DayPreview> getDayPreview (LocalDate date){
         ArrayList <DayPreview> preview = new ArrayList<>();
         Day day = calendar.getDay(date);
-        if (day.getWaterRecord().hasInformation() || day.getWeatherRecord().hasInformation() || day.getCropRecord().hasInformation()){
+        if (day != null && (day.getWaterRecord().hasInformation() || day.getWeatherRecord().hasInformation() || day.getCropRecord().hasInformation())){
             preview = previewCreator.getDayPreview(day);
         }
         return preview;

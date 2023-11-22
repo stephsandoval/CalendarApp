@@ -81,6 +81,7 @@ public class ContentfulConnector {
             CMAEntry entry = client.entries().fetchOne(entryId);
 
             // Update the entry's field with the asset
+            entry.setId("myId");
             entry.setField("visualMedia", "en-US", a);
 
             // Update the entry on Contentful

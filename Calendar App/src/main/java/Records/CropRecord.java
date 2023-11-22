@@ -6,11 +6,11 @@ public class CropRecord {
     private int amount;
 
     public CropRecord (){
-        this.crop = "-";
+        this.crop = "";
         this.amount = 0;
-        this.cropStatus = "-";
-        this.pests = "-";
-        this.cropNote = "-";
+        this.cropStatus = "";
+        this.pests = "";
+        this.cropNote = "";
     }
 
     public CropRecord (String crop, int amount, String cropStatus, String pests, String cropNote){
@@ -45,7 +45,7 @@ public class CropRecord {
         if (crop != null){
             this.crop = crop;
         } else {
-            this.crop = "-";
+            this.crop = "";
         }
     }
 
@@ -61,7 +61,7 @@ public class CropRecord {
         if (cropStatus != null){
             this.cropStatus = cropStatus;
         } else {
-            this.cropStatus = "-";
+            this.cropStatus = "";
         }
     }
 
@@ -69,7 +69,7 @@ public class CropRecord {
         if (pests != null){
             this.pests = pests;
         } else {
-            this.pests = "-";
+            this.pests = "";
         }
     }
 
@@ -77,12 +77,42 @@ public class CropRecord {
         if (cropNote != null){
             this.cropNote = cropNote;
         } else {
-            this.cropNote = "-";
+            this.cropNote = "";
+        }
+    }
+
+    public void updateCrop (String crop){
+        if (this.crop.isEmpty()|| this.crop == null){
+            this.crop = crop;
+        }
+    }
+
+    public void updateCropAmount (int cropAmount){
+        if (this.amount == 0){
+            this.amount = cropAmount;
+        }
+    }
+
+    public void updateCropStatus (String cropStatus){
+        if (this.cropStatus.isEmpty() || this.cropStatus == null){
+            this.cropStatus = cropStatus;
+        }
+    }
+
+    public void updatePests (String pests){
+        if (this.pests.isEmpty() || this.pests == null){
+            this.pests = pests;
+        }
+    }
+
+    public void updateNotes (String notes){
+        if (this.cropNote.isEmpty() || this.cropNote == null){
+            this.cropNote = notes;
         }
     }
 
     public boolean hasInformation (){
-        return (!crop.equals("-") || amount != 0 || !cropStatus.equals("-") || !pests.equals("-") || !cropNote.equals("-"));
+        return (!crop.isEmpty() || amount != 0 || !cropStatus.isEmpty() || !pests.isEmpty() || !cropNote.isEmpty());
     }
 
     public String toString (){

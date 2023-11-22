@@ -7,7 +7,7 @@ import java.time.YearMonth;
 
 public class Year {
  
-    private HashMap <Month, ArrayList<Day>> year;
+    private HashMap <Month, HashMap<Integer, Day>> year;
     private int yearNumber;
 
     public Year (int yearNumber){
@@ -18,33 +18,33 @@ public class Year {
 
     private void populateYear (){
         for (Month month : Month.values()){
-            YearMonth yearMonth = YearMonth.of(yearNumber, month);
-            int monthLength = yearMonth.lengthOfMonth();
-            ArrayList<Day> monthDays = new ArrayList<>();
-            for (int day = 1; day <= monthLength; day++){
-                monthDays.add(new Day(yearMonth.atDay(day)));
-            }
+            HashMap<Integer, Day> monthDays = new HashMap<>();
             year.put(month, monthDays);
         }
     }
 
-    public ArrayList<Day> getMonth (Month month){
+    public HashMap<Integer, Day> getMonth (Month month){
         return this.year.get(month);
     }
 
-    public void addMonth (Month month, ArrayList<Day> monthDays){
+    public void addMonth (Month month, HashMap<Integer, Day> monthDays){
         this.year.put(month, monthDays);
     }
 
     public void addDayToMonth (Month month, Day day){
-        // if the day doesn't have any info, the day is added
-        // if the day has info, it is replaced for the new information
         int dayNumber = day.getDate().getDayOfMonth();
-        ArrayList<Day> monthDays = year.get(month);
-        monthDays.set(dayNumber - 1, day);
+        HashMap<Integer, Day> monthDays = year.get(month);
+        if (monthDays.get(dayNumber) == null){
+            year.get(month).put(dayNumber, day);
+            System.out.println("adding day");
+            System.out.println(year.get(month).get(dayNumber));
+        } else {
+            System.out.println("updating day");
+            updateDay(year.get(month).get(dayNumber), day);
+        }
     }
 
-    public HashMap <Month, ArrayList<Day>> getYear (){
+    public HashMap <Month, HashMap<Integer, Day>> getYear (){
         return this.year;
     }
 
@@ -52,11 +52,17 @@ public class Year {
         return this.yearNumber;
     }
 
-    public void setYear (HashMap <Month, ArrayList<Day>> year){
+    public void setYear (HashMap <Month, HashMap<Integer, Day>> year){
         this.year = year;
     }
 
     public void setYearNumber (int yearNumber){
         this.yearNumber = yearNumber;
+    }
+
+    private void updateDay (Day day, Day newDay){
+        day.updateCropRecord(newDay.getCropRecord());
+        day.updateWaterRecord(newDay.getWaterRecord());
+        day.updateWeatherRecord(newDay.getWeatherRecord());
     }
 }

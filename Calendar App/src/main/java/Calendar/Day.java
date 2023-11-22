@@ -66,6 +66,28 @@ public class Day {
         this.cropRecord = cropRecord;
     }
 
+    public void updateCropRecord (CropRecord cropRecord){
+        this.cropRecord.updateCrop(cropRecord.getCrop());
+        this.cropRecord.updateCropAmount(cropRecord.getAmount());
+        this.cropRecord.updateCropStatus(cropRecord.getCropStatus());
+        this.cropRecord.updatePests(cropRecord.getPests());
+        this.cropRecord.updateNotes(cropRecord.getCropNote());
+    }
+
+    public void updateWaterRecord (WaterRecord waterRecord){
+        this.waterRecord.updateWaterSource(waterRecord.getWaterSource());
+        this.waterRecord.updateWaterAmount(waterRecord.getWaterAmount());
+        this.waterRecord.updateWaterpH(waterRecord.getWaterpH());
+        this.waterRecord.updateNotes(waterRecord.getWaterNote());
+    }
+
+    public void updateWeatherRecord (WeatherRecord weatherRecord){
+        this.weatherRecord.updateTemperature(weatherRecord.getTemperature());
+        this.weatherRecord.updateHumidity(weatherRecord.getHumidity());
+        this.weatherRecord.updatePrecipitation(weatherRecord.getPrecipitation());
+        this.weatherRecord.updateNotes(weatherRecord.getWeatherNote());
+    }
+
     public String toString (){
         return "day >> " + date.toString() + " | " + weatherRecord + " | " + waterRecord + " | " + cropRecord + " ";
     }

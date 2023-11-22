@@ -6,10 +6,10 @@ public class WaterRecord {
     private String waterSource, waterNote;
 
     public WaterRecord (){
-        this.waterSource = "-";
+        this.waterSource = "";
         this.waterAmount = 0.0;
-        this.waterpH = 1.0;
-        this.waterNote = "-";
+        this.waterpH = 0.0;
+        this.waterNote = "";
     }
 
     public WaterRecord (String waterSource, double waterAmount, double waterpH, String waterNote){
@@ -39,7 +39,7 @@ public class WaterRecord {
         if (waterSource != null){
             this.waterSource = waterSource;
         } else {
-            this.waterSource = "-";
+            this.waterSource = "";
         }
     }
 
@@ -55,7 +55,7 @@ public class WaterRecord {
         if (waterpH > 1){
             this.waterpH = waterpH;
         } else {
-            this.waterpH = 1;
+            this.waterpH = 0;
         }
     }
 
@@ -63,12 +63,36 @@ public class WaterRecord {
         if (waterNote != null){
             this.waterNote = waterNote;
         } else {
-            this.waterNote = "-";
+            this.waterNote = "";
+        }
+    }
+
+    public void updateWaterSource (String waterSource){
+        if (this.waterSource.isEmpty() || this.waterSource == null){
+            this.waterSource = waterSource;
+        }
+    }
+
+    public void updateWaterAmount (double waterAmount){
+        if (this.waterAmount == 0){
+            this.waterAmount = waterAmount;
+        }
+    }
+
+    public void updateWaterpH (double waterpH){
+        if (this.waterpH == 0){
+            this.waterpH = waterpH;
+        }
+    }
+
+    public void updateNotes (String notes){
+        if (this.waterNote.isEmpty() || this.waterNote == null){
+            this.waterNote = notes;
         }
     }
 
     public boolean hasInformation (){
-        return (waterAmount > 0 || waterpH > 1.0 || !waterSource.equals("-") || !waterNote.equals("-"));
+        return (waterAmount > 0 || waterpH > 1.0 || !waterSource.isEmpty() || !waterNote.isEmpty());
     }
 
     public String toString (){
