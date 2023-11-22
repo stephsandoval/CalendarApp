@@ -69,11 +69,19 @@ public class CalendarApiClient {
     }
 
     public void updateDay (Day day){
+        for (Day newDay : newDays){
+            if (newDay.getDate().equals(day.getDate())){
+                return;
+            }
+        }
         this.updateDays.add(day);
     }
 
     public void writeData (){
         updateData();
+        try {
+            Thread.sleep(1000);
+        } catch (Exception e){}
         for (Day day : newDays){
             CMAClient client = new CMAClient.Builder().setAccessToken(writeToken).setSpaceId(spaceId).setEnvironmentId(environmentId).build();
             CMAEntry entry = createEntry(day);

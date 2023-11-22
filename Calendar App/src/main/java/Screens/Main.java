@@ -28,6 +28,7 @@ public class Main extends Application {
             stage.setTitle("Calendar App");
             stage.getIcons().add(new Image("plantLogo.png"));
             stage.setOnCloseRequest(event -> {
+                stage.close();
                 CalendarApiClient.getInstance().writeData();
                 PostApiClient.getInstance().writeData();
                 System.exit(0);

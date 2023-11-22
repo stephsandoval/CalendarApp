@@ -1,4 +1,6 @@
 import java.io.File;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 
 import org.apache.tika.Tika;
 
@@ -20,5 +22,11 @@ public class Driver {
         File file = new File(potatoPath);
         String fileName = file.getName();
         System.out.println(fileName.split(".")[0]);
+
+        LocalDate today = LocalDate.now();
+        DayOfWeek dayWeek = today.getDayOfWeek();
+        System.out.println(dayWeek.getValue());
+        LocalDate start = today.minusDays(dayWeek.getValue());
+        System.out.println(start);
     }
 }

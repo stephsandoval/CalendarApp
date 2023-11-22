@@ -67,7 +67,7 @@ public class DayPreviewCreator {
             dayPreview.add(new DayPreview("water amount", amount));
         }
         if (!pH.equals("0.0")){
-            dayPreview.add(new DayPreview("precipitation", pH));
+            dayPreview.add(new DayPreview("water pH", pH));
         }
         if (!note.equals("")){
             dayPreview.add(new DayPreview("water note", note));

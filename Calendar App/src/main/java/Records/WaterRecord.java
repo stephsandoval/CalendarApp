@@ -61,7 +61,7 @@ public class WaterRecord {
     }
 
     public boolean hasInformation (){
-        return (waterAmount > 0 || waterpH > 1.0 || !waterSource.isEmpty() || !waterNote.isEmpty());
+        return (waterAmount > 0 || waterpH > 0 || !waterSource.isEmpty() || !waterNote.isEmpty());
     }
 
     public String toString (){

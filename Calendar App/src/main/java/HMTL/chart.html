@@ -8,16 +8,15 @@
       function drawStuff() {
 
         var chartDiv = document.getElementById('chart_div');
-
         var data = google.visualization.arrayToDataTable([
           ['Day', 'Temperature', 'Precipitation', 'Humidity'],
-          ['Monday', 21, 80, 91],
-          ['Tuesday', 21, 80, 91],
-          ['Wednesday', 21, 80, 91],
-          ['Thursday', 21, 80, 91],
-          ['Friday', 21, 80, 91],
-          ['Saturday', 21, 80, 91],
-          ['Sunday', 21, 80, 91],
+          ['SUNDAY', 20.0, 93.0, 91.0],
+          ['MONDAY', 20.0, 97.0, 91.0],
+          ['TUESDAY', 22.0, 67.0, 89.0],
+          ['WEDNESDAY', 23.0, 63.0, 90.0],
+          ['THURSDAY', 22.0, 87.0, 89.0],
+          ['FRIDAY', 23.0, 43.0, 89.0],
+          ['SATURDAY', 23.0, 87.0, 89.0],
         ]);
 
         var materialOptions = {
@@ -30,9 +29,7 @@
             1: { axis: 'Precipitation' },
             2: { axis: 'Humidity'}
           }
-        };
-
-        function drawMaterialChart() {
+        };function drawMaterialChart() {
           var materialChart = new google.charts.Bar(chartDiv);
           materialChart.draw(data, google.charts.Bar.convertOptions(materialOptions));
         }

@@ -32,11 +32,12 @@ public class EventController {
         int year = date.getYear();
         Month month = date.getMonth();
         Day day = new Day (date, weatherRecord, waterRecord, cropRecord);
-        calendar.getYear(year).addDayToMonth(month, day);
         if (!calendar.hasDay(date)){
             writer.addDay(day);
         } else {
+            System.out.println("here");
             writer.updateDay(calendar.getDay(date));
         }
+        calendar.getYear(year).addDayToMonth(month, day);
     }
 }

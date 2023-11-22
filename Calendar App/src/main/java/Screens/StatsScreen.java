@@ -3,6 +3,8 @@ package Screens;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import Controllers.StatsController;
@@ -39,11 +41,12 @@ public class StatsScreen extends GeneralScreen implements Initializable {
     }
 
     public void loadPage () throws MalformedURLException{
+        controller.getStats(screenDate.getValue());
         webView.getEngine().loadContent("");
         String aspect = screenAspectsStats.getValue();
 
-        if (aspect != null && aspect.equals("crop")) {
-            String fileName = controller.getURL("crop");
+        if (aspect != null && screenDate.getValue() != null) {
+            String fileName = controller.getURL(aspect);
             File file = new File(fileName);
             String url = file.toURI().toURL().toExternalForm();
             engine.load(url);
