@@ -1,9 +1,7 @@
 package Calendar;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.time.Month;
-import java.time.YearMonth;
 
 public class Year {
  
@@ -36,10 +34,7 @@ public class Year {
         HashMap<Integer, Day> monthDays = year.get(month);
         if (monthDays.get(dayNumber) == null){
             year.get(month).put(dayNumber, day);
-            System.out.println("adding day");
-            System.out.println(year.get(month).get(dayNumber));
         } else {
-            System.out.println("updating day");
             updateDay(year.get(month).get(dayNumber), day);
         }
     }

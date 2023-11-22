@@ -13,6 +13,7 @@ public class WaterRecord {
     }
 
     public WaterRecord (String waterSource, double waterAmount, double waterpH, String waterNote){
+        this();
         setWaterAmount(waterAmount);
         setWaterpH(waterpH);
         setWaterSource(waterSource);
@@ -36,58 +37,26 @@ public class WaterRecord {
     }
 
     public void setWaterSource (String waterSource){
-        if (waterSource != null){
+        if (waterSource != null && !waterSource.isEmpty()){
             this.waterSource = waterSource;
-        } else {
-            this.waterSource = "";
         }
     }
 
     public void setWaterAmount (double waterAmount){
         if (waterAmount > 0){
             this.waterAmount = waterAmount;
-        } else {
-            this.waterAmount = 0;
         }
     }
 
     public void setWaterpH (double waterpH){
         if (waterpH > 1){
             this.waterpH = waterpH;
-        } else {
-            this.waterpH = 0;
         }
     }
 
     public void setWaterNote (String waterNote){
-        if (waterNote != null){
+        if (waterNote != null && !waterNote.isEmpty()){
             this.waterNote = waterNote;
-        } else {
-            this.waterNote = "";
-        }
-    }
-
-    public void updateWaterSource (String waterSource){
-        if (this.waterSource.isEmpty() || this.waterSource == null){
-            this.waterSource = waterSource;
-        }
-    }
-
-    public void updateWaterAmount (double waterAmount){
-        if (this.waterAmount == 0){
-            this.waterAmount = waterAmount;
-        }
-    }
-
-    public void updateWaterpH (double waterpH){
-        if (this.waterpH == 0){
-            this.waterpH = waterpH;
-        }
-    }
-
-    public void updateNotes (String notes){
-        if (this.waterNote.isEmpty() || this.waterNote == null){
-            this.waterNote = notes;
         }
     }
 

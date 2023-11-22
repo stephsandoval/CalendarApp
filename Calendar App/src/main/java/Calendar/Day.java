@@ -67,25 +67,25 @@ public class Day {
     }
 
     public void updateCropRecord (CropRecord cropRecord){
-        this.cropRecord.updateCrop(cropRecord.getCrop());
-        this.cropRecord.updateCropAmount(cropRecord.getAmount());
-        this.cropRecord.updateCropStatus(cropRecord.getCropStatus());
-        this.cropRecord.updatePests(cropRecord.getPests());
-        this.cropRecord.updateNotes(cropRecord.getCropNote());
+        this.cropRecord.setCrop(cropRecord.getCrop());
+        this.cropRecord.setAmount(cropRecord.getAmount());
+        this.cropRecord.setCropStatus(cropRecord.getCropStatus());
+        this.cropRecord.setPests(cropRecord.getPests());
+        this.cropRecord.setCropNote(cropRecord.getCropNote());
     }
 
     public void updateWaterRecord (WaterRecord waterRecord){
-        this.waterRecord.updateWaterSource(waterRecord.getWaterSource());
-        this.waterRecord.updateWaterAmount(waterRecord.getWaterAmount());
-        this.waterRecord.updateWaterpH(waterRecord.getWaterpH());
-        this.waterRecord.updateNotes(waterRecord.getWaterNote());
+        this.waterRecord.setWaterSource(waterRecord.getWaterSource());
+        this.waterRecord.setWaterAmount(waterRecord.getWaterAmount());
+        this.waterRecord.setWaterpH(waterRecord.getWaterpH());
+        this.waterRecord.setWaterNote(waterRecord.getWaterNote());
     }
 
     public void updateWeatherRecord (WeatherRecord weatherRecord){
-        this.weatherRecord.updateTemperature(weatherRecord.getTemperature());
-        this.weatherRecord.updateHumidity(weatherRecord.getHumidity());
-        this.weatherRecord.updatePrecipitation(weatherRecord.getPrecipitation());
-        this.weatherRecord.updateNotes(weatherRecord.getWeatherNote());
+        this.weatherRecord.setTemperature(weatherRecord.getTemperature());
+        this.weatherRecord.setHumidity(weatherRecord.getHumidity());
+        this.weatherRecord.setPrecipitation(weatherRecord.getPrecipitation());
+        this.weatherRecord.setWeatherNote(weatherRecord.getWeatherNote());
     }
 
     public String toString (){

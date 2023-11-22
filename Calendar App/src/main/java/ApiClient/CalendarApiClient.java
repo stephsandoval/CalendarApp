@@ -21,8 +21,7 @@ public class CalendarApiClient {
     private HashMap<String, Action> readActionMap;
     private HashMap<Class<?>, Action> writeActionMap;
     private ArrayList<String> entryFields;
-    private ArrayList<Day> days;
-    private ArrayList<Day> newDays;
+    private ArrayList<Day> days, newDays, updateDays;
     private String writeToken, readToken, spaceId, environmentId, contentType;
     private static CalendarApiClient instance;
 
@@ -37,6 +36,7 @@ public class CalendarApiClient {
         this.writeActionMap = new HashMap<>();
         this.entryFields = new ArrayList<>();
         this.newDays = new ArrayList<>();
+        this.updateDays = new ArrayList<>();
 
         populateFields();
         populateReadActionMap();
@@ -68,12 +68,27 @@ public class CalendarApiClient {
         this.newDays.add(day);
     }
 
+    public void updateDay (Day day){
+        this.updateDays.add(day);
+    }
+
     public void writeData (){
+        updateData();
         for (Day day : newDays){
             CMAClient client = new CMAClient.Builder().setAccessToken(writeToken).setSpaceId(spaceId).setEnvironmentId(environmentId).build();
             CMAEntry entry = createEntry(day);
             CMAEntry result = client.entries().create(contentType, entry);
             client.entries().publish(result);
+        }
+    }
+
+    private void updateData (){
+        for (Day day : updateDays){
+            CMAClient client = new CMAClient.Builder().setAccessToken(writeToken).setSpaceId(spaceId).setEnvironmentId(environmentId).build();
+            CMAEntry oldEntry = client.entries().fetchOne("2023-05-05-calendar");
+            client.entries().unPublish(oldEntry);
+            client.entries().delete(oldEntry);
+            newDays.add(day);
         }
     }
 

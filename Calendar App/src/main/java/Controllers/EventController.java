@@ -33,6 +33,10 @@ public class EventController {
         Month month = date.getMonth();
         Day day = new Day (date, weatherRecord, waterRecord, cropRecord);
         calendar.getYear(year).addDayToMonth(month, day);
-        writer.addDay(day);
+        if (!calendar.hasDay(date)){
+            writer.addDay(day);
+        } else {
+            writer.updateDay(calendar.getDay(date));
+        }
     }
 }

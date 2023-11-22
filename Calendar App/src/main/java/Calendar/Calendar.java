@@ -62,4 +62,8 @@ public class Calendar {
     public boolean hasYear (int yearNumber){
         return this.calendar.containsKey(yearNumber);
     }
+
+    public boolean hasDay (LocalDate date){
+        return this.getYear(date.getYear()).getMonth(date.getMonth()).get(date.getDayOfMonth()) != null;
+    }
 }
