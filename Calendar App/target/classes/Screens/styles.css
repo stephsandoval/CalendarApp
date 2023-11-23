@@ -77,7 +77,7 @@
 }
 
 #day-view {
-    -fx-background-color: lightseagreen;
+    -fx-background-color: transparent;
     -fx-color : whitesmoke;
     -fx-font-family : "Candara";
     -fx-border-color : lightseagreen;

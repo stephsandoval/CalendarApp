@@ -21,7 +21,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.geometry.Pos;
 
 public class NewCalendarScreen extends GeneralScreen implements Initializable{
  
@@ -100,17 +99,25 @@ public class NewCalendarScreen extends GeneralScreen implements Initializable{
         int start = controller.getOffset();
         int stop = controller.getMaxDays();
         int currentDay = 1;
-    
-        for (int i = start; i < stop + start; i++) {
-            calendarDays.get(i).setText(Integer.toString(currentDay));
-            int dayOfMonth = currentDay;
-            YearMonth yearMonth = YearMonth.of(year, month);
-            LocalDate date = yearMonth.atDay(dayOfMonth);
-            calendarDays.get(i).setOnAction(e -> {
-                populatePreview(date);
-            });
-            calendarDays.get(i).setAlignment(Pos.CENTER);
-            currentDay++;
+
+        for (int buttonIndex = 0; buttonIndex < calendarDays.size(); buttonIndex++){
+            if (buttonIndex >= start && buttonIndex < stop + start){
+                calendarDays.get(buttonIndex).setText(Integer.toString(currentDay));
+                int dayOfMonth = currentDay;
+                YearMonth yearMonth = YearMonth.of(year, month);
+                LocalDate date = yearMonth.atDay(dayOfMonth);
+                calendarDays.get(buttonIndex).setOnAction(e -> {
+                    populatePreview(date);
+                });
+                if (controller.containsInfo(date)){
+                    setFullButton(calendarDays.get(buttonIndex));
+                } else {
+                    setEmptyButton(calendarDays.get(buttonIndex));
+                }
+                currentDay++;
+            } else {
+                setEmptyButton(calendarDays.get(buttonIndex));
+            }
         }
     }
 
@@ -129,5 +136,49 @@ public class NewCalendarScreen extends GeneralScreen implements Initializable{
     private void setBackground (){
         Image image = new Image("file:src/main/java/Images/background.png");
         background.setImage(image);
+    }
+
+    private void setEmptyButton (Button button){
+        String style1 = "-fx-background-color:  ";
+        String style2 = ";\r\n" +
+                "    -fx-background-radius: 4;\r\n" +
+                "    -fx-border-color : mediumaquamarine;\r\n" +
+                "    -fx-border-width : 2px;\r\n" +
+                "    -fx-border-radius : 4;\r\n" +
+                "    -fx-text-fill:";
+        String style3 = ";\r\n" +
+                "    -fx-font-size : 14;\r\n" +
+                "    -fx-font-family : \"Candara\";";
+        String originalStyle = style1 + "transparent" + style2 + "black" + style3;
+        String secondStyle = style1 + "darkcyan" + style2 + "white" + style3;
+        button.setStyle(originalStyle);
+        button.setOnMouseEntered(event -> {
+            button.setStyle(secondStyle);
+        });
+        button.setOnMouseExited(event -> {
+            button.setStyle(originalStyle);
+        });
+    }
+
+    private void setFullButton (Button button){
+        String style1 = "-fx-background-color:  ";
+        String style2 = ";\r\n" +
+                "    -fx-background-radius: 4;\r\n" +
+                "    -fx-border-color : mediumaquamarine;\r\n" +
+                "    -fx-border-width : 2px;\r\n" +
+                "    -fx-border-radius : 4;\r\n" +
+                "    -fx-text-fill: ";
+        String style3 = ";\r\n" +
+                "    -fx-font-size : 14;\r\n" + 
+                "    -fx-font-family : \"Candara\";";
+        String originalStyle = style1 + "rgba(32, 178, 170, 0.4)" + style2 + "black" + style3;
+        String secondStyle = style1 + "darkcyan" + style2 + "white" + style3;
+        button.setStyle(originalStyle);
+        button.setOnMouseEntered(event -> {
+            button.setStyle(secondStyle);
+        });
+        button.setOnMouseExited(event -> {
+            button.setStyle(originalStyle);
+        });
     }
 }
