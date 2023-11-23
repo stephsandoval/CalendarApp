@@ -69,7 +69,7 @@ public class VideoElement implements VisualElement{
         try {
             new URI(input);
             return true;
-        } catch (Exception e) {
+        } catch (Exception exception) {
             return false;
         }
     }

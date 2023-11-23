@@ -23,8 +23,8 @@ public class LogInScreen extends GeneralScreen implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setBackground();
-        logInButton.setOnAction(e -> {
-            loadFirstInformation(e);
+        logInButton.setOnAction(event -> {
+            loadFirstInformation(event);
         });
     }
 
@@ -33,7 +33,7 @@ public class LogInScreen extends GeneralScreen implements Initializable{
         PostApiClient.getInstance();
         try {
             loadCalendarScreen(event);
-        } catch (IOException e) {}
+        } catch (IOException exception) {}
     }
 
     private void setBackground (){

@@ -24,7 +24,7 @@ public class ImageElement implements VisualElement{
             try {
                 File file = new File(mediaPath);
                 image = new Image(file.toURI().toURL().toString());
-            } catch (Exception e){}
+            } catch (Exception exception){}
         }
         ImageView imageView = new ImageView(image);
         imageView.setPreserveRatio(false);
@@ -39,7 +39,7 @@ public class ImageElement implements VisualElement{
         try {
             new URL(input);
             return true;
-        } catch (Exception e) {
+        } catch (Exception exception) {
             return false;
         }
     }

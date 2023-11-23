@@ -89,7 +89,7 @@ public class NewCalendarScreen extends GeneralScreen implements Initializable{
     private void clearButtons (){
         for (Button button : calendarDays){
             button.setText("");
-            button.setOnAction(e -> {
+            button.setOnAction(event -> {
                 dayView.getItems().clear();
             });
         }
@@ -106,7 +106,7 @@ public class NewCalendarScreen extends GeneralScreen implements Initializable{
                 int dayOfMonth = currentDay;
                 YearMonth yearMonth = YearMonth.of(year, month);
                 LocalDate date = yearMonth.atDay(dayOfMonth);
-                calendarDays.get(buttonIndex).setOnAction(e -> {
+                calendarDays.get(buttonIndex).setOnAction(event -> {
                     populatePreview(date);
                 });
                 if (controller.containsInfo(date)){

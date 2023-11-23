@@ -34,7 +34,7 @@ public class Main extends Application {
                 System.exit(0);
             });
             stage.show();
-        } catch (Exception e){}
+        } catch (Exception exception){}
     }
 
     public static void main (String[] args){

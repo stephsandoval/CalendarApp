@@ -150,7 +150,7 @@ public class PostApiClient {
             CMAAsset draftAsset = client.assets().fetchOne(draftAssetId);
             CMAAsset publishAsset = client.assets().publish(draftAsset);
             publishId = publishAsset.getId();
-        } catch (Exception e) {}
+        } catch (Exception exception) {}
         return publishId;
     }
 
@@ -215,7 +215,7 @@ public class PostApiClient {
                 entryContent.append(entryLine);
             }
             entryReader.close();
-        } catch (Exception e){}
+        } catch (Exception exception){}
         String imageURL = parseJson(entryContent.toString());
         return imageURL;
     }
@@ -227,7 +227,7 @@ public class PostApiClient {
             JsonObject fields = jsonObject.getJsonObject("fields");
             JsonObject file = fields.getJsonObject("file");
             imageURL = file.getString("url");
-        } catch (Exception e) {}
+        } catch (Exception exception) {}
         return imageURL;
     }    
 

@@ -41,13 +41,13 @@ public class DayPreviewCreator {
         String note = day.getWeatherRecord().getWeatherNote();
 
         if (!temperature.equals("0.0")){
-            dayPreview.add(new DayPreview("temperature", temperature));
+            dayPreview.add(new DayPreview("temperature", temperature + " °C"));
         }
         if (!humidity.equals("0.0")){
-            dayPreview.add(new DayPreview("humidity", humidity));
+            dayPreview.add(new DayPreview("humidity", humidity + " %"));
         }
         if (!precipitation.equals("0.0")){
-            dayPreview.add(new DayPreview("precipitation", precipitation));
+            dayPreview.add(new DayPreview("precipitation", precipitation + " %"));
         }
         if (!note.equals("")){
             dayPreview.add(new DayPreview("weather note", note));
@@ -64,7 +64,7 @@ public class DayPreviewCreator {
             dayPreview.add(new DayPreview("water source", source));
         }
         if (!amount.equals("0.0")){
-            dayPreview.add(new DayPreview("water amount", amount));
+            dayPreview.add(new DayPreview("water amount", amount + " L"));
         }
         if (!pH.equals("0.0")){
             dayPreview.add(new DayPreview("water pH", pH));

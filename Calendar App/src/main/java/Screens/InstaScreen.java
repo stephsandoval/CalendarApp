@@ -148,7 +148,7 @@ public class InstaScreen extends GeneralScreen implements Initializable, Observe
             if (path.isAbsolute() && path.normalize().equals(path)){
                 return true;
             }
-        } catch (Exception e){}
+        } catch (Exception exception){}
         showNotification(Status.WARNING, "Invalid path. Please provide a valid path for the visual media");
         return false;
     }

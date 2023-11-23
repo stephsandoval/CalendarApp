@@ -43,7 +43,7 @@ public class StatsCreator {
                 contents += scanner.nextLine() + "\r\n";
             }
             scanner.close();
-        } catch (Exception e) {}
+        } catch (Exception exception) {}
         return contents;
     }
 
@@ -54,7 +54,7 @@ public class StatsCreator {
             BufferedWriter writer = new BufferedWriter(new FileWriter(htmlFile));
             writer.write(header + getWeatherStats() + footer);
             writer.close();
-        } catch (Exception e){}
+        } catch (Exception exception){}
     }
 
     private void createWaterStats (){
@@ -64,7 +64,7 @@ public class StatsCreator {
             BufferedWriter writer = new BufferedWriter(new FileWriter(htmlFile));
             writer.write(header + getWaterStats() + footer);
             writer.close();
-        } catch (Exception e){}
+        } catch (Exception exception){}
     }
 
     private String getWeatherStats (){

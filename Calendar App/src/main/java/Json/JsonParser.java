@@ -44,7 +44,7 @@ public class JsonParser {
             jsonCropStatus = jsonParser.getJsonArray("crop status");
             jsonPests = jsonParser.getJsonArray("pests");
             jsonAspects = jsonParser.getJsonArray("aspects");
-        } catch (Exception e){}
+        } catch (Exception exception){}
     }
 
     private ArrayList<String> toArray (JsonArray jsonArray){
