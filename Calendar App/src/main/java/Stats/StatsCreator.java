@@ -16,22 +16,22 @@ public class StatsCreator {
     private Calendar calendar;
     private ArrayList<LocalDate> week;
 
+    private final String header = getContents(new File("src/main/java/Stats/header.txt"));
+    private final String footer = getContents(new File("src/main/java/Stats/footer.txt"));
+
     public StatsCreator (){
         calendar = Calendar.getInstance();
         this.week = new ArrayList<>();
     }
 
-    public void createStats (ArrayList<LocalDate> week){
+    public void createStats (ArrayList<LocalDate> week, String aspect){
         this.week = week;
-        createFiles();
-    }
-
-    private void createFiles (){
-        String header = getContents(new File("src/main/java/Stats/header.txt"));
-        String footer = getContents(new File("src/main/java/Stats/footer.txt"));
-        createWeatherStats(header, footer);
-        createWaterStats(header, footer);
-        return;
+        if (aspect.equals("weather")){
+            createWeatherStats();
+        }
+        if (aspect.equals("water")){
+            createWaterStats();
+        }
     }
 
     private String getContents (File file){
@@ -47,7 +47,7 @@ public class StatsCreator {
         return contents;
     }
 
-    private void createWeatherStats (String header, String footer){
+    private void createWeatherStats (){
         File htmlFile = new File("src/main/java/HMTL/weather.html");
         try {
             htmlFile.createNewFile();
@@ -57,7 +57,7 @@ public class StatsCreator {
         } catch (Exception e){}
     }
 
-    private void createWaterStats (String header, String footer){
+    private void createWaterStats (){
         File htmlFile = new File("src/main/java/HMTL/water.html");
         try {
             htmlFile.createNewFile();

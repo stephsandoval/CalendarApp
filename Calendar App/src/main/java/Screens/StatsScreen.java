@@ -50,7 +50,7 @@ public class StatsScreen extends GeneralScreen implements Initializable {
     public void loadPage () throws MalformedURLException{
         getValues();
         if (validFields() && validDate() && validAspect()){
-            controller.getStats(screenDate.getValue());
+            controller.getStats(date, aspect);
             webView.getEngine().loadContent("");
             String fileName = controller.getURL(aspect);
             File file = new File(fileName);
