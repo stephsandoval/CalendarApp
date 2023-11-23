@@ -6,48 +6,54 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="920.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Screens.EventScreen">
    <children>
-      <Pane layoutX="14.0" layoutY="14.0" prefHeight="492.0" prefWidth="86.0">
+      <ImageView fx:id="background" fitHeight="520.0" fitWidth="920.0" pickOnBounds="true" preserveRatio="true" />
+      <Pane id="rounded-pane" layoutX="14.0" layoutY="14.0" prefHeight="492.0" prefWidth="86.0">
          <children>
-            <Button layoutX="8.0" layoutY="9.0" mnemonicParsing="false" onAction="#loadCalendarScreen" prefWidth="70.0" text="CALENDAR">
+            <Button id="medium-tone-button" layoutX="8.0" layoutY="9.0" mnemonicParsing="false" onAction="#loadCalendarScreen" prefWidth="70.0" text="CALENDAR">
                <font>
                   <Font size="10.0" />
                </font>
             </Button>
-            <Button layoutX="8.0" layoutY="47.0" mnemonicParsing="false" onAction="#loadPostsScreen" prefWidth="70.0" text="POSTS">
+            <Button id="medium-tone-button" layoutX="8.0" layoutY="47.0" mnemonicParsing="false" onAction="#loadPostsScreen" prefWidth="70.0" text="POSTS">
                <font>
                   <Font size="10.0" />
                </font>
             </Button>
-            <Button layoutX="8.0" layoutY="85.0" mnemonicParsing="false" onAction="#loadStatsScreen" prefWidth="70.0" text="STATS">
+            <Button id="medium-tone-button" layoutX="8.0" layoutY="85.0" mnemonicParsing="false" onAction="#loadStatsScreen" prefWidth="70.0" text="STATS">
                <font>
                   <Font size="10.0" />
                </font>
             </Button>
-            <Button layoutX="8.0" layoutY="459.0" mnemonicParsing="false" onAction="#loadLoginScreen" prefWidth="70.0" text="LOGOUT">
+            <Button id="medium-tone-button" layoutX="8.0" layoutY="459.0" mnemonicParsing="false" onAction="#loadLoginScreen" prefWidth="70.0" text="LOGOUT">
                <font>
                   <Font size="10.0" />
                </font></Button>
          </children>
       </Pane>
       <Separator layoutX="113.0" orientation="VERTICAL" prefHeight="520.0" />
-      <Label layoutX="130.0" layoutY="14.0" text="NEW EVENT">
+      <Label layoutX="130.0" layoutY="20.0" text="NEW EVENT">
          <font>
             <Font name="Arial Black" size="36.0" />
          </font>
       </Label>
-      <Button layoutX="869.0" layoutY="474.0" mnemonicParsing="false" onAction="#loadCalendarScreen" text="&lt;" />
-      <TextField fx:id="screenWeatherNotes" layoutX="673.0" layoutY="329.0" prefHeight="25.0" prefWidth="221.0" />
-      <TextField fx:id="screenCropNotes" layoutX="140.0" layoutY="397.0" prefHeight="25.0" prefWidth="221.0" />
-      <TextField fx:id="screenWaterNotes" layoutX="407.0" layoutY="330.0" prefHeight="25.0" prefWidth="221.0" />
-      <ComboBox fx:id="screenPests" layoutX="140.0" layoutY="331.0" prefHeight="25.0" prefWidth="221.0" />
-      <ComboBox fx:id="screenCropStatus" layoutX="140.0" layoutY="260.0" prefHeight="25.0" prefWidth="221.0" />
-      <ComboBox fx:id="screenWaterSource" layoutX="407.0" layoutY="120.0" prefHeight="25.0" prefWidth="221.0" />
+      <Button id="circular-button-green" layoutX="869.0" layoutY="474.0" mnemonicParsing="false" onAction="#loadCalendarScreen" text="&lt;" />
+      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="25.0" layoutX="673.0" layoutY="329.0" stroke="WHITE" strokeType="INSIDE" width="221.0" />
+      <TextField id="text-field" fx:id="screenWeatherNotes" layoutX="673.0" layoutY="329.0" prefHeight="25.0" prefWidth="221.0" />
+      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="25.0" layoutX="140.0" layoutY="398.0" stroke="WHITE" strokeType="INSIDE" width="221.0" />
+      <TextField id="text-field" fx:id="screenCropNotes" layoutX="140.0" layoutY="397.0" prefHeight="25.0" prefWidth="221.0" />
+      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="25.0" layoutX="407.0" layoutY="330.0" stroke="WHITE" strokeType="INSIDE" width="221.0" />
+      <TextField id="text-field" fx:id="screenWaterNotes" layoutX="407.0" layoutY="330.0" prefHeight="25.0" prefWidth="221.0" />
+      <ComboBox id="choice-box" fx:id="screenPests" layoutX="140.0" layoutY="331.0" prefHeight="25.0" prefWidth="221.0" />
+      <ComboBox id="choice-box" fx:id="screenCropStatus" layoutX="140.0" layoutY="260.0" prefHeight="25.0" prefWidth="221.0" />
+      <ComboBox id="choice-box" fx:id="screenWaterSource" layoutX="407.0" layoutY="120.0" prefHeight="25.0" prefWidth="221.0" />
       <Label layoutX="673.0" layoutY="99.0" text="TEMPERATURE">
          <font>
             <Font size="10.0" />
@@ -108,7 +114,7 @@
             <Font size="10.0" />
          </font>
       </Label>
-      <Button fx:id="addEventButton" layoutX="769.0" layoutY="474.0" mnemonicParsing="false" onAction="#createEvent" prefHeight="25.0" prefWidth="86.0" text="ADD EVENT">
+      <Button id="medium-tone-button" fx:id="addEventButton" layoutX="769.0" layoutY="474.0" mnemonicParsing="false" onAction="#createEvent" prefHeight="25.0" prefWidth="86.0" text="ADD EVENT">
          <font>
             <Font size="11.0" />
          </font>
@@ -118,17 +124,11 @@
             <Font size="10.0" />
          </font>
       </Label>
-      <DatePicker fx:id="screenDate" layoutX="673.0" layoutY="29.0" prefHeight="25.0" prefWidth="221.0" />
-      <ComboBox fx:id="screenCrop" layoutX="140.0" layoutY="121.0" prefHeight="25.0" prefWidth="221.0" />
-      <TextField fx:id="screenCropAmount" layoutX="140.0" layoutY="196.0" onKeyTyped="#checkKey" prefHeight="25.0" prefWidth="221.0" />
-      <TextField fx:id="screenWaterAmount" layoutX="407.0" layoutY="196.0" onKeyTyped="#checkKey" prefHeight="25.0" prefWidth="221.0" />
-      <TextField fx:id="screenPrecipitation" layoutX="673.0" layoutY="196.0" onKeyTyped="#checkKey" prefHeight="25.0" prefWidth="221.0" />
-      <TextField fx:id="screenWaterpH" layoutX="407.0" layoutY="260.0" onKeyTyped="#checkKey" prefHeight="25.0" prefWidth="221.0" />
-      <TextField fx:id="screenHumidity" layoutX="673.0" layoutY="260.0" onKeyTyped="#checkKey" prefHeight="25.0" prefWidth="221.0" />
-      <TextField fx:id="screenTemperature" layoutX="673.0" layoutY="120.0" onKeyTyped="#checkKey" prefHeight="25.0" prefWidth="221.0" />
-      <Label layoutX="326.0" layoutY="201.0" text="plants" textFill="#a19a9a">
+      <DatePicker id="text-field" fx:id="screenDate" layoutX="673.0" layoutY="29.0" prefHeight="25.0" prefWidth="221.0" />
+      <ComboBox id="choice-box" fx:id="screenCrop" layoutX="140.0" layoutY="121.0" prefHeight="25.0" prefWidth="221.0" />
+      <Label layoutX="326.0" layoutY="203.0" text="plants" textFill="#a19a9a">
          <font>
-            <Font size="11.0" />
+            <Font name="Candara" size="11.0" />
          </font>
       </Label>
       <Label layoutX="608.0" layoutY="265.0" text="pH" textFill="#a19a9a">
@@ -136,7 +136,7 @@
             <Font size="11.0" />
          </font>
       </Label>
-      <Label layoutX="878.0" layoutY="265.0" text="\%" textFill="#a19a9a">
+      <Label layoutX="878.0" layoutY="265.0" text="\\%" textFill="#a19a9a">
          <font>
             <Font size="11.0" />
          </font>
@@ -151,5 +151,22 @@
             <Font size="11.0" />
          </font>
       </Label>
+      <Label layoutX="616.0" layoutY="201.0" text="L" textFill="#a19a9a">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
+      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="25.0" layoutX="140.0" layoutY="196.0" stroke="WHITE" strokeType="INSIDE" width="221.0" />
+      <TextField id="text-field" fx:id="screenCropAmount" layoutX="140.0" layoutY="196.0" onKeyTyped="#checkKey" prefHeight="25.0" prefWidth="221.0" />
+      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="25.0" layoutX="407.0" layoutY="196.0" stroke="WHITE" strokeType="INSIDE" width="221.0" />
+      <TextField id="text-field" fx:id="screenWaterAmount" layoutX="407.0" layoutY="196.0" onKeyTyped="#checkKey" prefHeight="25.0" prefWidth="221.0" />
+      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="25.0" layoutX="407.0" layoutY="260.0" stroke="WHITE" strokeType="INSIDE" width="221.0" />
+      <TextField id="text-field" fx:id="screenWaterpH" layoutX="407.0" layoutY="260.0" onKeyTyped="#checkKey" prefHeight="25.0" prefWidth="221.0" />
+      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="25.0" layoutX="673.0" layoutY="260.0" stroke="WHITE" strokeType="INSIDE" width="221.0" />
+      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="25.0" layoutX="673.0" layoutY="120.0" stroke="WHITE" strokeType="INSIDE" width="221.0" />
+      <TextField id="text-field" fx:id="screenTemperature" layoutX="673.0" layoutY="120.0" onKeyTyped="#checkKey" prefHeight="25.0" prefWidth="221.0" />
+      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="25.0" layoutX="673.0" layoutY="196.0" stroke="WHITE" strokeType="INSIDE" width="221.0" />
+      <TextField id="text-field" fx:id="screenHumidity" layoutX="673.0" layoutY="260.0" onKeyTyped="#checkKey" prefHeight="25.0" prefWidth="221.0" />
+      <TextField id="text-field" fx:id="screenPrecipitation" layoutX="673.0" layoutY="196.0" onKeyTyped="#checkKey" prefHeight="25.0" prefWidth="221.0" />
    </children>
 </AnchorPane>

@@ -13,6 +13,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 
 public class EventScreen extends GeneralScreen implements Initializable{
@@ -25,6 +27,8 @@ public class EventScreen extends GeneralScreen implements Initializable{
     private Button addEventButton;
     @FXML
     private DatePicker screenDate;
+    @FXML
+    private ImageView background;
 
     private double temperature, humidity, precipitation, waterAmount, waterpH;
     private int cropAmount;
@@ -37,6 +41,7 @@ public class EventScreen extends GeneralScreen implements Initializable{
     @Override
     public void initialize (URL location, ResourceBundle resources) {
         clearFields();
+        setBackground();
         screenWaterSource.getItems().setAll(items.getWaterSource());
         screenCrop.getItems().setAll(items.getCrops());
         screenCropStatus.getItems().setAll(items.getCropStatus());
@@ -157,5 +162,10 @@ public class EventScreen extends GeneralScreen implements Initializable{
             return false;
         }
         return true;
+    }
+
+    private void setBackground (){
+        Image image = new Image("file:src/main/java/Images/background.png");
+        background.setImage(image);
     }
 }

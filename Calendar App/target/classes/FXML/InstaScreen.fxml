@@ -6,30 +6,33 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="920.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Screens.InstaScreen">
    <children>
-      <Pane layoutX="14.0" layoutY="14.0" prefHeight="492.0" prefWidth="86.0">
+      <ImageView fx:id="background" fitHeight="520.0" fitWidth="920.0" pickOnBounds="true" preserveRatio="true" />
+      <Pane id="rounded-pane" layoutX="14.0" layoutY="14.0" prefHeight="492.0" prefWidth="86.0">
          <children>
-            <Button layoutX="8.0" layoutY="9.0" mnemonicParsing="false" onAction="#loadCalendarScreen" prefWidth="70.0" text="CALENDAR">
+            <Button id="medium-tone-button" layoutX="8.0" layoutY="9.0" mnemonicParsing="false" onAction="#loadCalendarScreen" prefWidth="70.0" text="CALENDAR">
                <font>
                   <Font size="10.0" />
                </font>
             </Button>
-            <Button layoutX="8.0" layoutY="47.0" mnemonicParsing="false" onAction="#loadPostsScreen" prefWidth="70.0" text="POSTS">
+            <Button id="medium-tone-button" layoutX="8.0" layoutY="47.0" mnemonicParsing="false" onAction="#loadPostsScreen" prefWidth="70.0" text="POSTS">
                <font>
                   <Font size="10.0" />
                </font>
             </Button>
-            <Button layoutX="8.0" layoutY="85.0" mnemonicParsing="false" onAction="#loadStatsScreen" prefWidth="70.0" text="STATS">
+            <Button id="medium-tone-button" layoutX="8.0" layoutY="85.0" mnemonicParsing="false" onAction="#loadStatsScreen" prefWidth="70.0" text="STATS">
                <font>
                   <Font size="10.0" />
                </font>
             </Button>
-            <Button layoutX="8.0" layoutY="459.0" mnemonicParsing="false" onAction="#loadLoginScreen" prefWidth="70.0" text="LOGOUT">
+            <Button id="medium-tone-button" layoutX="8.0" layoutY="459.0" mnemonicParsing="false" onAction="#loadLoginScreen" prefWidth="70.0" text="LOGOUT">
                <font>
                   <Font size="10.0" />
                </font></Button>
@@ -41,14 +44,14 @@
             <Font name="Arial Black" size="36.0" />
          </font>
       </Label>
-      <Button fx:id="addPostButton" layoutX="831.0" layoutY="481.0" mnemonicParsing="false" onAction="#addPost" text="ADD POST">
+      <Button id="medium-tone-button" fx:id="addPostButton" layoutX="831.0" layoutY="480.0" mnemonicParsing="false" onAction="#addPost" prefHeight="25.0" prefWidth="66.0" text="ADD POST">
          <font>
             <Font size="11.0" />
          </font>
       </Button>
-      <ScrollPane fx:id="scrollPane" layoutX="174.0" layoutY="102.0" prefHeight="418.0" prefWidth="368.0">
+      <ScrollPane id="scrollbar" fx:id="scrollPane" layoutX="180.0" layoutY="102.0" prefHeight="418.0" prefWidth="365.0">
         <content>
-          <AnchorPane fx:id="postPane" minHeight="0.0" minWidth="0.0" prefHeight="418.0" prefWidth="367.0" />
+          <AnchorPane id="anchor-pane" fx:id="postPane" minHeight="0.0" minWidth="0.0" prefHeight="423.0" prefWidth="350.0" />
         </content>
       </ScrollPane>
       <Separator layoutX="598.0" orientation="VERTICAL" prefHeight="520.0" prefWidth="6.0" />
@@ -57,24 +60,26 @@
             <Font name="Arial Black" size="36.0" />
          </font>
       </Label>
-      <TextField fx:id="screenMediaPath" layoutX="629.0" layoutY="116.0" prefHeight="25.0" prefWidth="227.0" />
-      <Button fx:id="openFileExplorerButton" layoutX="868.0" layoutY="116.0" mnemonicParsing="false" onAction="#openFileExplorer" text="+" />
-      <Label layoutX="629.0" layoutY="94.0" text="MEDIA">
+      <Button id="circular-button-dark" fx:id="openFileExplorerButton" layoutX="868.0" layoutY="124.0" mnemonicParsing="false" onAction="#openFileExplorer" text="+" />
+      <Label layoutX="629.0" layoutY="102.0" text="MEDIA">
          <font>
-            <Font size="10.0" />
+            <Font name="Candara Bold" size="11.0" />
          </font>
       </Label>
-      <Label layoutX="629.0" layoutY="212.0" text="DESCRIPTION">
+      <Label layoutX="629.0" layoutY="220.0" text="DESCRIPTION">
          <font>
-            <Font size="10.0" />
+            <Font name="Candara Bold" size="11.0" />
          </font>
       </Label>
-      <TextArea fx:id="screenDescription" layoutX="629.0" layoutY="236.0" prefHeight="200.0" prefWidth="264.0" />
-      <TextField fx:id="screenUsername" layoutX="629.0" layoutY="175.0" prefHeight="25.0" prefWidth="264.0" />
-      <Label layoutX="629.0" layoutY="153.0" text="USERNAME">
+      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="25.0" layoutX="629.0" layoutY="183.0" stroke="WHITE" strokeType="INSIDE" width="264.0" />
+      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="25.0" layoutX="629.0" layoutY="124.0" stroke="WHITE" strokeType="INSIDE" width="227.0" />
+      <TextField id="text-field" fx:id="screenUsername" layoutX="629.0" layoutY="183.0" prefHeight="25.0" prefWidth="264.0" />
+      <Label layoutX="629.0" layoutY="161.0" text="USERNAME">
          <font>
-            <Font size="10.0" />
+            <Font name="Candara Bold" size="11.0" />
          </font>
       </Label>
+      <TextField id="text-field" fx:id="screenMediaPath" layoutX="629.0" layoutY="124.0" prefHeight="25.0" prefWidth="227.0" />
+      <TextArea id="text-field" fx:id="screenDescription" layoutX="629.0" layoutY="244.0" prefHeight="200.0" prefWidth="264.0" />
    </children>
 </AnchorPane>

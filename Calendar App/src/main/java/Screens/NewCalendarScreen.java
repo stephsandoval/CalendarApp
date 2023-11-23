@@ -18,6 +18,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.geometry.Pos;
 
@@ -28,11 +30,13 @@ public class NewCalendarScreen extends GeneralScreen implements Initializable{
     @FXML
     private Button previousButton, nextButton;
     @FXML
-    private Label monthLabel, yearLabel;
+    private Label titleLabel;
     @FXML 
     private TableView<DayPreview> dayView;
     @FXML
     private TableColumn<DayPreview, String> aspectColumn, infoColumn;
+    @FXML
+    private ImageView background;
 
     private ArrayList<Button> calendarDays;
     private Month month;
@@ -45,14 +49,30 @@ public class NewCalendarScreen extends GeneralScreen implements Initializable{
         this.month = today.getMonth();
         this.year = today.getYear();
         setCalendar(month, year);
+        setBackground();
         aspectColumn.setCellValueFactory(new PropertyValueFactory<>("aspect"));
         infoColumn.setCellValueFactory(new PropertyValueFactory<>("info"));
     }
 
+    public void loadPreviousMonth (){
+        if (month == Month.JANUARY){
+            year--;
+        }
+        month = month.minus(1);
+        setCalendar(month, year);
+    }
+
+    public void loadNextMonth (){
+        if (month == Month.DECEMBER){
+            year++;
+        }
+        month = month.plus(1);
+        setCalendar(month, year);
+    }
+
     private void setCalendar (Month month, int year){
         controller.setMonthandYear(month, year);
-        monthLabel.setText(month.toString());
-        yearLabel.setText(Integer.toString(year));
+        titleLabel.setText(month.toString() + " " + Integer.toString(year));
         collectButtons();
         clearButtons();
         nameButtons();
@@ -89,12 +109,10 @@ public class NewCalendarScreen extends GeneralScreen implements Initializable{
             calendarDays.get(i).setOnAction(e -> {
                 populatePreview(date);
             });
-            // change style based on button's condition
             calendarDays.get(i).setAlignment(Pos.CENTER);
             currentDay++;
         }
     }
-    
 
     private void populatePreview (LocalDate day){
         ArrayList <DayPreview> dayPreview = controller.getDayPreview(day);
@@ -108,19 +126,8 @@ public class NewCalendarScreen extends GeneralScreen implements Initializable{
         dayView.setItems(tablePreview);
     }
 
-    public void loadPreviousMonth (){
-        if (month == Month.JANUARY){
-            year--;
-        }
-        month = month.minus(1);
-        setCalendar(month, year);
-    }
-
-    public void loadNextMonth (){
-        if (month == Month.DECEMBER){
-            year++;
-        }
-        month = month.plus(1);
-        setCalendar(month, year);
+    private void setBackground (){
+        Image image = new Image("file:src/main/java/Images/background.png");
+        background.setImage(image);
     }
 }

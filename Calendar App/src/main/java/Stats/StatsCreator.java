@@ -92,7 +92,7 @@ public class StatsCreator {
                 "            1: { axis: 'Precipitation' },\r\n" + //
                 "            2: { axis: 'Humidity'}\r\n" + //
                 "          },\r\n" + //
-                "          colors: ['#1b9e77', '#d95f02', '#7570b3']\r\n" + //
+                "          colors: ['#90ee90', '#20b2aa', '#66cdaa']\r\n" + //
                 "        };\r\n" + //
                 "        \r\n";
         return content;
@@ -122,7 +122,7 @@ public class StatsCreator {
                 "            0: { axis: 'Amount' },\r\n" + //
                 "            1: { axis: 'pH' },\r\n" + //
                 "          },\r\n" + //
-                "          colors: ['#1b9e77', '#d95f02']\r\n" + //
+                "          colors: ['#20b2aa', '#66cdaa']\r\n" + //
                 "        };\r\n" + //
                 "        \r\n";
         return content;

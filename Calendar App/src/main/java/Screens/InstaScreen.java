@@ -17,6 +17,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -37,6 +39,8 @@ public class InstaScreen extends GeneralScreen implements Initializable, Observe
     private AnchorPane postPane;
     @FXML
     private ScrollPane scrollPane;
+    @FXML
+    private ImageView background;
 
     private FileChooser fileChooser = new FileChooser();
     private InstaController controller = new InstaController();
@@ -50,6 +54,7 @@ public class InstaScreen extends GeneralScreen implements Initializable, Observe
     public void initialize(URL location, ResourceBundle resources) {
         controller.registerMe(this);
         setPosts();
+        setBackground();
         screenDescription.setWrapText(true);
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
         setKeyboardActions();
@@ -157,5 +162,10 @@ public class InstaScreen extends GeneralScreen implements Initializable, Observe
             return false;
         }
         return true;
+    }
+
+    private void setBackground (){
+        Image image = new Image("file:src/main/java/Images/background.png");
+        background.setImage(image);
     }
 }

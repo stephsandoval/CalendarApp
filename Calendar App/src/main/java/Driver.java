@@ -1,32 +1,45 @@
-import java.io.File;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
-import org.apache.tika.Tika;
+public class Driver extends Application {
 
-public class Driver {
-    public static void main (String [] args){
-        String videoPath = "src/main/java/Videos/seedlings.mp4";
-        String potatoPath = "src/main/java/Images/potato.jpg";
-        String tempPath = "https://images.ctfassets.net/7u4zyhwnzl64/6jNFjWiOT3l0fhfeHR80EJ/5502dab671e0aa2a5acac566ff3e6f7c/potato.jpg";
+    @Override
+    public void start(Stage primaryStage) {
+        // Create a button
+        //Button button = new Button("Click me");
 
-        Tika tika = new Tika();
+        // Create an image view with an icon (replace "path/to/icon.png" with your actual icon path)
+        Image icon = new Image("file:src/main/java/Images/successIcon.png");
+        ImageView iconView = new ImageView(icon);
+        iconView.setFitWidth(16); // Adjust the size as needed
+        iconView.setFitHeight(16);
 
-        String mimeType = tika.detect(videoPath);
-        System.out.println(mimeType);
-        mimeType = tika.detect(potatoPath);
-        System.out.println(mimeType);
-        mimeType = tika.detect(tempPath);
-        System.out.println(mimeType.split("/")[0]);
+        // Create a label with text and an icon
+        Label labeledButton = new Label("Click me too", iconView);
 
-        File file = new File(potatoPath);
-        String fileName = file.getName();
-        System.out.println(fileName.split(".")[0]);
+        // Set actions for the buttons (you can replace these with your actual actions)
+        //button.setOnAction(e -> System.out.println("Button Clicked!"));
+        labeledButton.setOnMouseClicked(e -> System.out.println("Labeled Button Clicked!"));
 
-        LocalDate today = LocalDate.now();
-        DayOfWeek dayWeek = today.getDayOfWeek();
-        System.out.println(dayWeek.getValue());
-        LocalDate start = today.minusDays(dayWeek.getValue());
-        System.out.println(start);
+        // Create a layout and add the buttons
+        VBox root = new VBox(10);
+        root.getChildren().addAll(labeledButton);
+
+        // Create a scene and set it on the stage
+        Scene scene = new Scene(root, 300, 200);
+        primaryStage.setScene(scene);
+
+        // Set the stage title and show it
+        primaryStage.setTitle("JavaFX Icon Button Example");
+        primaryStage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
     }
 }

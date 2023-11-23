@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -12,61 +13,57 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="920.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Screens.NewCalendarScreen">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="920.0" style="-fx-background-color: whitesmoke;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Screens.NewCalendarScreen">
    <children>
-      <Pane layoutX="14.0" layoutY="14.0" prefHeight="492.0" prefWidth="86.0">
+      <ImageView fx:id="background" fitHeight="520.0" fitWidth="920.0" pickOnBounds="true" preserveRatio="true" />
+      <Pane id="rounded-pane" layoutX="14.0" layoutY="14.0" prefHeight="492.0" prefWidth="86.0">
          <children>
-            <Button layoutX="8.0" layoutY="9.0" mnemonicParsing="false" onAction="#loadCalendarScreen" prefWidth="70.0" text="CALENDAR">
+            <Button id="medium-tone-button" layoutX="8.0" layoutY="9.0" mnemonicParsing="false" onAction="#loadCalendarScreen" prefWidth="70.0" text="CALENDAR">
                <font>
                   <Font size="10.0" />
                </font>
             </Button>
-            <Button layoutX="8.0" layoutY="47.0" mnemonicParsing="false" onAction="#loadPostsScreen" prefWidth="70.0" text="POSTS">
+            <Button id="medium-tone-button" layoutX="8.0" layoutY="47.0" mnemonicParsing="false" onAction="#loadPostsScreen" prefWidth="70.0" text="POSTS">
                <font>
                   <Font size="10.0" />
                </font>
             </Button>
-            <Button layoutX="8.0" layoutY="85.0" mnemonicParsing="false" onAction="#loadStatsScreen" prefWidth="70.0" text="STATS">
+            <Button id="medium-tone-button" layoutX="8.0" layoutY="85.0" mnemonicParsing="false" onAction="#loadStatsScreen" prefWidth="70.0" text="STATS">
                <font>
                   <Font size="10.0" />
                </font>
             </Button>
-            <Button layoutX="8.0" layoutY="459.0" mnemonicParsing="false" onAction="#loadLoginScreen" prefWidth="70.0" text="LOGOUT">
+            <Button id="medium-tone-button" layoutX="8.0" layoutY="459.0" mnemonicParsing="false" onAction="#loadLoginScreen" prefWidth="70.0" text="LOGOUT">
                <font>
                   <Font size="10.0" />
                </font>
             </Button>
          </children>
       </Pane>
-      <Pane layoutX="643.0" prefHeight="520.0" prefWidth="283.0">
+      <Pane layoutX="638.0" prefHeight="520.0" prefWidth="283.0">
          <children>
-            <Button layoutX="235.0" layoutY="481.0" mnemonicParsing="false" onAction="#loadEventsScreen" text="+" />
+            <Button id="circular-button-green" layoutX="232.0" layoutY="474.0" mnemonicParsing="false" onAction="#loadEventsScreen" text="+" />
             <Label layoutX="89.0" layoutY="32.0" text="DAY VIEW">
                <font>
                   <Font name="Arial Black" size="18.0" />
                </font>
             </Label>
-            <TableView fx:id="dayView" layoutX="11.0" layoutY="67.0" prefHeight="401.0" prefWidth="249.0">
+            <TableView id="day-view" fx:id="dayView" layoutX="11.0" layoutY="67.0" prefHeight="367.0" prefWidth="249.0">
               <columns>
                 <TableColumn fx:id="aspectColumn" editable="false" prefWidth="94.0" resizable="false" sortable="false" text="ASPECT" />
-                <TableColumn fx:id="infoColumn" editable="false" prefWidth="161.0" resizable="false" sortable="false" text="INFO" />
+                <TableColumn fx:id="infoColumn" editable="false" prefWidth="149.0" resizable="false" sortable="false" text="INFO" />
               </columns>
             </TableView>
          </children>
       </Pane>
       <Separator layoutX="113.0" orientation="VERTICAL" prefHeight="520.0" />
-      <Label fx:id="monthLabel" alignment="CENTER" layoutX="188.0" layoutY="20.0" prefHeight="54.0" prefWidth="256.0" text="SEPTEMBER">
+      <Label fx:id="titleLabel" alignment="CENTER" layoutX="188.0" layoutY="20.0" prefHeight="54.0" prefWidth="372.0" text="SEPTEMBER 2023">
          <font>
             <Font name="Arial Black" size="36.0" />
          </font>
       </Label>
-      <Label fx:id="yearLabel" alignment="CENTER" layoutX="444.0" layoutY="20.0" prefHeight="54.0" prefWidth="112.0" text="2023">
-         <font>
-            <Font name="Arial Black" size="36.0" />
-         </font>
-      </Label>
-      <Button fx:id="nextButton" layoutX="576.0" layoutY="33.0" mnemonicParsing="false" onAction="#loadNextMonth" text="&gt;" />
-      <Button fx:id="previousButton" layoutX="145.0" layoutY="33.0" mnemonicParsing="false" onAction="#loadPreviousMonth" text="&lt;" />
+      <Button id="circular-button-green" fx:id="nextButton" layoutX="576.0" layoutY="33.0" mnemonicParsing="false" onAction="#loadNextMonth" text="&gt;" />
+      <Button id="circular-button-green" fx:id="previousButton" layoutX="145.0" layoutY="33.0" mnemonicParsing="false" onAction="#loadPreviousMonth" text="&lt;" />
       <GridPane fx:id="calendarGrid" alignment="CENTER" hgap="5.0" layoutX="144.0" layoutY="132.0" prefHeight="299.0" prefWidth="458.0" vgap="5.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -86,51 +83,51 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" />
-            <Button alignment="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="1" />
-            <Button alignment="CENTER" layoutX="76.0" layoutY="10.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="2" />
-            <Button alignment="CENTER" layoutX="142.0" layoutY="10.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="3" />
-            <Button alignment="CENTER" layoutX="208.0" layoutY="10.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="4" />
-            <Button alignment="CENTER" layoutX="274.0" layoutY="10.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="5" />
-            <Button alignment="CENTER" layoutX="340.0" layoutY="10.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="6" />
-            <Button alignment="CENTER" layoutX="406.0" layoutY="10.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.rowIndex="1" />
-            <Button alignment="CENTER" layoutX="10.0" layoutY="61.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Button alignment="CENTER" layoutX="76.0" layoutY="61.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Button alignment="CENTER" layoutX="142.0" layoutY="61.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <Button alignment="CENTER" layoutX="208.0" layoutY="61.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-            <Button alignment="CENTER" layoutX="274.0" layoutY="61.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-            <Button alignment="CENTER" layoutX="340.0" layoutY="61.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="6" GridPane.rowIndex="1" />
-            <Button alignment="CENTER" layoutX="406.0" layoutY="61.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.rowIndex="2" />
-            <Button alignment="CENTER" layoutX="10.0" layoutY="112.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button alignment="CENTER" layoutX="76.0" layoutY="112.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <Button alignment="CENTER" layoutX="142.0" layoutY="112.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-            <Button alignment="CENTER" layoutX="208.0" layoutY="112.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-            <Button alignment="CENTER" layoutX="274.0" layoutY="112.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="5" GridPane.rowIndex="2" />
-            <Button alignment="CENTER" layoutX="340.0" layoutY="112.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="6" GridPane.rowIndex="2" />
-            <Button alignment="CENTER" layoutX="406.0" layoutY="112.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.rowIndex="3" />
-            <Button alignment="CENTER" layoutX="10.0" layoutY="163.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Button alignment="CENTER" layoutX="76.0" layoutY="163.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-            <Button alignment="CENTER" layoutX="142.0" layoutY="163.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-            <Button alignment="CENTER" layoutX="208.0" layoutY="163.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-            <Button alignment="CENTER" layoutX="274.0" layoutY="163.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="5" GridPane.rowIndex="3" />
-            <Button alignment="CENTER" layoutX="340.0" layoutY="163.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="6" GridPane.rowIndex="3" />
-            <Button alignment="CENTER" layoutX="406.0" layoutY="163.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.rowIndex="4" />
-            <Button alignment="CENTER" layoutX="10.0" layoutY="214.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Button alignment="CENTER" layoutX="76.0" layoutY="214.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-            <Button alignment="CENTER" layoutX="142.0" layoutY="214.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-            <Button alignment="CENTER" layoutX="208.0" layoutY="214.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="4" GridPane.rowIndex="4" />
-            <Button alignment="CENTER" layoutX="274.0" layoutY="214.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="5" GridPane.rowIndex="4" />
-            <Button alignment="CENTER" layoutX="340.0" layoutY="214.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="6" GridPane.rowIndex="4" />
-            <Button alignment="CENTER" layoutX="406.0" layoutY="214.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.rowIndex="5" />
-            <Button alignment="CENTER" layoutX="10.0" layoutY="264.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <Button alignment="CENTER" layoutX="76.0" layoutY="264.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-            <Button alignment="CENTER" layoutX="142.0" layoutY="264.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-            <Button alignment="CENTER" layoutX="208.0" layoutY="264.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="4" GridPane.rowIndex="5" />
-            <Button alignment="CENTER" layoutX="274.0" layoutY="264.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="5" GridPane.rowIndex="5" />
-            <Button alignment="CENTER" layoutX="340.0" layoutY="264.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="6" GridPane.rowIndex="5" />
+            <Button id="calendar-button" alignment="CENTER" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" />
+            <Button id="calendar-button" alignment="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="1" />
+            <Button id="calendar-button" alignment="CENTER" layoutX="76.0" layoutY="10.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="2" />
+            <Button id="calendar-button" alignment="CENTER" layoutX="142.0" layoutY="10.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="3" />
+            <Button id="calendar-button" alignment="CENTER" layoutX="208.0" layoutY="10.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="4" />
+            <Button id="calendar-button" alignment="CENTER" layoutX="274.0" layoutY="10.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="5" />
+            <Button id="calendar-button" alignment="CENTER" layoutX="340.0" layoutY="10.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="6" />
+            <Button id="calendar-button" alignment="CENTER" layoutX="406.0" layoutY="10.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.rowIndex="1" />
+            <Button id="calendar-button" alignment="CENTER" layoutX="10.0" layoutY="61.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button id="calendar-button" alignment="CENTER" layoutX="76.0" layoutY="61.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Button id="calendar-button" alignment="CENTER" layoutX="142.0" layoutY="61.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <Button id="calendar-button" alignment="CENTER" layoutX="208.0" layoutY="61.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+            <Button id="calendar-button" alignment="CENTER" layoutX="274.0" layoutY="61.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+            <Button id="calendar-button" alignment="CENTER" layoutX="340.0" layoutY="61.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+            <Button id="calendar-button" alignment="CENTER" layoutX="406.0" layoutY="61.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.rowIndex="2" />
+            <Button id="calendar-button" alignment="CENTER" layoutX="10.0" layoutY="112.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button id="calendar-button" alignment="CENTER" layoutX="76.0" layoutY="112.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Button id="calendar-button" alignment="CENTER" layoutX="142.0" layoutY="112.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <Button id="calendar-button" alignment="CENTER" layoutX="208.0" layoutY="112.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+            <Button id="calendar-button" alignment="CENTER" layoutX="274.0" layoutY="112.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+            <Button id="calendar-button" alignment="CENTER" layoutX="340.0" layoutY="112.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+            <Button id="calendar-button" alignment="CENTER" layoutX="406.0" layoutY="112.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.rowIndex="3" />
+            <Button id="calendar-button" alignment="CENTER" layoutX="10.0" layoutY="163.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Button id="calendar-button" alignment="CENTER" layoutX="76.0" layoutY="163.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <Button id="calendar-button" alignment="CENTER" layoutX="142.0" layoutY="163.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+            <Button id="calendar-button" alignment="CENTER" layoutX="208.0" layoutY="163.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+            <Button id="calendar-button" alignment="CENTER" layoutX="274.0" layoutY="163.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="5" GridPane.rowIndex="3" />
+            <Button id="calendar-button" alignment="CENTER" layoutX="340.0" layoutY="163.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="6" GridPane.rowIndex="3" />
+            <Button id="calendar-button" alignment="CENTER" layoutX="406.0" layoutY="163.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.rowIndex="4" />
+            <Button id="calendar-button" alignment="CENTER" layoutX="10.0" layoutY="214.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Button id="calendar-button" alignment="CENTER" layoutX="76.0" layoutY="214.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <Button id="calendar-button" alignment="CENTER" layoutX="142.0" layoutY="214.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+            <Button id="calendar-button" alignment="CENTER" layoutX="208.0" layoutY="214.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+            <Button id="calendar-button" alignment="CENTER" layoutX="274.0" layoutY="214.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="5" GridPane.rowIndex="4" />
+            <Button id="calendar-button" alignment="CENTER" layoutX="340.0" layoutY="214.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="6" GridPane.rowIndex="4" />
+            <Button id="calendar-button" alignment="CENTER" layoutX="406.0" layoutY="214.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.rowIndex="5" />
+            <Button id="calendar-button" alignment="CENTER" layoutX="10.0" layoutY="264.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Button id="calendar-button" alignment="CENTER" layoutX="76.0" layoutY="264.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            <Button id="calendar-button" alignment="CENTER" layoutX="142.0" layoutY="264.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+            <Button id="calendar-button" alignment="CENTER" layoutX="208.0" layoutY="264.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+            <Button id="calendar-button" alignment="CENTER" layoutX="274.0" layoutY="264.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="5" GridPane.rowIndex="5" />
+            <Button id="calendar-button" alignment="CENTER" layoutX="340.0" layoutY="264.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="65.0" GridPane.columnIndex="6" GridPane.rowIndex="5" />
          </children>
       </GridPane>
-      <GridPane alignment="CENTER" hgap="5.0" layoutX="144.0" layoutY="90.0" prefHeight="21.0" prefWidth="458.0">
+      <GridPane id="rounded-pane-green" alignment="CENTER" hgap="5.0" layoutX="144.0" layoutY="88.0" prefHeight="30.0" prefWidth="458.0">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -145,13 +142,13 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label alignment="CENTER" prefHeight="17.0" prefWidth="72.0" text="Sat" GridPane.columnIndex="6" GridPane.rowIndex="1" />
-            <Label alignment="CENTER" layoutX="10.0" layoutY="9.0" prefHeight="17.0" prefWidth="72.0" text="Fri" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-            <Label alignment="CENTER" layoutX="10.0" layoutY="9.0" prefHeight="17.0" prefWidth="72.0" text="Thu" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-            <Label alignment="CENTER" layoutX="10.0" layoutY="9.0" prefHeight="17.0" prefWidth="72.0" text="Wed" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <Label alignment="CENTER" layoutX="10.0" layoutY="9.0" prefHeight="17.0" prefWidth="72.0" text="Tue" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Label alignment="CENTER" layoutX="10.0" layoutY="9.0" prefHeight="17.0" prefWidth="72.0" text="Mon" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label alignment="CENTER" layoutX="10.0" layoutY="9.0" prefHeight="17.0" prefWidth="72.0" text="Sun" GridPane.rowIndex="1" />
+            <Label id="sea-green-label" alignment="CENTER" prefHeight="17.0" prefWidth="72.0" text="SAT" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+            <Label id="sea-green-label" alignment="CENTER" layoutX="10.0" layoutY="9.0" prefHeight="17.0" prefWidth="72.0" text="FRI" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+            <Label id="sea-green-label" alignment="CENTER" layoutX="10.0" layoutY="9.0" prefHeight="17.0" prefWidth="72.0" text="THU" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+            <Label id="sea-green-label" alignment="CENTER" layoutX="10.0" layoutY="9.0" prefHeight="17.0" prefWidth="72.0" text="WED" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <Label id="sea-green-label" alignment="CENTER" layoutX="10.0" layoutY="9.0" prefHeight="17.0" prefWidth="72.0" text="TUE" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Label id="sea-green-label" alignment="CENTER" layoutX="10.0" layoutY="9.0" prefHeight="17.0" prefWidth="72.0" text="MON" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label id="sea-green-label" alignment="CENTER" layoutX="10.0" layoutY="9.0" prefHeight="17.0" prefWidth="72.0" text="SUN" GridPane.rowIndex="1" />
          </children>
       </GridPane>
       <Separator layoutX="632.0" orientation="VERTICAL" prefHeight="520.0" prefWidth="0.0" />

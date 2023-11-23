@@ -1,6 +1,6 @@
 {
     "water source" : ["groundwater", "surface water", "rainwater harvesting", "municipal water", "treated wastewater"],
-    "crops" : ["coffee", "potato", "carrot", "cassava", "strawberry", "apple", "peache", "plum", "sugarcane"],
+    "crops" : ["coffee", "potato", "carrot", "cassava", "strawberry", "apple", "peach", "plum", "sugarcane"],
     "crop status" : ["germination", "sprouting", "seedling", "growth", "flowering", "pollination", "fruiting", "ripening", "harvesting", "post-harvest"],
     "pests" : ["insects", "rodents", "nematodes", "weeds", "fungi", "bacteria", "viruses"],
     "aspects" : ["weather", "water"]

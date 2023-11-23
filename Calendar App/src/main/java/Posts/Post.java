@@ -40,11 +40,12 @@ public class Post extends Pane{
 
     private void setPane (){
         this.setPrefWidth(355);
-        this.setPrefWidth(332);
+        this.setPrefHeight(332);
         this.getChildren().add(username);
         this.getChildren().add(date);
         this.getChildren().add(description);
         this.getChildren().add(media);
+        this.setStyle("-fx-background-color : transparent;");
     }
 
     private void setUsernameLabel (String username){
@@ -52,6 +53,7 @@ public class Post extends Pane{
         this.username.setAlignment(Pos.CENTER_LEFT);
         this.username.setLayoutX(14);
         this.username.setLayoutY(14);
+        this.username.setStyle("-fx-font-family : \"Candara\"; -fx-font-weight : bold");
     }
 
     private void setDateLabel (LocalDate date){
@@ -59,16 +61,18 @@ public class Post extends Pane{
         this.date.setAlignment(Pos.CENTER_RIGHT);
         this.date.setLayoutX(275);
         this.date.setLayoutY(14);
+        this.date.setStyle("-fx-font-family : \"Candara\"; -fx-font-weight : bold");
     }
 
     private void setDescriptionArea (String description){
         setDescription(description);
         this.description.setWrapText(true);
         this.description.setEditable(false);
-        this.description.setPrefWidth(326);
+        this.description.setPrefWidth(328);
         this.description.setPrefHeight(85);
         this.description.setLayoutX(14);
         this.description.setLayoutY(232);
+        this.description.setStyle("-fx-background-color : transparent; -fx-text-fill : rgb(61, 61, 61); -fx-font-family : \"Candara\"; -fx-font-size : 12;");
     }
 
     public LocalDate getDate (){
