@@ -75,9 +75,9 @@ public class StatsCreator {
                 WeatherRecord weather = calendar.getDay(weekDay).getWeatherRecord();
                 if (weather != null){
                     content += "          ['" + weekDay.getDayOfWeek().toString() + "', " + weather.getTemperature() + ", " + weather.getPrecipitation() + ", " + weather.getHumidity() + "],\r\n";
-                } else {
-                    content += "          ['" + weekDay.getDayOfWeek().toString() + "', " + 0 + ", " + 0 + ", " + 0 + "],\r\n";
                 }
+            } else {
+                content += "          ['" + weekDay.getDayOfWeek().toString() + "', " + 0 + ", " + 0 + ", " + 0 + "],\r\n";
             }
         }
         content += "        ]);\r\n" + //
@@ -106,9 +106,9 @@ public class StatsCreator {
                 WaterRecord waterRecord = calendar.getDay(weekDay).getWaterRecord();
                 if (waterRecord.hasInformation()){
                     content += "          ['" + weekDay.getDayOfWeek().toString() + "', " + waterRecord.getWaterAmount() + ", " + waterRecord.getWaterpH() + "],\r\n";
-                } else {
-                    content += "          ['" + weekDay.getDayOfWeek().toString() + "', " + 0 + ", " + 0 + "],\r\n";
                 }
+            } else {
+                content += "          ['" + weekDay.getDayOfWeek().toString() + "', " + 0 + ", " + 0 + "],\r\n";
             }
         }
         content += "        ]);\r\n" + //
