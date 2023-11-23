@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="920.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Screens.InstaScreen">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="920.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Screens.InstaScreen">
    <children>
       <ImageView fx:id="background" fitHeight="520.0" fitWidth="920.0" pickOnBounds="true" preserveRatio="true" />
       <Pane id="rounded-pane" layoutX="14.0" layoutY="14.0" prefHeight="492.0" prefWidth="86.0">
@@ -49,10 +49,10 @@
             <Font size="11.0" />
          </font>
       </Button>
-      <ScrollPane id="scrollbar" fx:id="scrollPane" layoutX="180.0" layoutY="102.0" prefHeight="418.0" prefWidth="365.0">
-        <content>
-          <AnchorPane id="anchor-pane" fx:id="postPane" minHeight="0.0" minWidth="0.0" prefHeight="423.0" prefWidth="350.0" />
-        </content>
+      <ScrollPane id="scrollbar" fx:id="scrollPane" layoutX="180.0" layoutY="102.0" prefHeight="418.0" prefWidth="367.0">
+         <content>
+            <Pane id="post-pane" fx:id="postPane" prefHeight="423.0" prefWidth="350.0" />
+         </content>
       </ScrollPane>
       <Separator layoutX="598.0" orientation="VERTICAL" prefHeight="520.0" prefWidth="6.0" />
       <Label alignment="CENTER" layoutX="629.0" layoutY="24.0" prefHeight="54.0" prefWidth="264.0" text="NEW POST" textAlignment="CENTER">

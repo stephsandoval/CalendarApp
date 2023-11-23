@@ -20,15 +20,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class InstaScreen extends GeneralScreen implements Initializable, Observer {
-    
-    @FXML
-    private AnchorPane rootPane;
+
     @FXML
     private TextField screenMediaPath, screenUsername;
     @FXML
@@ -36,7 +33,7 @@ public class InstaScreen extends GeneralScreen implements Initializable, Observe
     @FXML
     private Button openFileExplorerButton, addPostButton;
     @FXML
-    private AnchorPane postPane;
+    private Pane postPane;
     @FXML
     private ScrollPane scrollPane;
     @FXML

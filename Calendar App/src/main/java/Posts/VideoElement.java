@@ -35,20 +35,28 @@ public class VideoElement implements VisualElement{
         mediaView.setFitHeight(189);
         mediaView.setLayoutX(14);
         mediaView.setLayoutY(35);
-        mediaView.setOnMousePressed(e -> {
+        mediaView.setOnMousePressed(event -> {
             setVideoActions();
+        });
+        mediaView.setOnMouseEntered(event -> {
+            startPlaying();
         });
         return (Node) mediaView;
     }
 
     private void setVideoActions (){
-        if (mediaPlayer.getStatus().equals(Status.READY)){
-            mediaPlayer.play();
-        } 
+        startPlaying();
         if (mediaPlayer.getStatus().equals(Status.PLAYING)){
             mediaPlayer.pause();
         }
         if (mediaPlayer.getStatus().equals(Status.PAUSED)){
+            mediaPlayer.play();
+        }
+        
+    }
+
+    private void startPlaying (){
+        if (mediaPlayer.getStatus().equals(Status.READY)){
             mediaPlayer.play();
         }
         if (mediaPlayer.getCurrentTime().equals(mediaPlayer.getTotalDuration())){
