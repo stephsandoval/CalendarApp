@@ -74,11 +74,11 @@ public class StatsCreator {
             if (calendar.getDay(weekDay) != null){
                 WeatherRecord weather = calendar.getDay(weekDay).getWeatherRecord();
                 if (weather != null){
-                    content += "          ['" + weekDay.getDayOfWeek().toString() + "', " + weather.getTemperature() + ", " + weather.getPrecipitation() + ", " + weather.getHumidity() + "],\r\n";
+                    content += "          ['" + weekDay.getDayOfWeek().toString() + " " + weekDay.getDayOfMonth() + "', " + weather.getTemperature() + ", " + weather.getPrecipitation() + ", " + weather.getHumidity() + "],\r\n";
                     continue;
                 }
             }
-            content += "          ['" + weekDay.getDayOfWeek().toString() + "', " + 0 + ", " + 0 + ", " + 0 + "],\r\n";
+            content += "          ['" + weekDay.getDayOfWeek().toString() + " " +  weekDay.getDayOfMonth() + "', " + 0 + ", " + 0 + ", " + 0 + "],\r\n";
         }
         content += "        ]);\r\n" + //
                 "\r\n" + //
@@ -105,11 +105,11 @@ public class StatsCreator {
             if (calendar.getDay(weekDay) != null){
                 WaterRecord waterRecord = calendar.getDay(weekDay).getWaterRecord();
                 if (waterRecord.hasInformation()){
-                    content += "          ['" + weekDay.getDayOfWeek().toString() + "', " + waterRecord.getWaterAmount() + ", " + waterRecord.getWaterpH() + "],\r\n";
+                    content += "          ['" + weekDay.getDayOfWeek().toString() + " " + weekDay.getDayOfMonth() + "', " + waterRecord.getWaterAmount() + ", " + waterRecord.getWaterpH() + "],\r\n";
                     continue;
                 }
             }
-            content += "          ['" + weekDay.getDayOfWeek().toString() + "', " + 0 + ", " + 0 + "],\r\n";
+            content += "          ['" + weekDay.getDayOfWeek().toString() + " " + weekDay.getDayOfMonth() + "', " + 0 + ", " + 0 + "],\r\n";
         }
         content += "        ]);\r\n" + //
                 "\r\n" + //

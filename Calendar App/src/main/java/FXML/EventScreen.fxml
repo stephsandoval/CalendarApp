@@ -126,36 +126,6 @@
       </Label>
       <DatePicker id="text-field" fx:id="screenDate" layoutX="673.0" layoutY="29.0" prefHeight="25.0" prefWidth="221.0" />
       <ComboBox id="choice-box" fx:id="screenCrop" layoutX="140.0" layoutY="121.0" prefHeight="25.0" prefWidth="221.0" />
-      <Label layoutX="326.0" layoutY="203.0" text="plants" textFill="#a19a9a">
-         <font>
-            <Font name="Candara" size="11.0" />
-         </font>
-      </Label>
-      <Label layoutX="608.0" layoutY="265.0" text="pH" textFill="#a19a9a">
-         <font>
-            <Font size="11.0" />
-         </font>
-      </Label>
-      <Label layoutX="878.0" layoutY="265.0" text="\\%" textFill="#a19a9a">
-         <font>
-            <Font size="11.0" />
-         </font>
-      </Label>
-      <Label layoutX="878.0" layoutY="201.0" text="\%" textFill="#a19a9a">
-         <font>
-            <Font size="11.0" />
-         </font>
-      </Label>
-      <Label layoutX="876.0" layoutY="125.0" text="°C" textFill="#a19a9a">
-         <font>
-            <Font size="11.0" />
-         </font>
-      </Label>
-      <Label layoutX="616.0" layoutY="201.0" text="L" textFill="#a19a9a">
-         <font>
-            <Font size="11.0" />
-         </font>
-      </Label>
       <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="25.0" layoutX="140.0" layoutY="196.0" stroke="WHITE" strokeType="INSIDE" width="221.0" />
       <TextField id="text-field" fx:id="screenCropAmount" layoutX="140.0" layoutY="196.0" onKeyTyped="#checkKey" prefHeight="25.0" prefWidth="221.0" />
       <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="25.0" layoutX="407.0" layoutY="196.0" stroke="WHITE" strokeType="INSIDE" width="221.0" />
@@ -168,5 +138,35 @@
       <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="25.0" layoutX="673.0" layoutY="196.0" stroke="WHITE" strokeType="INSIDE" width="221.0" />
       <TextField id="text-field" fx:id="screenHumidity" layoutX="673.0" layoutY="260.0" onKeyTyped="#checkKey" prefHeight="25.0" prefWidth="221.0" />
       <TextField id="text-field" fx:id="screenPrecipitation" layoutX="673.0" layoutY="196.0" onKeyTyped="#checkKey" prefHeight="25.0" prefWidth="221.0" />
+      <Label layoutX="615.0" layoutY="201.0" text="L" textFill="#a19a9a">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
+      <Label layoutX="875.0" layoutY="125.0" text="°C" textFill="#a19a9a">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
+      <Label layoutX="877.0" layoutY="201.0" text="\%" textFill="#a19a9a">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
+      <Label layoutX="877.0" layoutY="265.0" text="\%" textFill="#a19a9a">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
+      <Label layoutX="607.0" layoutY="265.0" text="pH" textFill="#a19a9a">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
+      <Label layoutX="325.0" layoutY="203.0" text="plants" textFill="#a19a9a">
+         <font>
+            <Font name="Candara" size="11.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

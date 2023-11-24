@@ -85,7 +85,7 @@ public class DayPreviewCreator {
             dayPreview.add(new DayPreview("crop type", type));
         }
         if (!amount.equals("0")){
-            dayPreview.add(new DayPreview("crop amount", amount));
+            dayPreview.add(new DayPreview("crop amount", amount + " plants"));
         }
         if (!status.equals("")){
             dayPreview.add(new DayPreview("crop status", status));
