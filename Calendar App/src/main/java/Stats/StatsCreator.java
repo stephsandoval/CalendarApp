@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import Calendar.Calendar;
+import Records.CropRecord;
 import Records.WaterRecord;
 import Records.WeatherRecord;
 
@@ -24,14 +25,8 @@ public class StatsCreator {
         this.week = new ArrayList<>();
     }
 
-    public void createStats (ArrayList<LocalDate> week, String aspect){
+    public void setWeek (ArrayList<LocalDate> week){
         this.week = week;
-        if (aspect.equals("weather")){
-            createWeatherStats();
-        }
-        if (aspect.equals("water")){
-            createWaterStats();
-        }
     }
 
     private String getContents (File file){
@@ -47,27 +42,37 @@ public class StatsCreator {
         return contents;
     }
 
-    private void createWeatherStats (){
+    public void createWeatherStats (){
         File htmlFile = new File("src/main/java/HMTL/weather.html");
         try {
             htmlFile.createNewFile();
             BufferedWriter writer = new BufferedWriter(new FileWriter(htmlFile));
-            writer.write(header + getWeatherStats() + footer);
+            writer.write(header + setWeatherStats() + footer);
             writer.close();
         } catch (Exception exception){}
     }
 
-    private void createWaterStats (){
+    public void createWaterStats (){
         File htmlFile = new File("src/main/java/HMTL/water.html");
         try {
             htmlFile.createNewFile();
             BufferedWriter writer = new BufferedWriter(new FileWriter(htmlFile));
-            writer.write(header + getWaterStats() + footer);
+            writer.write(header + setWaterStats() + footer);
             writer.close();
         } catch (Exception exception){}
     }
 
-    private String getWeatherStats (){
+    public void createCropStats (LocalDate date){
+        File htmlFile = new File("src/main/java/HMTL/crop.html");
+        try {
+            htmlFile.createNewFile();
+            BufferedWriter writer = new BufferedWriter(new FileWriter(htmlFile));
+            writer.write(header + setCropStats(date) + footer);
+            writer.close();
+        } catch (Exception exception){}
+    }
+
+    private String setWeatherStats (){
         String content = "        var data = google.visualization.arrayToDataTable([\r\n" + //
                 "          ['Day', 'Temperature', 'Precipitation', 'Humidity'],\r\n";
         for (LocalDate weekDay : week){
@@ -98,7 +103,7 @@ public class StatsCreator {
         return content;
     }
 
-    private String getWaterStats (){
+    private String setWaterStats (){
         String content = "        var data = google.visualization.arrayToDataTable([\r\n" + //
                 "          ['Day', 'Amount', 'pH'],\r\n";
         for (LocalDate weekDay : week){
@@ -123,6 +128,36 @@ public class StatsCreator {
                 "            1: { axis: 'pH' },\r\n" + //
                 "          },\r\n" + //
                 "          colors: ['#20b2aa', '#66cdaa']\r\n" + //
+                "        };\r\n" + //
+                "        \r\n";
+        return content;
+    }
+
+    private String setCropStats (LocalDate date){
+        String content = "        var data = google.visualization.arrayToDataTable([\r\n" + //
+                "          ['Day', 'Amount'],\r\n";
+        String crop = calendar.getDay(date).getCropRecord().getCrop();
+        for (LocalDate weekDay : week){
+            if (calendar.getDay(weekDay) != null){
+                CropRecord cropRecord = calendar.getDay(weekDay).getCropRecord();
+                if (cropRecord.hasInformation() && crop != null && calendar.getDay(weekDay).getCropRecord().getCrop().equals(crop)){
+                    content += "          ['" + weekDay.getDayOfWeek().toString() + " " + weekDay.getDayOfMonth() + "', " + cropRecord.getAmount() + "],\r\n";
+                    continue;
+                }
+            }
+            content += "          ['" + weekDay.getDayOfWeek().toString() + " " + weekDay.getDayOfMonth() + "', " + 0 + "],\r\n";
+        }
+        content += "        ]);\r\n" + //
+                "\r\n" + //
+                "        var materialOptions = {\r\n" + //
+                "          width: 930,\r\n" + //
+                "          chart: {\r\n" + //
+                "            title: 'Crop Statistics'\r\n" + //
+                "          },\r\n" + //
+                "          series: {\r\n" + //
+                "            0: { axis: 'Amount' },\r\n" + //
+                "          },\r\n" + //
+                "          colors: ['#20b2aa']\r\n" + //
                 "        };\r\n" + //
                 "        \r\n";
         return content;

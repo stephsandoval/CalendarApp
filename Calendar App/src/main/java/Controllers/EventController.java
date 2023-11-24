@@ -35,7 +35,6 @@ public class EventController {
         if (!calendar.hasDay(date)){
             writer.addDay(day);
         } else {
-            System.out.println("here");
             writer.updateDay(calendar.getDay(date));
         }
         calendar.getYear(year).addDayToMonth(month, day);

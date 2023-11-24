@@ -4,12 +4,14 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import ApiClient.Action;
 import Stats.StatsCreator;
 
 public class StatsController {
  
     private HashMap <String, String> urlMap;
     private StatsCreator statsCreator;
+    private HashMap <String, Action> actionMap;
 
     public StatsController (){
         statsCreator = new StatsCreator();
@@ -20,7 +22,7 @@ public class StatsController {
     private void loadMap (){
         urlMap.put("water", "src/main/java/HMTL/water.html");
         urlMap.put("weather", "src/main/java/HMTL/weather.html");
-        //urlMap.put("crop", "src/main/java/HMTL/index.html");
+        urlMap.put("crop", "src/main/java/HMTL/crop.html");
     }
 
     public String getURL (String aspect) {
@@ -33,6 +35,20 @@ public class StatsController {
         for (int increment = 0; increment < 7; increment++){
             week.add(start.plusDays(increment));
         }
-        statsCreator.createStats(week, aspect);
+        statsCreator.setWeek(week);
+        switch (aspect){
+            case "water" :
+                statsCreator.createWaterStats();
+                break;
+            case "weather" : 
+                statsCreator.createWeatherStats();
+                break;
+            case "crop" :
+                statsCreator.createCropStats(dayChosen);
+                break;
+            default:
+                break;
+
+        }
     }
 }

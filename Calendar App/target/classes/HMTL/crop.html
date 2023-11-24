@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart', 'bar']});
+      google.charts.setOnLoadCallback(drawStuff);
+
+      function drawStuff() {
+
+        var chartDiv = document.getElementById('chart_div');
+        var data = google.visualization.arrayToDataTable([
+          ['Day', 'Amount'],
+          ['SUNDAY 27', 0],
+          ['MONDAY 28', 0],
+          ['TUESDAY 29', 0],
+          ['WEDNESDAY 30', 0],
+          ['THURSDAY 31', 350],
+          ['FRIDAY 1', 350],
+          ['SATURDAY 2', 0],
+        ]);
+
+        var materialOptions = {
+          width: 930,
+          chart: {
+            title: 'Crop Statistics'
+          },
+          series: {
+            0: { axis: 'Amount' },
+          },
+          colors: ['#20b2aa']
+        };
+        
+function drawMaterialChart() {
+          var materialChart = new google.charts.Bar(chartDiv);
+          materialChart.draw(data, google.charts.Bar.convertOptions(materialOptions));
+        }
+
+        drawMaterialChart();
+    };
+    </script>
+  </head>
+  <body>
+    <br><br>
+    <div id="chart_div" style="width: 772px; height: 383px;"></div>
+  </body>
+</html>
