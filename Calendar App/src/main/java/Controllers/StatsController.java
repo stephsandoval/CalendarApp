@@ -4,14 +4,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import ApiClient.Action;
 import Stats.StatsCreator;
 
 public class StatsController {
  
     private HashMap <String, String> urlMap;
     private StatsCreator statsCreator;
-    private HashMap <String, Action> actionMap;
 
     public StatsController (){
         statsCreator = new StatsCreator();
